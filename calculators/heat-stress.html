@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat Stress Calculator | HSE Calculator</title>
+    <meta name="description" content="Calculate heat stress risk and determine safe work practices based on temperature, humidity, and work intensity.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator-styles.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+    
+    <!-- HTML2PDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Calculator Content -->
+    <section class="calculator-section">
+        <div class="container">
+            <h1 class="section-title">Heat Stress Calculator</h1>
+            <p class="section-subtitle">Calculate heat stress risk and determine safe work practices based on temperature, humidity, and work intensity.</p>
+            
+            <div class="calculator-form" id="heat-calculator-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="temperature" class="form-label">Air Temperature (°F):</label>
+                        <input type="number" id="temperature" class="form-control" min="50" max="120" value="85" 
+                               data-tooltip="Enter the ambient air temperature">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="humidity" class="form-label">Relative Humidity (%):</label>
+                        <input type="number" id="humidity" class="form-control" min="10" max="100" value="60" 
+                               data-tooltip="Enter the relative humidity percentage">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="work-intensity" class="form-label">Work Intensity:</label>
+                    <select id="work-intensity" class="form-control" data-tooltip="Select the level of physical activity">
+                        <option value="light">Light Work (Office Work, Standing)</option>
+                        <option value="moderate" selected>Moderate Work (Walking, Light Lifting)</option>
+                        <option value="heavy">Heavy Work (Digging, Heavy Lifting)</option>
+                        <option value="very-heavy">Very Heavy Work (Intense Labor)</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sun-exposure" class="form-label">Sun Exposure:</label>
+                        <select id="sun-exposure" class="form-control" data-tooltip="Select sun exposure level">
+                            <option value="shade">Full Shade/Indoors</option>
+                            <option value="partial">Partial Sun/Cloudy</option>
+                            <option value="full" selected>Full Sun Exposure</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="wind-speed" class="form-label">Wind Speed (mph):</label>
+                        <input type="number" id="wind-speed" class="form-control" min="0" max="30" value="5" 
+                               data-tooltip="Enter wind speed in miles per hour">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="work-duration" class="form-label">Work Duration (hours):</label>
+                    <input type="number" id="work-duration" class="form-control" min="0.5" max="12" step="0.5" value="8" 
+                           data-tooltip="Enter planned work duration">
+                </div>
+                
+                <div class="form-group">
+                    <label for="acclimatization" class="form-label">Worker Acclimatization:</label>
+                    <select id="acclimatization" class="form-control" data-tooltip="Select worker heat acclimatization level">
+                        <option value="unacclimatized">Unacclimatized (First 3 days)</option>
+                        <option value="partially">Partially Acclimatized (4-7 days)</option>
+                        <option value="fully" selected>Fully Acclimatized (8+ days)</option>
+                    </select>
+                </div>
+                
+                <button id="calculate-heat" class="btn btn-primary">
+                    <i class="fas fa-temperature-high"></i> Calculate Heat Stress
+                </button>
+                
+                <div id="heat-result" class="result-box">
+                    <h3>Heat Stress Assessment</h3>
+                    <div class="result-value" id="heat-value"></div>
+                    <div class="result-interpretation" id="heat-interpretation"></div>
+                    
+                    <div class="heat-details mt-3" id="heat-details"></div>
+                    
+                    <div class="print-actions">
+                        <button class="btn btn-primary print-btn" onclick="generatePDF('heat-calculator-form', 'heat-stress')">
+                            <i class="fas fa-file-pdf"></i> Save as PDF
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calculator-info mt-4">
+                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
+                    <p>1. <strong>Environmental Conditions:</strong> Enter temperature, humidity, and wind speed.</p>
+                    <p>2. <strong>Work Factors:</strong> Select work intensity, duration, and sun exposure.</p>
+                    <p>3. <strong>Worker Factors:</strong> Consider acclimatization and clothing.</p>
+                    <p>4. <strong>Calculation:</strong> The calculator determines WBGT, heat index, and recommended work/rest cycles.</p>
+                    
+                    <h5 class="mt-3">Heat Stress Risk Levels</h5>
+                    <table class="risk-matrix">
+                        <thead>
+                            <tr>
+                                <th>Risk Level</th>
+                                <th>WBGT Index (°F)</th>
+                                <th>Heat Index (°F)</th>
+                                <th>Action Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Low</td>
+                                <td>&lt; 80</td>
+                                <td>&lt; 91</td>
+                                <td>Normal work with water available</td>
+                            </tr>
+                            <tr>
+                                <td>Moderate</td>
+                                <td>80-85</td>
+                                <td>91-103</td>
+                                <td>Increased breaks, monitor workers</td>
+                            </tr>
+                            <tr>
+                                <td>High</td>
+                                <td>85-88</td>
+                                <td>103-115</td>
+                                <td>Mandatory breaks, limit exposure</td>
+                            </tr>
+                            <tr>
+                                <td>Very High</td>
+                                <td>&gt; 88</td>
+                                <td>&gt; 115</td>
+                                <td>Stop work or implement extreme controls</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Social Sharing -->
+            <div class="social-sharing mt-4">
+                <div class="social-card">
+                    <h3>Share This Calculator</h3>
+                    <p>Help other safety professionals discover this tool</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn facebook" onclick="shareCalculator('Heat Stress Calculator').facebook()">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-btn twitter" onclick="shareCalculator('Heat Stress Calculator').twitter()">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-btn linkedin" onclick="shareCalculator('Heat Stress Calculator').linkedin()">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Heat Stress Calculator').whatsapp()">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Calculators -->
+            <div class="related-calculators mt-4">
+                <h3 class="section-title">Related Calculators</h3>
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Risk Assessment Calculator</h3>
+                            <p>Calculate risk levels based on probability and severity to prioritize safety measures.</p>
+                            <a href="risk-assessment.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Ventilation Calculator</h3>
+                            <p>Calculate ventilation requirements for confined spaces and industrial environments.</p>
+                            <a href="ventilation.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>PPE Selection Calculator</h3>
+                            <p>Determine appropriate Personal Protective Equipment based on hazard assessment.</p>
+                            <a href="ppe-selection.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/calculators.js"></script>
+    
+    <script>
+        // Heat Stress Calculator specific logic
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculate-heat').addEventListener('click', calculateHeatStress);
+        });
+        
+        function calculateHeatStress() {
+            // Get input values
+            const temperature = parseFloat(document.getElementById('temperature').value);
+            const humidity = parseFloat(document.getElementById('humidity').value);
+            const workIntensity = document.getElementById('work-intensity').value;
+            const sunExposure = document.getElementById('sun-exposure').value;
+            const windSpeed = parseFloat(document.getElementById('wind-speed').value);
+            const workDuration = parseFloat(document.getElementById('work-duration').value);
+            const acclimatization = document.getElementById('acclimatization').value;
+            
+            // Validate inputs
+            if (isNaN(temperature) || temperature < 50 || temperature > 120) {
+                alert('Please enter a valid temperature (50-120°F).');
+                return;
+            }
+            
+            if (isNaN(humidity) || humidity < 10 || humidity > 100) {
+                alert('Please enter a valid humidity percentage (10-100%).');
+                return;
+            }
+            
+            // Calculate Heat Index (simplified approximation)
+            const heatIndex = calculateHeatIndex(temperature, humidity);
+            
+            // Calculate WBGT (Wet Bulb Globe Temperature) approximation
+            const wbgt = calculateWBGT(temperature, humidity, sunExposure, windSpeed);
+            
+            // Determine work intensity factor
+            let intensityFactor;
+            switch(workIntensity) {
+                case 'light': intensityFactor = 1.0; break;
+                case 'moderate': intensityFactor = 1.5; break;
+                case 'heavy': intensityFactor = 2.0; break;
+                case 'very-heavy': intensityFactor = 2.5; break;
+                default: intensityFactor = 1.5;
+            }
+            
+            // Determine acclimatization factor
+            let acclimatizationFactor;
+            switch(acclimatization) {
+                case 'unacclimatized': acclimatizationFactor = 0.7; break;
+                case 'partially': acclimatizationFactor = 0.85; break;
+                case 'fully': acclimatizationFactor = 1.0; break;
+                default: acclimatizationFactor = 1.0;
+            }
+            
+            // Calculate adjusted WBGT
+            const adjustedWBGT = wbgt * intensityFactor * (1 / acclimatizationFactor);
+            
+            // Determine risk level and recommendations
+            let riskLevel, riskColor, recommendations, workRestCycle;
+            
+            if (adjustedWBGT < 80) {
+                riskLevel = 'Low Risk';
+                riskColor = '#27ae60';
+                recommendations = 'Normal work with water available. Monitor workers new to heat.';
+                workRestCycle = 'Continuous work with normal breaks';
+            } else if (adjustedWBGT < 85) {
+                riskLevel = 'Moderate Risk';
+                riskColor = '#f39c12';
+                recommendations = 'Increase water intake. Schedule heavier work for cooler parts of day. Monitor workers closely.';
+                workRestCycle = '45 minutes work, 15 minutes rest in shade';
+            } else if (adjustedWBGT < 88) {
+                riskLevel = 'High Risk';
+                riskColor = '#e74c3c';
+                recommendations = 'Implement mandatory breaks. Consider rescheduling non-essential work. Use cooling vests if available.';
+                workRestCycle = '30 minutes work, 30 minutes rest in shade';
+            } else {
+                riskLevel = 'Very High Risk';
+                riskColor = '#c0392b';
+                recommendations = 'Consider stopping work. If work continues, implement extreme precautions. Emergency procedures should be ready.';
+                workRestCycle = '15 minutes work, 45 minutes rest in cool area';
+            }
+            
+            // Calculate hourly fluid requirements
+            const fluidRequirement = Math.round(32 + (adjustedWBGT - 80) * 8); // ounces per hour
+            
+            // Display results
+            document.getElementById('heat-value').innerHTML = `
+                <div class="result-item">
+                    <strong>Heat Index:</strong> ${heatIndex.toFixed(1)}°F
+                </div>
+                <div class="result-item">
+                    <strong>Estimated WBGT:</strong> ${wbgt.toFixed(1)}°F (Adjusted: ${adjustedWBGT.toFixed(1)}°F)
+                </div>
+                <div class="result-item">
+                    <strong>Risk Level:</strong> <span style="color: ${riskColor}; font-weight: bold;">${riskLevel}</span>
+                </div>
+                <div class="result-item">
+                    <strong>Work/Rest Cycle:</strong> ${workRestCycle}
+                </div>
+            `;
+            
+            document.getElementById('heat-interpretation').innerHTML = `
+                <p><strong>Recommendations:</strong> ${recommendations}</p>
+                <p><strong>Fluid Intake:</strong> Drink approximately ${fluidRequirement} oz (${(fluidRequirement/33.8).toFixed(1)} liters) of water per hour.</p>
+            `;
+            
+            // Show detailed analysis
+            document.getElementById('heat-details').innerHTML = `
+                <div class="heat-analysis">
+                    <table class="result-table">
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Value</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Air Temperature</td>
+                                <td>${temperature}°F</td>
+                                <td>${temperature > 90 ? 'High' : temperature > 80 ? 'Moderate' : 'Low'}</td>
+                            </tr>
+                            <tr>
+                                <td>Relative Humidity</td>
+                                <td>${humidity}%</td>
+                                <td>${humidity > 70 ? 'High (reduces evaporation)' : humidity > 50 ? 'Moderate' : 'Low'}</td>
+                            </tr>
+                            <tr>
+                                <td>Work Intensity</td>
+                                <td>${document.getElementById('work-intensity').options[document.getElementById('work-intensity').selectedIndex].text}</td>
+                                <td>${workIntensity.replace('-', ' ').toUpperCase()}</td>
+                            </tr>
+                            <tr>
+                                <td>Sun Exposure</td>
+                                <td>${sunExposure.replace('-', ' ').toUpperCase()}</td>
+                                <td>${sunExposure === 'full' ? 'Adds 10-15°F to effective temperature' : sunExposure === 'partial' ? 'Adds 5-10°F' : 'No additional heat load'}</td>
+                            </tr>
+                            <tr>
+                                <td>Wind Speed</td>
+                                <td>${windSpeed} mph</td>
+                                <td>${windSpeed > 10 ? 'Cooling effect' : windSpeed > 5 ? 'Moderate cooling' : 'Limited cooling'}</td>
+                            </tr>
+                            <tr>
+                                <td>Acclimatization</td>
+                                <td>${acclimatization.replace('-', ' ').toUpperCase()}</td>
+                                <td>${acclimatization === 'unacclimatized' ? 'Highest risk group' : acclimatization === 'partially' ? 'Moderate risk' : 'Best tolerance'}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('heat-result').classList.add('active');
+        }
+        
+        function calculateHeatIndex(temp, humidity) {
+            // Simplified heat index calculation
+            // Based on NOAA formula approximation
+            if (temp < 80) return temp;
+            
+            const c1 = -42.379;
+            const c2 = 2.04901523;
+            const c3 = 10.14333127;
+            const c4 = -0.22475541;
+            const c5 = -6.83783e-3;
+            const c6 = -5.481717e-2;
+            const c7 = 1.22874e-3;
+            const c8 = 8.5282e-4;
+            const c9 = -1.99e-6;
+            
+            const T = temp;
+            const R = humidity;
+            
+            const heatIndex = c1 + (c2 * T) + (c3 * R) + (c4 * T * R) + 
+                            (c5 * T * T) + (c6 * R * R) + (c7 * T * T * R) + 
+                            (c8 * T * R * R) + (c9 * T * T * R * R);
+            
+            return Math.max(temp, heatIndex);
+        }
+        
+        function calculateWBGT(temp, humidity, sunExposure, windSpeed) {
+            // Simplified WBGT approximation
+            // WBGT = 0.7 * Tw + 0.2 * Tg + 0.1 * Td
+            // Where Tw = wet bulb, Tg = globe, Td = dry bulb
+            
+            // Estimate wet bulb temperature
+            const Tw = temp - ((100 - humidity) / 5);
+            
+            // Adjust for sun exposure
+            let sunFactor = 0;
+            switch(sunExposure) {
+                case 'full': sunFactor = 15; break;
+                case 'partial': sunFactor = 8; break;
+                case 'shade': sunFactor = 0; break;
+            }
+            
+            // Adjust for wind cooling
+            const windCooling = Math.min(10, windSpeed) * 0.5;
+            
+            const Tg = temp + sunFactor - windCooling;
+            const Td = temp;
+            
+            const wbgt = (0.7 * Tw) + (0.2 * Tg) + (0.1 * Td);
+            return Math.max(temp, wbgt);
+        }
+        
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
+            const opt = {
+                margin: 1,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
+        
+        function shareCalculator(title) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`${title} - Professional HSE Tool`);
+            
+            return {
+                facebook: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank'),
+                twitter: () => window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank'),
+                linkedin: () => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank'),
+                whatsapp: () => window.open(`https://api.whatsapp.com/send?text=${text}: ${url}`, '_blank')
+            };
+        }
+    </script>
+    
+    <style>
+        .heat-analysis table {
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .heat-analysis td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .result-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+    </style>
+</body>
+</html>
