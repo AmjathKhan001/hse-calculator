@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Training Record | HSE Calculator</title>
+    <meta name="description" content="Create and manage safety training records for your organization.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator-styles.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+    
+    <!-- HTML2PDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Safety Training Section -->
+    <section class="calculator-section">
+        <div class="container">
+            <h1 class="section-title">Safety Training Record System</h1>
+            <p class="section-subtitle">Create, manage, and document safety training records for your organization.</p>
+            
+            <div class="training-container">
+                <!-- Training Input Form -->
+                <div class="training-form-card" id="training-form">
+                    <h3><i class="fas fa-edit"></i> Training Record Form</h3>
+                    
+                    <form id="safety-training-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="employee-name">Employee Name *</label>
+                                <input type="text" id="employee-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="employee-id">Employee ID</label>
+                                <input type="text" id="employee-id" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="department">Department *</label>
+                                <select id="department" class="form-control" required>
+                                    <option value="">Select Department</option>
+                                    <option value="production">Production</option>
+                                    <option value="maintenance">Maintenance</option>
+                                    <option value="quality">Quality Control</option>
+                                    <option value="warehouse">Warehouse</option>
+                                    <option value="office">Office</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="position">Position/Title</label>
+                                <input type="text" id="position" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="training-title">Training Title *</label>
+                            <select id="training-title" class="form-control" required>
+                                <option value="">Select Training</option>
+                                <option value="hazcom">Hazard Communication</option>
+                                <option value="lockout-tagout">Lockout/Tagout</option>
+                                <option value="ppe">Personal Protective Equipment</option>
+                                <option value="emergency-response">Emergency Response</option>
+                                <option value="fire-safety">Fire Safety</option>
+                                <option value="first-aid">First Aid/CPR</option>
+                                <option value="forklift">Forklift Operation</option>
+                                <option value="fall-protection">Fall Protection</option>
+                                <option value="electrical-safety">Electrical Safety</option>
+                                <option value="confined-space">Confined Space Entry</option>
+                                <option value="other-training">Other</option>
+                            </select>
+                            <input type="text" id="other-training" class="form-control mt-2" placeholder="Specify other training" style="display: none;">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="training-date">Training Date *</label>
+                                <input type="date" id="training-date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expiry-date">Expiry/Retraining Date</label>
+                                <input type="date" id="expiry-date" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="trainer-name">Trainer Name *</label>
+                                <input type="text" id="trainer-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="trainer-qualification">Trainer Qualification</label>
+                                <input type="text" id="trainer-qualification" class="form-control" placeholder="e.g., Certified Safety Professional">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="training-hours">Training Duration (hours) *</label>
+                            <input type="number" id="training-hours" class="form-control" min="0.5" max="40" step="0.5" value="2" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="training-location">Training Location *</label>
+                            <input type="text" id="training-location" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Training Method *</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="training-method" value="classroom"> Classroom
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="training-method" value="hands-on"> Hands-on
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="training-method" value="online"> Online
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="training-method" value="on-the-job"> On-the-job
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="assessment-method">Assessment Method</label>
+                            <select id="assessment-method" class="form-control">
+                                <option value="">Select Method</option>
+                                <option value="written-test">Written Test</option>
+                                <option value="practical-demo">Practical Demonstration</option>
+                                <option value="oral-quiz">Oral Quiz</option>
+                                <option value="observation">Observation</option>
+                                <option value="no-assessment">No Formal Assessment</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="result">Training Result *</label>
+                            <select id="result" class="form-control" required>
+                                <option value="">Select Result</option>
+                                <option value="passed">Passed</option>
+                                <option value="failed">Failed</option>
+                                <option value="incomplete">Incomplete</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="comments">Comments/Notes</label>
+                            <textarea id="comments" class="form-control" rows="3" placeholder="Additional notes about the training..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="attachment">Attach Certificate (optional)</label>
+                            <input type="file" id="attachment" class="form-control" accept=".pdf,.jpg,.png">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Training Record
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="clearTrainingForm()">
+                                <i class="fas fa-redo"></i> Clear Form
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Training Records Display -->
+                <div class="training-records-card" id="training-records">
+                    <h3><i class="fas fa-list"></i> Training Records</h3>
+                    
+                    <div class="records-controls">
+                        <div class="search-box">
+                            <input type="text" id="search-records" class="form-control" placeholder="Search records...">
+                            <button class="btn btn-small"><i class="fas fa-search"></i></button>
+                        </div>
+                        <button class="btn btn-primary" onclick="exportToExcel()">
+                            <i class="fas fa-file-excel"></i> Export to Excel
+                        </button>
+                    </div>
+                    
+                    <div class="records-table-container">
+                        <table class="records-table" id="training-table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Training</th>
+                                    <th>Date</th>
+                                    <th>Trainer</th>
+                                    <th>Result</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="training-table-body">
+                                <!-- Records will be added here dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="records-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">Total Records:</span>
+                            <span class="summary-value" id="total-records">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Passed:</span>
+                            <span class="summary-value" id="passed-count">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Expiring Soon:</span>
+                            <span class="summary-value" id="expiring-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Print/Export Section -->
+            <div class="training-export mt-4" id="training-export-section">
+                <div class="export-card">
+                    <h3><i class="fas fa-download"></i> Export Training Records</h3>
+                    <p>Generate professional reports of training records</p>
+                    
+                    <div class="export-options">
+                        <button class="btn btn-primary" onclick="generateTrainingPDF()">
+                            <i class="fas fa-file-pdf"></i> Generate PDF Report
+                        </button>
+                        <button class="btn btn-success" onclick="exportToExcel()">
+                            <i class="fas fa-file-excel"></i> Export to Excel
+                        </button>
+                        <button class="btn btn-info" onclick="printTrainingRecords()">
+                            <i class="fas fa-print"></i> Print Records
+                        </button>
+                        <button class="btn btn-warning" onclick="generateTrainingCertificate()">
+                            <i class="fas fa-certificate"></i> Generate Certificate
+                        </button>
+                    </div>
+                    
+                    <div class="export-filters">
+                        <div class="form-group">
+                            <label>Filter by Date Range:</label>
+                            <div class="date-range">
+                                <input type="date" id="start-date" class="form-control">
+                                <span>to</span>
+                                <input type="date" id="end-date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Filter by Department:</label>
+                            <select id="filter-department" class="form-control">
+                                <option value="">All Departments</option>
+                                <option value="production">Production</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="quality">Quality Control</option>
+                                <option value="warehouse">Warehouse</option>
+                                <option value="office">Office</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sample Training Records (for demo) -->
+            <div class="sample-records mt-4">
+                <h4><i class="fas fa-lightbulb"></i> Sample Training Records</h4>
+                <p>Try these sample records to see how the system works:</p>
+                <div class="sample-buttons">
+                    <button class="btn btn-small" onclick="loadSampleRecords()">
+                        <i class="fas fa-magic"></i> Load Sample Records
+                    </button>
+                    <button class="btn btn-small btn-secondary" onclick="clearAllRecords()">
+                        <i class="fas fa-trash"></i> Clear All Records
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Training Statistics -->
+            <div class="training-stats mt-4">
+                <h3><i class="fas fa-chart-bar"></i> Training Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Employees Trained</h4>
+                            <div class="stat-value" id="stat-trained">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Total Training Hours</h4>
+                            <div class="stat-value" id="stat-hours">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Pass Rate</h4>
+                            <div class="stat-value" id="stat-pass-rate">0%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-exclamation"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Expiring Soon</h4>
+                            <div class="stat-value" id="stat-expiring">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Same footer as other pages -->
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/calculators.js"></script>
+    <script src="../js/safety-training.js"></script>
+    
+    <script>
+        // Initialize safety training system
+        function initSafetyTraining() {
+            // Load existing records from localStorage
+            loadTrainingRecords();
+            
+            // Setup form submission
+            document.getElementById('safety-training-form').addEventListener('submit', saveTrainingRecord);
+            
+            // Setup training type change
+            document.getElementById('training-title').addEventListener('change', function() {
+                const otherInput = document.getElementById('other-training');
+                otherInput.style.display = this.value === 'other-training' ? 'block' : 'none';
+            });
+            
+            // Setup search
+            document.getElementById('search-records').addEventListener('input', filterTrainingRecords);
+            
+            // Update statistics
+            updateTrainingStatistics();
+        }
+        
+        // Run initialization
+        document.addEventListener('DOMContentLoaded', initSafetyTraining);
+    </script>
+</body>
+</html>
