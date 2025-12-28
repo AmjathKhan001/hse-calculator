@@ -1,1 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventilation Calculator | HSE Calculator</title>
+    <meta name="description" content="Calculate ventilation requirements for confined spaces, industrial environments, and air quality control.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator-styles.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+    
+    <!-- HTML2PDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
 
+    <!-- Calculator Content -->
+    <section class="calculator-section">
+        <div class="container">
+            <h1 class="section-title">Ventilation Calculator</h1>
+            <p class="section-subtitle">Calculate ventilation requirements for confined spaces, industrial environments, and air quality control.</p>
+            
+            <div class="calculator-form" id="ventilation-calculator-form">
+                <div class="form-group">
+                    <label for="application-type" class="form-label">Application Type:</label>
+                    <select id="application-type" class="form-control" data-tooltip="Select the ventilation application">
+                        <option value="confined-space">Confined Space Entry</option>
+                        <option value="industrial">Industrial Ventilation</option>
+                        <option value="welding">Welding/Ventilation</option>
+                        <option value="painting">Painting/Coating</option>
+                        <option value="chemical">Chemical Process</option>
+                        <option value="general">General Room Ventilation</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <h4>Space Dimensions</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="length" class="form-label">Length (ft):</label>
+                            <input type="number" id="length" class="form-control" min="1" value="20" 
+                                   data-tooltip="Enter the length of the space">
+                        </div>
+                        <div class="form-group">
+                            <label for="width" class="form-label">Width (ft):</label>
+                            <input type="number" id="width" class="form-control" min="1" value="15" 
+                                   data-tooltip="Enter the width of the space">
+                        </div>
+                        <div class="form-group">
+                            <label for="height" class="form-label">Height (ft):</label>
+                            <input type="number" id="height" class="form-control" min="1" value="10" 
+                                   data-tooltip="Enter the height of the space">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="air-changes" class="form-label">Required Air Changes per Hour:</label>
+                    <select id="air-changes" class="form-control" data-tooltip="Select required air change rate">
+                        <option value="4">4 ACH (General Ventilation)</option>
+                        <option value="6">6 ACH (Office/Commercial)</option>
+                        <option value="10">10 ACH (Light Industrial)</option>
+                        <option value="15" selected>15 ACH (Welding/Painting)</option>
+                        <option value="20">20 ACH (Chemical Processing)</option>
+                        <option value="30">30 ACH (Confined Space Entry)</option>
+                        <option value="custom">Custom ACH</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="custom-ach-group" style="display: none;">
+                    <label for="custom-ach" class="form-label">Custom Air Changes per Hour:</label>
+                    <input type="number" id="custom-ach" class="form-control" min="1" max="100" placeholder="Enter custom ACH">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contaminant-type" class="form-label">Contaminant Type:</label>
+                    <select id="contaminant-type" class="form-control" data-tooltip="Select the primary contaminant">
+                        <option value="dust">Dust/Particulates</option>
+                        <option value="fumes">Welding Fumes</option>
+                        <option value="vapor">Chemical Vapors</option>
+                        <option value="gas">Toxic Gases</option>
+                        <option value="heat">Heat Only</option>
+                        <option value="moisture">Moisture/Humidity</option>
+                        <option value="none">No Specific Contaminant</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="number-workers" class="form-label">Number of Workers:</label>
+                    <input type="number" id="number-workers" class="form-control" min="1" max="50" value="3" 
+                           data-tooltip="Enter the number of workers in the space">
+                </div>
+                
+                <div class="form-group">
+                    <label for="ventilation-type" class="form-label">Ventilation System Type:</label>
+                    <select id="ventilation-type" class="form-control" data-tooltip="Select ventilation system type">
+                        <option value="dilution">Dilution Ventilation</option>
+                        <option value="local-exhaust">Local Exhaust Ventilation (LEV)</option>
+                        <option value="push-pull">Push-Pull System</option>
+                        <option value="natural">Natural Ventilation</option>
+                    </select>
+                </div>
+                
+                <button id="calculate-ventilation" class="btn btn-primary">
+                    <i class="fas fa-wind"></i> Calculate Ventilation
+                </button>
+                
+                <div id="ventilation-result" class="result-box">
+                    <h3>Ventilation Requirements</h3>
+                    <div class="result-value" id="ventilation-value"></div>
+                    <div class="result-interpretation" id="ventilation-interpretation"></div>
+                    
+                    <div class="ventilation-details mt-3" id="ventilation-details"></div>
+                    
+                    <div class="print-actions">
+                        <button class="btn btn-primary print-btn" onclick="generatePDF('ventilation-calculator-form', 'ventilation')">
+                            <i class="fas fa-file-pdf"></i> Save as PDF
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calculator-info mt-4">
+                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
+                    <p>1. <strong>Application Type:</strong> Select the specific ventilation application.</p>
+                    <p>2. <strong>Space Dimensions:</strong> Enter length, width, and height of the space.</p>
+                    <p>3. <strong>Air Changes:</strong> Select required air changes per hour based on application.</p>
+                    <p>4. <strong>Contaminant Type:</strong> Specify the primary contaminant to be controlled.</p>
+                    
+                    <h5 class="mt-3">Minimum Ventilation Requirements</h5>
+                    <table class="risk-matrix">
+                        <thead>
+                            <tr>
+                                <th>Application</th>
+                                <th>Minimum ACH</th>
+                                <th>CFM per Worker</th>
+                                <th>Standard</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Confined Space Entry</td>
+                                <td>20-30</td>
+                                <td>200</td>
+                                <td>OSHA 1910.146</td>
+                            </tr>
+                            <tr>
+                                <td>Welding Areas</td>
+                                <td>15-20</td>
+                                <td>150</td>
+                                <td>OSHA 1910.252</td>
+                            </tr>
+                            <tr>
+                                <td>Painting Booths</td>
+                                <td>15-25</td>
+                                <td>100-150</td>
+                                <td>NFPA 33</td>
+                            </tr>
+                            <tr>
+                                <td>General Industry</td>
+                                <td>4-10</td>
+                                <td>20</td>
+                                <td>ASHRAE 62.1</td>
+                            </tr>
+                            <tr>
+                                <td>Chemical Storage</td>
+                                <td>6-12</td>
+                                <td>50</td>
+                                <td>OSHA 1910.106</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Social Sharing -->
+            <div class="social-sharing mt-4">
+                <div class="social-card">
+                    <h3>Share This Calculator</h3>
+                    <p>Help other safety professionals discover this tool</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn facebook" onclick="shareCalculator('Ventilation Calculator').facebook()">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-btn twitter" onclick="shareCalculator('Ventilation Calculator').twitter()">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-btn linkedin" onclick="shareCalculator('Ventilation Calculator').linkedin()">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Ventilation Calculator').whatsapp()">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Calculators -->
+            <div class="related-calculators mt-4">
+                <h3 class="section-title">Related Calculators</h3>
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-skull-crossbones"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Chemical Exposure Calculator</h3>
+                            <p>Calculate chemical exposure levels and assess workplace compliance.</p>
+                            <a href="chemical-exposure.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Heat Stress Calculator</h3>
+                            <p>Assess heat stress risk based on temperature, humidity, and work intensity.</p>
+                            <a href="heat-stress.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Environmental Impact Calculator</h3>
+                            <p>Calculate environmental impact and sustainability metrics.</p>
+                            <a href="environmental-impact.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/calculators.js"></script>
+    
+    <script>
+        // Ventilation Calculator specific logic
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculate-ventilation').addEventListener('click', calculateVentilation);
+            
+            // Show/hide custom ACH field
+            document.getElementById('air-changes').addEventListener('change', function() {
+                const customGroup = document.getElementById('custom-ach-group');
+                customGroup.style.display = this.value === 'custom' ? 'block' : 'none';
+            });
+        });
+        
+        function calculateVentilation() {
+            // Get input values
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const airChangesSelect = document.getElementById('air-changes').value;
+            const customACH = document.getElementById('custom-ach').value ? parseFloat(document.getElementById('custom-ach').value) : null;
+            const contaminantType = document.getElementById('contaminant-type').value;
+            const numWorkers = parseInt(document.getElementById('number-workers').value);
+            const ventilationType = document.getElementById('ventilation-type').value;
+            const applicationType = document.getElementById('application-type').value;
+            
+            // Validate inputs
+            if (isNaN(length) || length <= 0 || isNaN(width) || width <= 0 || isNaN(height) || height <= 0) {
+                alert('Please enter valid space dimensions.');
+                return;
+            }
+            
+            if (isNaN(numWorkers) || numWorkers <= 0) {
+                alert('Please enter a valid number of workers.');
+                return;
+            }
+            
+            // Determine ACH (Air Changes per Hour)
+            let ACH;
+            if (airChangesSelect === 'custom' && customACH) {
+                ACH = customACH;
+            } else {
+                ACH = parseFloat(airChangesSelect);
+            }
+            
+            // Calculate space volume
+            const volume = length * width * height; // cubic feet
+            
+            // Calculate required CFM (Cubic Feet per Minute)
+            // CFM = (Volume × ACH) ÷ 60
+            const requiredCFM = (volume * ACH) / 60;
+            
+            // Calculate per-worker ventilation requirements
+            let perWorkerCFM;
+            switch(contaminantType) {
+                case 'dust': perWorkerCFM = 50; break;
+                case 'fumes': perWorkerCFM = 150; break;
+                case 'vapor': perWorkerCFM = 100; break;
+                case 'gas': perWorkerCFM = 200; break;
+                case 'heat': perWorkerCFM = 30; break;
+                case 'moisture': perWorkerCFM = 40; break;
+                default: perWorkerCFM = 20;
+            }
+            
+            const workerCFM = perWorkerCFM * numWorkers;
+            
+            // Determine required CFM (whichever is higher)
+            const totalRequiredCFM = Math.max(requiredCFM, workerCFM);
+            
+            // Calculate air velocity (assuming standard duct size)
+            const ductDiameter = 12; // inches
+            const ductArea = Math.PI * Math.pow(ductDiameter/2, 2) / 144; // square feet
+            const airVelocity = totalRequiredCFM / ductArea; // feet per minute
+            
+            // Calculate fan power requirements (simplified)
+            const staticPressure = 1.0; // inches water gauge
+            const fanPower = (totalRequiredCFM * staticPressure) / 6356; // horsepower
+            
+            // Determine recommendations based on contaminant type
+            let recommendations, systemType;
+            switch(contaminantType) {
+                case 'dust':
+                    recommendations = 'Use dust collectors with HEPA filters. Maintain face velocity > 100 fpm at hood openings.';
+                    systemType = 'Local Exhaust with Dust Collector';
+                    break;
+                case 'fumes':
+                    recommendations = 'Use local exhaust hoods positioned close to source. Capture velocity > 200 fpm for welding.';
+                    systemType = 'Local Exhaust with Fume Extractor';
+                    break;
+                case 'vapor':
+                    recommendations = 'Use push-pull ventilation. Ensure vapor concentration remains below 25% of LEL.';
+                    systemType = 'Push-Pull or Dilution Ventilation';
+                    break;
+                case 'gas':
+                    recommendations = 'Continuous monitoring required. Use emergency purge system. Maintain concentration below PEL.';
+                    systemType = 'Emergency Ventilation with Monitors';
+                    break;
+                default:
+                    recommendations = 'General dilution ventilation acceptable. Ensure proper air distribution.';
+                    systemType = 'Dilution Ventilation';
+            }
+            
+            // Calculate air exchange time
+            const exchangeTime = 60 / ACH; // minutes for one complete air change
+            
+            // Display results
+            document.getElementById('ventilation-value').innerHTML = `
+                <div class="result-item">
+                    <strong>Total Required CFM:</strong> ${totalRequiredCFM.toFixed(0)} CFM
+                </div>
+                <div class="result-item">
+                    <strong>Air Changes per Hour:</strong> ${ACH} ACH
+                </div>
+                <div class="result-item">
+                    <strong>Air Velocity (12" duct):</strong> ${airVelocity.toFixed(0)} FPM
+                </div>
+                <div class="result-item">
+                    <strong>Recommended System:</strong> ${systemType}
+                </div>
+            `;
+            
+            document.getElementById('ventilation-interpretation').innerHTML = `
+                <p><strong>Space Volume:</strong> ${volume.toFixed(0)} cubic feet (${length}' × ${width}' × ${height}')</p>
+                <p><strong>Recommendations:</strong> ${recommendations}</p>
+                <p><strong>Air Exchange Time:</strong> One complete air change every ${exchangeTime.toFixed(1)} minutes</p>
+            `;
+            
+            // Show detailed calculations
+            document.getElementById('ventilation-details').innerHTML = `
+                <div class="ventilation-calculations">
+                    <table class="result-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Value</th>
+                                <th>Standard/Requirement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Space Volume</td>
+                                <td>${volume.toLocaleString()} ft³</td>
+                                <td>Length × Width × Height</td>
+                            </tr>
+                            <tr>
+                                <td>Required ACH</td>
+                                <td>${ACH}</td>
+                                <td>${getACHStandard(applicationType)}</td>
+                            </tr>
+                            <tr>
+                                <td>Ventilation based on Volume</td>
+                                <td>${requiredCFM.toFixed(0)} CFM</td>
+                                <td>(Volume × ACH) ÷ 60</td>
+                            </tr>
+                            <tr>
+                                <td>Ventilation based on Workers</td>
+                                <td>${workerCFM.toFixed(0)} CFM</td>
+                                <td>${numWorkers} workers × ${perWorkerCFM} CFM/worker</td>
+                            </tr>
+                            <tr>
+                                <td>Total Required Ventilation</td>
+                                <td>${totalRequiredCFM.toFixed(0)} CFM</td>
+                                <td>Maximum of both calculations</td>
+                            </tr>
+                            <tr>
+                                <td>Estimated Fan Power</td>
+                                <td>${fanPower.toFixed(1)} HP</td>
+                                <td>Assumes 1.0" WG static pressure</td>
+                            </tr>
+                            <tr>
+                                <td>Duct Velocity (12" diameter)</td>
+                                <td>${airVelocity.toFixed(0)} FPM</td>
+                                <td>${airVelocity > 4000 ? 'High velocity - consider larger duct' : airVelocity > 2000 ? 'Optimal velocity' : 'Low velocity - adequate'}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="ventilation-tips mt-3">
+                        <h5>Ventilation Design Tips:</h5>
+                        <ul>
+                            <li>Position exhaust openings near contaminant sources</li>
+                            <li>Ensure make-up air is properly conditioned</li>
+                            <li>Balance supply and exhaust airflow</li>
+                            <li>Regularly maintain and clean ventilation systems</li>
+                            <li>Monitor air quality and adjust ventilation as needed</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('ventilation-result').classList.add('active');
+        }
+        
+        function getACHStandard(application) {
+            switch(application) {
+                case 'confined-space': return 'OSHA 1910.146: Minimum 20 ACH';
+                case 'welding': return 'OSHA 1910.252: 15-20 ACH recommended';
+                case 'painting': return 'NFPA 33: 15-25 ACH required';
+                case 'chemical': return 'OSHA 1910.106: 6-12 ACH minimum';
+                default: return 'ASHRAE 62.1: General ventilation';
+            }
+        }
+        
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
+            const opt = {
+                margin: 1,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
+        
+        function shareCalculator(title) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`${title} - Professional HSE Tool`);
+            
+            return {
+                facebook: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank'),
+                twitter: () => window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank'),
+                linkedin: () => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank'),
+                whatsapp: () => window.open(`https://api.whatsapp.com/send?text=${text}: ${url}`, '_blank')
+            };
+        }
+    </script>
+    
+    <style>
+        .ventilation-calculations table {
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .ventilation-calculations td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .ventilation-tips ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .ventilation-tips li {
+            margin-bottom: 5px;
+            color: #34495e;
+        }
+    </style>
+</body>
+</html>
