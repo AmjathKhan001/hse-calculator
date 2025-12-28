@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment Calculator | HSE Calculator</title>
+    <meta name="description" content="Calculate risk levels based on probability and severity to prioritize safety measures.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+    
+    <!-- HTML2PDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Calculator Content -->
+    <section class="calculator-section">
+        <div class="container">
+            <h1 class="section-title">Risk Assessment Calculator</h1>
+            <p class="section-subtitle">Calculate risk levels based on probability and severity to prioritize safety measures.</p>
+            
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label for="probability" class="form-label">Probability (1-5, where 5 is most likely):</label>
+                    <input type="number" id="probability" class="form-control" min="1" max="5" value="3" data-tooltip="Rate the likelihood of the hazard occurring">
+                    <small class="form-text">1 = Rare, 2 = Unlikely, 3 = Possible, 4 = Likely, 5 = Almost Certain</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="severity" class="form-label">Severity (1-5, where 5 is most severe):</label>
+                    <input type="number" id="severity" class="form-control" min="1" max="5" value="3" data-tooltip="Rate the potential consequences if the hazard occurs">
+                    <small class="form-text">1 = Negligible, 2 = Minor, 3 = Moderate, 4 = Major, 5 = Catastrophic</small>
+                </div>
+                
+                <button id="calculate-risk" class="btn btn-primary">
+                    <i class="fas fa-calculator"></i> Calculate Risk
+                </button>
+                
+                <div id="risk-result" class="result-box">
+                    <h3>Risk Assessment Result</h3>
+                    <div class="result-value" id="risk-value"></div>
+                    <div class="result-interpretation" id="risk-interpretation"></div>
+                    
+                    <div class="print-actions">
+                        <button class="btn btn-primary print-btn">
+                            <i class="fas fa-file-pdf"></i> Save as PDF
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calculator-info mt-4">
+                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
+                    <p>1. <strong>Probability (1-5):</strong> Assess how likely the hazard is to occur.</p>
+                    <p>2. <strong>Severity (1-5):</strong> Assess the potential consequences if the hazard occurs.</p>
+                    <p>3. <strong>Risk Level:</strong> Multiply probability × severity to get the risk score.</p>
+                    <p>4. <strong>Action Required:</strong> Based on the risk score, determine appropriate control measures.</p>
+                    
+                    <h5 class="mt-3">Risk Matrix Interpretation</h5>
+                    <table class="risk-matrix">
+                        <thead>
+                            <tr>
+                                <th>Risk Score</th>
+                                <th>Level</th>
+                                <th>Action Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1-5</td>
+                                <td>Low</td>
+                                <td>Routine monitoring</td>
+                            </tr>
+                            <tr>
+                                <td>6-10</td>
+                                <td>Moderate</td>
+                                <td>Additional controls may be needed</td>
+                            </tr>
+                            <tr>
+                                <td>11-15</td>
+                                <td>High</td>
+                                <td>Immediate action required</td>
+                            </tr>
+                            <tr>
+                                <td>16-25</td>
+                                <td>Very High</td>
+                                <td>Stop activity and implement controls</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Social Sharing -->
+            <div class="social-sharing mt-4">
+                <div class="social-card">
+                    <h3>Share This Calculator</h3>
+                    <p>Help other safety professionals discover this tool</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn facebook" onclick="shareOnFacebook()">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-btn twitter" onclick="shareOnTwitter()">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-btn linkedin" onclick="shareOnLinkedIn()">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-btn whatsapp" onclick="shareOnWhatsApp()">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Calculators -->
+            <div class="related-calculators mt-4">
+                <h3 class="section-title">Related Calculators</h3>
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Noise Exposure Calculator</h3>
+                            <p>Determine daily noise exposure and compliance with occupational limits.</p>
+                            <a href="noise-exposure.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Incident Rate Calculator</h3>
+                            <p>Calculate TRIR, DART, and other safety performance metrics.</p>
+                            <a href="incident-rate.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>PPE Selection Calculator</h3>
+                            <p>Determine appropriate Personal Protective Equipment based on hazard assessment.</p>
+                            <a href="ppe-selection.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Same footer as index.html -->
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    
+    <script>
+        // Calculator-specific JavaScript
+        document.getElementById('calculate-risk').addEventListener('click', function() {
+            const probability = parseInt(document.getElementById('probability').value);
+            const severity = parseInt(document.getElementById('severity').value);
+            
+            if (isNaN(probability) || isNaN(severity) || probability < 1 || probability > 5 || severity < 1 || severity > 5) {
+                alert('Please enter valid values between 1 and 5 for both probability and severity.');
+                return;
+            }
+            
+            const risk = probability * severity;
+            let interpretation = '';
+            let riskLevel = '';
+            
+            if (risk <= 5) {
+                interpretation = 'Low risk - Routine monitoring required.';
+                riskLevel = 'Low';
+            } else if (risk <= 10) {
+                interpretation = 'Moderate risk - Additional controls may be needed.';
+                riskLevel = 'Moderate';
+            } else if (risk <= 15) {
+                interpretation = 'High risk - Immediate action required.';
+                riskLevel = 'High';
+            } else {
+                interpretation = 'Very high risk - Stop activity and implement controls immediately.';
+                riskLevel = 'Very High';
+            }
+            
+            document.getElementById('risk-value').textContent = `Risk Score: ${risk} (${riskLevel})`;
+            document.getElementById('risk-interpretation').textContent = interpretation;
+            document.getElementById('risk-result').classList.add('active');
+        });
+        
+        // Print/Save as PDF
+        document.querySelector('.print-btn').addEventListener('click', function() {
+            const element = document.querySelector('.calculator-form');
+            
+            // Configure PDF options
+            const opt = {
+                margin: 1,
+                filename: `risk-assessment-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            // Generate and save PDF
+            html2pdf().set(opt).from(element).save();
+        });
+        
+        // Social sharing functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        }
+        
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("Risk Assessment Calculator - Professional HSE Tool");
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+        
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+        
+        function shareOnWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("Risk Assessment Calculator: " + window.location.href);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>
