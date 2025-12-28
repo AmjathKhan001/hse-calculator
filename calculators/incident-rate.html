@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Rate Calculator | HSE Calculator</title>
+    <meta name="description" content="Calculate TRIR, DART, and other safety performance metrics for workplace safety analysis.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator-styles.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+    
+    <!-- HTML2PDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Calculator Content -->
+    <section class="calculator-section">
+        <div class="container">
+            <h1 class="section-title">Incident Rate Calculator</h1>
+            <p class="section-subtitle">Calculate TRIR, DART, and other safety performance metrics for workplace safety analysis.</p>
+            
+            <div class="calculator-form" id="incident-calculator-form">
+                <div class="form-group">
+                    <label for="total-work-hours" class="form-label">Total Hours Worked:</label>
+                    <input type="number" id="total-work-hours" class="form-control" min="1" value="200000" 
+                           data-tooltip="Enter total employee work hours for the period">
+                    <small class="form-text">Typically 200,000 hours represents 100 employees working full-time for one year</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="period" class="form-label">Time Period:</label>
+                    <select id="period" class="form-control" data-tooltip="Select the time period for calculation">
+                        <option value="year">1 Year</option>
+                        <option value="quarter">Quarter (3 Months)</option>
+                        <option value="month">1 Month</option>
+                        <option value="custom">Custom Period</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <h4>Incident Types</h4>
+                    <div class="incident-inputs">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="total-recordable" class="form-label">Total Recordable Incidents:</label>
+                                <input type="number" id="total-recordable" class="form-control" min="0" value="2">
+                            </div>
+                            <div class="form-group">
+                                <label for="fatalities" class="form-label">Fatalities:</label>
+                                <input type="number" id="fatalities" class="form-control" min="0" value="0">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="lost-workdays" class="form-label">Days Away from Work Cases:</label>
+                                <input type="number" id="lost-workdays" class="form-control" min="0" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="restricted-workdays" class="form-label">Restricted Workday Cases:</label>
+                                <input type="number" id="restricted-workdays" class="form-control" min="0" value="1">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="total-lost-days" class="form-label">Total Lost Workdays:</label>
+                                <input type="number" id="total-lost-days" class="form-control" min="0" value="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="total-restricted-days" class="form-label">Total Restricted Days:</label>
+                                <input type="number" id="total-restricted-days" class="form-control" min="0" value="10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="calculate-incident" class="btn btn-primary">
+                    <i class="fas fa-chart-line"></i> Calculate Incident Rates
+                </button>
+                
+                <div id="incident-result" class="result-box">
+                    <h3>Incident Rate Analysis</h3>
+                    <div class="result-value" id="incident-value"></div>
+                    <div class="result-interpretation" id="incident-interpretation"></div>
+                    
+                    <div class="metrics-grid mt-3" id="metrics-grid"></div>
+                    
+                    <div class="print-actions">
+                        <button class="btn btn-primary print-btn" onclick="generatePDF('incident-calculator-form', 'incident-rates')">
+                            <i class="fas fa-file-pdf"></i> Save as PDF
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calculator-info mt-4">
+                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
+                    <p>1. <strong>Total Hours Worked:</strong> Enter total employee work hours for the period.</p>
+                    <p>2. <strong>Time Period:</strong> Select the time period for calculation (typically 1 year = 200,000 hours).</p>
+                    <p>3. <strong>Incident Data:</strong> Enter the number of incidents by type.</p>
+                    <p>4. <strong>Calculation:</strong> The calculator determines various safety metrics including TRIR, DART, and LTIFR.</p>
+                    
+                    <h5 class="mt-3">Standard Formulas</h5>
+                    <table class="risk-matrix">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Formula</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TRIR</td>
+                                <td>(Total Recordables × 200,000) ÷ Hours Worked</td>
+                                <td>Total Recordable Incident Rate</td>
+                            </tr>
+                            <tr>
+                                <td>DART</td>
+                                <td>((Lost Days + Restricted Days) × 200,000) ÷ Hours Worked</td>
+                                <td>Days Away/Restricted/Transfer Rate</td>
+                            </tr>
+                            <tr>
+                                <td>LTIFR</td>
+                                <td>(Lost Time Incidents × 1,000,000) ÷ Hours Worked</td>
+                                <td>Lost Time Injury Frequency Rate</td>
+                            </tr>
+                            <tr>
+                                <td>Severity Rate</td>
+                                <td>(Total Lost Days × 200,000) ÷ Hours Worked</td>
+                                <td>Measures injury severity</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Social Sharing -->
+            <div class="social-sharing mt-4">
+                <div class="social-card">
+                    <h3>Share This Calculator</h3>
+                    <p>Help other safety professionals discover this tool</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn facebook" onclick="shareCalculator('Incident Rate Calculator').facebook()">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-btn twitter" onclick="shareCalculator('Incident Rate Calculator').twitter()">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-btn linkedin" onclick="shareCalculator('Incident Rate Calculator').linkedin()">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Incident Rate Calculator').whatsapp()">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Calculators -->
+            <div class="related-calculators mt-4">
+                <h3 class="section-title">Related Calculators</h3>
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Risk Assessment Calculator</h3>
+                            <p>Calculate risk levels based on probability and severity to prioritize safety measures.</p>
+                            <a href="risk-assessment.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-skull-crossbones"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Chemical Exposure Calculator</h3>
+                            <p>Calculate chemical exposure levels and assess workplace compliance.</p>
+                            <a href="chemical-exposure.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Fall Protection Calculator</h3>
+                            <p>Calculate fall distances, clearance requirements, and anchor point strength.</p>
+                            <a href="fall-protection.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/calculators.js"></script>
+    
+    <script>
+        // Incident Rate Calculator specific logic
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculate-incident').addEventListener('click', calculateIncidentRates);
+        });
+        
+        function calculateIncidentRates() {
+            // Get input values
+            const totalHours = parseInt(document.getElementById('total-work-hours').value);
+            const totalRecordable = parseInt(document.getElementById('total-recordable').value);
+            const fatalities = parseInt(document.getElementById('fatalities').value);
+            const lostWorkdays = parseInt(document.getElementById('lost-workdays').value);
+            const restrictedWorkdays = parseInt(document.getElementById('restricted-workdays').value);
+            const totalLostDays = parseInt(document.getElementById('total-lost-days').value);
+            const totalRestrictedDays = parseInt(document.getElementById('total-restricted-days').value);
+            
+            // Validate inputs
+            if (isNaN(totalHours) || totalHours <= 0) {
+                alert('Please enter a valid number for total hours worked.');
+                return;
+            }
+            
+            // Calculate base multipliers
+            const baseMultiplier = 200000; // Standard OSHA base for 100 employees working 1 year
+            const ltifrMultiplier = 1000000; // Standard for LTIFR
+            
+            // Calculate various incident rates
+            const trir = (totalRecordable * baseMultiplier) / totalHours;
+            const dartCases = lostWorkdays + restrictedWorkdays;
+            const dartRate = (dartCases * baseMultiplier) / totalHours;
+            const ltifr = (lostWorkdays * ltifrMultiplier) / totalHours;
+            const severityRate = (totalLostDays * baseMultiplier) / totalHours;
+            const fatalityRate = (fatalities * baseMultiplier) / totalHours;
+            
+            // Calculate total case rate
+            const totalCases = totalRecordable + fatalities;
+            const totalCaseRate = (totalCases * baseMultiplier) / totalHours;
+            
+            // Calculate incident frequency
+            const incidentFrequency = (totalRecordable * 1000) / (totalHours / 2000); // Per 1000 workers
+            
+            // Determine safety performance level
+            let performanceLevel, performanceColor, recommendations;
+            
+            if (trir === 0 && fatalities === 0) {
+                performanceLevel = 'Excellent';
+                performanceColor = 'green';
+                recommendations = 'Maintain current safety programs. Consider implementing advanced safety initiatives.';
+            } else if (trir < 1.0) {
+                performanceLevel = 'Good';
+                performanceColor = 'blue';
+                recommendations = 'Continue current safety practices. Focus on hazard identification and near-miss reporting.';
+            } else if (trir < 3.0) {
+                performanceLevel = 'Average';
+                performanceColor = 'yellow';
+                recommendations = 'Review safety procedures. Increase training frequency. Investigate all incidents thoroughly.';
+            } else if (trir < 5.0) {
+                performanceLevel = 'Poor';
+                performanceColor = 'orange';
+                recommendations = 'Immediate action required. Conduct comprehensive safety audit. Implement corrective actions.';
+            } else {
+                performanceLevel = 'Critical';
+                performanceColor = 'red';
+                recommendations = 'Stop non-essential operations. Conduct immediate safety review. Implement emergency safety measures.';
+            }
+            
+            // Display results
+            document.getElementById('incident-value').innerHTML = `
+                <div class="result-item">
+                    <strong>TRIR (Total Recordable Incident Rate):</strong> ${trir.toFixed(2)}
+                </div>
+                <div class="result-item">
+                    <strong>DART Rate (Days Away/Restricted/Transfer):</strong> ${dartRate.toFixed(2)}
+                </div>
+                <div class="result-item">
+                    <strong>Safety Performance:</strong> <span style="color: ${performanceColor}; font-weight: bold;">${performanceLevel}</span>
+                </div>
+            `;
+            
+            document.getElementById('incident-interpretation').innerHTML = `
+                <p><strong>Interpretation:</strong> Your organization has ${totalRecordable} recordable incidents with a TRIR of ${trir.toFixed(2)}.</p>
+                <p><strong>Recommendations:</strong> ${recommendations}</p>
+            `;
+            
+            // Display metrics grid
+            document.getElementById('metrics-grid').innerHTML = `
+                <div class="metrics-container">
+                    <div class="metric-card">
+                        <div class="metric-title">TRIR</div>
+                        <div class="metric-value">${trir.toFixed(2)}</div>
+                        <div class="metric-description">Total Recordable Incident Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">DART</div>
+                        <div class="metric-value">${dartRate.toFixed(2)}</div>
+                        <div class="metric-description">Days Away/Restricted/Transfer Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">LTIFR</div>
+                        <div class="metric-value">${ltifr.toFixed(2)}</div>
+                        <div class="metric-description">Lost Time Injury Frequency Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Severity Rate</div>
+                        <div class="metric-value">${severityRate.toFixed(2)}</div>
+                        <div class="metric-description">Injury Severity Rate</div>
+                    </div>
+                </div>
+                
+                <div class="incident-summary mt-3">
+                    <h5>Incident Summary</h5>
+                    <table class="result-table">
+                        <tbody>
+                            <tr>
+                                <td>Total Recordable Incidents</td>
+                                <td>${totalRecordable}</td>
+                            </tr>
+                            <tr>
+                                <td>Fatalities</td>
+                                <td>${fatalities}</td>
+                            </tr>
+                            <tr>
+                                <td>Days Away from Work Cases</td>
+                                <td>${lostWorkdays}</td>
+                            </tr>
+                            <tr>
+                                <td>Restricted Workday Cases</td>
+                                <td>${restrictedWorkdays}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Lost Workdays</td>
+                                <td>${totalLostDays}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Restricted Days</td>
+                                <td>${totalRestrictedDays}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Hours Worked</td>
+                                <td>${totalHours.toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('incident-result').classList.add('active');
+        }
+        
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
+            const opt = {
+                margin: 1,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
+        
+        function shareCalculator(title) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`${title} - Professional HSE Tool`);
+            
+            return {
+                facebook: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank'),
+                twitter: () => window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank'),
+                linkedin: () => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank'),
+                whatsapp: () => window.open(`https://api.whatsapp.com/send?text=${text}: ${url}`, '_blank')
+            };
+        }
+    </script>
+    
+    <style>
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-top: 4px solid #3498db;
+        }
+        
+        .metric-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #3498db;
+            margin: 10px 0;
+        }
+        
+        .metric-description {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .incident-inputs {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .result-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .result-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</body>
+</html>
