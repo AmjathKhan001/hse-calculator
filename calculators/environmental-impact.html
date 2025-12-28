@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Impact Calculator | HSE Calculator</title>
+    <meta name="description" content="Calculate environmental impact, carbon footprint, and sustainability metrics for industrial operations.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator-styles.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+    
+    <!-- HTML2PDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Calculator Content -->
+    <section class="calculator-section">
+        <div class="container">
+            <h1 class="section-title">Environmental Impact Calculator</h1>
+            <p class="section-subtitle">Calculate environmental impact, carbon footprint, and sustainability metrics for industrial operations.</p>
+            
+            <div class="calculator-form" id="environmental-calculator-form">
+                <div class="form-group">
+                    <label for="facility-type" class="form-label">Facility Type:</label>
+                    <select id="facility-type" class="form-control" data-tooltip="Select type of facility">
+                        <option value="manufacturing">Manufacturing Plant</option>
+                        <option value="office">Office Building</option>
+                        <option value="warehouse">Warehouse/Logistics</option>
+                        <option value="chemical">Chemical Plant</option>
+                        <option value="construction">Construction Site</option>
+                        <option value="hospital">Hospital/Healthcare</option>
+                        <option value="hotel">Hotel/Commercial</option>
+                        <option value="school">School/University</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <h4>Energy Consumption</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="electricity" class="form-label">Electricity (kWh/month):</label>
+                            <input type="number" id="electricity" class="form-control" min="0" value="50000" 
+                                   data-tooltip="Enter monthly electricity consumption">
+                        </div>
+                        <div class="form-group">
+                            <label for="natural-gas" class="form-label">Natural Gas (therms/month):</label>
+                            <input type="number" id="natural-gas" class="form-control" min="0" value="2000" 
+                                   data-tooltip="Enter monthly natural gas consumption">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="diesel" class="form-label">Diesel Fuel (gallons/month):</label>
+                            <input type="number" id="diesel" class="form-control" min="0" value="1000" 
+                                   data-tooltip="Enter monthly diesel consumption">
+                        </div>
+                        <div class="form-group">
+                            <label for="gasoline" class="form-label">Gasoline (gallons/month):</label>
+                            <input type="number" id="gasoline" class="form-control" min="0" value="500" 
+                                   data-tooltip="Enter monthly gasoline consumption">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h4>Water Consumption</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="water" class="form-label">Water Usage (gallons/month):</label>
+                            <input type="number" id="water" class="form-control" min="0" value="100000" 
+                                   data-tooltip="Enter monthly water consumption">
+                        </div>
+                        <div class="form-group">
+                            <label for="wastewater" class="form-label">Wastewater Generated (gallons/month):</label>
+                            <input type="number" id="wastewater" class="form-control" min="0" value="80000" 
+                                   data-tooltip="Enter monthly wastewater generation">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h4>Waste Generation</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hazardous-waste" class="form-label">Hazardous Waste (lbs/month):</label>
+                            <input type="number" id="hazardous-waste" class="form-control" min="0" value="500" 
+                                   data-tooltip="Enter monthly hazardous waste generation">
+                        </div>
+                        <div class="form-group">
+                            <label for="solid-waste" class="form-label">Solid Waste (lbs/month):</label>
+                            <input type="number" id="solid-waste" class="form-control" min="0" value="5000" 
+                                   data-tooltip="Enter monthly solid waste generation">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recycling" class="form-label">Materials Recycled (lbs/month):</label>
+                            <input type="number" id="recycling" class="form-control" min="0" value="2000" 
+                                   data-tooltip="Enter monthly recycling amount">
+                        </div>
+                        <div class="form-group">
+                            <label for="employees" class="form-label">Number of Employees:</label>
+                            <input type="number" id="employees" class="form-control" min="1" value="100" 
+                                   data-tooltip="Enter total number of employees">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="region" class="form-label">Geographic Region:</label>
+                    <select id="region" class="form-control" data-tooltip="Select your geographic region for emission factors">
+                        <option value="us-average">United States (Average)</option>
+                        <option value="us-northeast">US - Northeast</option>
+                        <option value="us-south">US - South</option>
+                        <option value="us-midwest">US - Midwest</option>
+                        <option value="us-west">US - West</option>
+                        <option value="canada">Canada</option>
+                        <option value="europe">European Union</option>
+                        <option value="asia">Asia (Average)</option>
+                        <option value="custom">Custom Emission Factors</option>
+                    </select>
+                </div>
+                
+                <button id="calculate-environmental" class="btn btn-primary">
+                    <i class="fas fa-leaf"></i> Calculate Environmental Impact
+                </button>
+                
+                <div id="environmental-result" class="result-box">
+                    <h3>Environmental Impact Assessment</h3>
+                    <div class="result-value" id="environmental-value"></div>
+                    <div class="result-interpretation" id="environmental-interpretation"></div>
+                    
+                    <div class="environmental-details mt-3" id="environmental-details"></div>
+                    
+                    <div class="print-actions">
+                        <button class="btn btn-primary print-btn" onclick="generatePDF('environmental-calculator-form', 'environmental-impact')">
+                            <i class="fas fa-file-pdf"></i> Save as PDF
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calculator-info mt-4">
+                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
+                    <p>1. <strong>Facility Information:</strong> Select facility type and location for appropriate emission factors.</p>
+                    <p>2. <strong>Energy Consumption:</strong> Enter monthly energy usage (electricity, natural gas, fuels).</p>
+                    <p>3. <strong>Water and Waste:</strong> Enter water consumption and waste generation data.</p>
+                    <p>4. <strong>Calculation:</strong> The calculator determines carbon footprint, water footprint, and environmental impact metrics.</p>
+                    
+                    <h5 class="mt-3">Emission Factors (US Average)</h5>
+                    <table class="risk-matrix">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>CO₂ Equivalent</th>
+                                <th>Unit</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Grid Electricity</td>
+                                <td>0.85 lbs CO₂e/kWh</td>
+                                <td>Per kWh</td>
+                                <td>EPA eGRID</td>
+                            </tr>
+                            <tr>
+                                <td>Natural Gas</td>
+                                <td>11.7 lbs CO₂e/therm</td>
+                                <td>Per therm</td>
+                                <td>EPA</td>
+                            </tr>
+                            <tr>
+                                <td>Diesel Fuel</td>
+                                <td>22.38 lbs CO₂e/gallon</td>
+                                <td>Per gallon</td>
+                                <td>EPA</td>
+                            </tr>
+                            <tr>
+                                <td>Gasoline</td>
+                                <td>19.64 lbs CO₂e/gallon</td>
+                                <td>Per gallon</td>
+                                <td>EPA</td>
+                            </tr>
+                            <tr>
+                                <td>Water Treatment</td>
+                                <td>1.3 lbs CO₂e/1000 gallons</td>
+                                <td>Per 1000 gallons</td>
+                                <td>WEF</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Social Sharing -->
+            <div class="social-sharing mt-4">
+                <div class="social-card">
+                    <h3>Share This Calculator</h3>
+                    <p>Help other environmental professionals discover this tool</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn facebook" onclick="shareCalculator('Environmental Impact Calculator').facebook()">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-btn twitter" onclick="shareCalculator('Environmental Impact Calculator').twitter()">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-btn linkedin" onclick="shareCalculator('Environmental Impact Calculator').linkedin()">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Environmental Impact Calculator').whatsapp()">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Calculators -->
+            <div class="related-calculators mt-4">
+                <h3 class="section-title">Related Calculators</h3>
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Risk Assessment Calculator</h3>
+                            <p>Calculate risk levels based on probability and severity to prioritize safety measures.</p>
+                            <a href="risk-assessment.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-skull-crossbones"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Chemical Exposure Calculator</h3>
+                            <p>Calculate chemical exposure levels and assess workplace compliance.</p>
+                            <a href="chemical-exposure.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Ventilation Calculator</h3>
+                            <p>Calculate ventilation requirements for confined spaces and industrial environments.</p>
+                            <a href="ventilation.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/calculators.js"></script>
+    
+    <script>
+        // Environmental Impact Calculator specific logic
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculate-environmental').addEventListener('click', calculateEnvironmentalImpact);
+        });
+        
+        function calculateEnvironmentalImpact() {
+            // Get input values
+            const electricity = parseFloat(document.getElementById('electricity').value);
+            const naturalGas = parseFloat(document.getElementById('natural-gas').value);
+            const diesel = parseFloat(document.getElementById('diesel').value);
+            const gasoline = parseFloat(document.getElementById('gasoline').value);
+            const water = parseFloat(document.getElementById('water').value);
+            const wastewater = parseFloat(document.getElementById('wastewater').value);
+            const hazardousWaste = parseFloat(document.getElementById('hazardous-waste').value);
+            const solidWaste = parseFloat(document.getElementById('solid-waste').value);
+            const recycling = parseFloat(document.getElementById('recycling').value);
+            const employees = parseInt(document.getElementById('employees').value);
+            const region = document.getElementById('region').value;
+            
+            // Validate inputs
+            if (isNaN(electricity) || electricity < 0 || isNaN(naturalGas) || naturalGas < 0 ||
+                isNaN(diesel) || diesel < 0 || isNaN(gasoline) || gasoline < 0) {
+                alert('Please enter valid energy consumption values.');
+                return;
+            }
+            
+            if (isNaN(employees) || employees <= 0) {
+                alert('Please enter a valid number of employees.');
+                return;
+            }
+            
+            // Get emission factors based on region
+            const emissionFactors = getEmissionFactors(region);
+            
+            // Calculate CO₂ emissions
+            const co2Electricity = electricity * emissionFactors.electricity; // lbs CO₂e
+            const co2NaturalGas = naturalGas * emissionFactors.naturalGas; // lbs CO₂e
+            const co2Diesel = diesel * emissionFactors.diesel; // lbs CO₂e
+            const co2Gasoline = gasoline * emissionFactors.gasoline; // lbs CO₂e
+            
+            // Calculate total CO₂ emissions
+            const totalCO2 = co2Electricity + co2NaturalGas + co2Diesel + co2Gasoline;
+            
+            // Calculate water footprint
+            const waterFootprint = water * 0.001; // Convert to thousands of gallons
+            const waterCO2 = waterFootprint * emissionFactors.water; // CO₂ from water treatment
+            
+            // Calculate waste impact
+            const wasteToLandfill = solidWaste - recycling;
+            const landfillCO2 = wasteToLandfill * 0.5; // Approx 0.5 lbs CO₂e per lb of waste
+            
+            // Calculate total carbon footprint
+            const totalCarbonFootprint = totalCO2 + waterCO2 + landfillCO2;
+            
+            // Calculate per employee metrics
+            const co2PerEmployee = totalCarbonFootprint / employees;
+            const waterPerEmployee = water / employees;
+            const wastePerEmployee = solidWaste / employees;
+            
+            // Calculate energy intensity
+            const totalEnergy = (electricity * 3412) + (naturalGas * 100000) + (diesel * 138700) + (gasoline * 125000); // BTU
+            const energyIntensity = totalEnergy / employees; // BTU per employee
+            
+            // Calculate recycling rate
+            const recyclingRate = solidWaste > 0 ? (recycling / solidWaste) * 100 : 0;
+            
+            // Determine sustainability rating
+            let sustainabilityRating, ratingColor, recommendations;
+            
+            if (co2PerEmployee < 1000 && recyclingRate > 50) {
+                sustainabilityRating = 'Excellent';
+                ratingColor = '#27ae60';
+                recommendations = 'Continue current practices. Consider renewable energy options.';
+            } else if (co2PerEmployee < 2000 && recyclingRate > 30) {
+                sustainabilityRating = 'Good';
+                ratingColor = '#3498db';
+                recommendations = 'Implement energy efficiency measures. Increase recycling programs.';
+            } else if (co2PerEmployee < 4000 && recyclingRate > 20) {
+                sustainabilityRating = 'Fair';
+                ratingColor = '#f39c12';
+                recommendations = 'Conduct energy audit. Implement waste reduction program.';
+            } else {
+                sustainabilityRating = 'Needs Improvement';
+                ratingColor = '#e74c3c';
+                recommendations = 'Immediate action required. Develop sustainability plan.';
+            }
+            
+            // Calculate potential savings
+            const potentialCO2Reduction = totalCarbonFootprint * 0.20; // 20% reduction potential
+            const potentialCostSavings = totalCarbonFootprint * 0.02; // $0.02 per lb CO₂ reduction
+            
+            // Display results
+            document.getElementById('environmental-value').innerHTML = `
+                <div class="result-item">
+                    <strong>Total Carbon Footprint:</strong> ${(totalCarbonFootprint/2000).toFixed(1)} tons CO₂e/month
+                </div>
+                <div class="result-item">
+                    <strong>Per Employee Footprint:</strong> ${co2PerEmployee.toFixed(0)} lbs CO₂e/employee/month
+                </div>
+                <div class="result-item">
+                    <strong>Recycling Rate:</strong> ${recyclingRate.toFixed(1)}%
+                </div>
+                <div class="result-item">
+                    <strong>Sustainability Rating:</strong> <span style="color: ${ratingColor}; font-weight: bold;">${sustainabilityRating}</span>
+                </div>
+            `;
+            
+            document.getElementById('environmental-interpretation').innerHTML = `
+                <p><strong>Assessment:</strong> Your facility generates approximately ${(totalCarbonFootprint/2000).toFixed(1)} tons of CO₂ equivalent per month.</p>
+                <p><strong>Recommendations:</strong> ${recommendations}</p>
+                <p><strong>Potential Savings:</strong> Could reduce ${(potentialCO2Reduction/2000).toFixed(1)} tons CO₂e/month and save $${potentialCostSavings.toFixed(0)}/month</p>
+            `;
+            
+            // Show detailed breakdown
+            document.getElementById('environmental-details').innerHTML = `
+                <div class="environmental-breakdown">
+                    <table class="result-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Monthly Amount</th>
+                                <th>CO₂ Equivalent</th>
+                                <th>% of Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Electricity</td>
+                                <td>${electricity.toLocaleString()} kWh</td>
+                                <td>${(co2Electricity/2000).toFixed(1)} tons</td>
+                                <td>${((co2Electricity/totalCarbonFootprint)*100).toFixed(1)}%</td>
+                            </tr>
+                            <tr>
+                                <td>Natural Gas</td>
+                                <td>${naturalGas.toLocaleString()} therms</td>
+                                <td>${(co2NaturalGas/2000).toFixed(1)} tons</td>
+                                <td>${((co2NaturalGas/totalCarbonFootprint)*100).toFixed(1)}%</td>
+                            </tr>
+                            <tr>
+                                <td>Diesel Fuel</td>
+                                <td>${diesel.toLocaleString()} gallons</td>
+                                <td>${(co2Diesel/2000).toFixed(1)} tons</td>
+                                <td>${((co2Diesel/totalCarbonFootprint)*100).toFixed(1)}%</td>
+                            </tr>
+                            <tr>
+                                <td>Gasoline</td>
+                                <td>${gasoline.toLocaleString()} gallons</td>
+                                <td>${(co2Gasoline/2000).toFixed(1)} tons</td>
+                                <td>${((co2Gasoline/totalCarbonFootprint)*100).toFixed(1)}%</td>
+                            </tr>
+                            <tr>
+                                <td>Water Treatment</td>
+                                <td>${water.toLocaleString()} gallons</td>
+                                <td>${(waterCO2/2000).toFixed(1)} tons</td>
+                                <td>${((waterCO2/totalCarbonFootprint)*100).toFixed(1)}%</td>
+                            </tr>
+                            <tr>
+                                <td>Waste to Landfill</td>
+                                <td>${wasteToLandfill.toLocaleString()} lbs</td>
+                                <td>${(landfillCO2/2000).toFixed(1)} tons</td>
+                                <td>${((landfillCO2/totalCarbonFootprint)*100).toFixed(1)}%</td>
+                            </tr>
+                            <tr style="font-weight: bold; background: #f8f9fa;">
+                                <td>Total</td>
+                                <td>-</td>
+                                <td>${(totalCarbonFootprint/2000).toFixed(1)} tons</td>
+                                <td>100%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="environmental-metrics mt-3">
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-title">Energy Intensity</div>
+                                <div class="metric-value">${(energyIntensity/1000000).toFixed(1)} MMBTU</div>
+                                <div class="metric-description">Per employee per month</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-title">Water Usage</div>
+                                <div class="metric-value">${waterPerEmployee.toFixed(0)} gal</div>
+                                <div class="metric-description">Per employee per month</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-title">Waste Generation</div>
+                                <div class="metric-value">${wastePerEmployee.toFixed(1)} lbs</div>
+                                <div class="metric-description">Per employee per month</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-title">Recycling Rate</div>
+                                <div class="metric-value">${recyclingRate.toFixed(1)}%</div>
+                                <div class="metric-description">Of total waste recycled</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="improvement-tips mt-3">
+                        <h5>Environmental Improvement Opportunities:</h5>
+                        <ul>
+                            <li><strong>Energy Efficiency:</strong> Upgrade to LED lighting, install motion sensors</li>
+                            <li><strong>Renewable Energy:</strong> Consider solar panels or purchase green power</li>
+                            <li><strong>Water Conservation:</strong> Install low-flow fixtures, implement water recycling</li>
+                            <li><strong>Waste Reduction:</strong> Implement source reduction, increase recycling programs</li>
+                            <li><strong>Transportation:</strong> Optimize delivery routes, encourage carpooling</li>
+                            <li><strong>Employee Engagement:</strong> Conduct sustainability training, establish green teams</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('environmental-result').classList.add('active');
+        }
+        
+        function getEmissionFactors(region) {
+            // Default to US average
+            const factors = {
+                electricity: 0.85, // lbs CO₂e per kWh
+                naturalGas: 11.7, // lbs CO₂e per therm
+                diesel: 22.38, // lbs CO₂e per gallon
+                gasoline: 19.64, // lbs CO₂e per gallon
+                water: 1.3 // lbs CO₂e per 1000 gallons treated
+            };
+            
+            // Adjust based on region
+            switch(region) {
+                case 'us-northeast':
+                    factors.electricity = 0.75; // Lower carbon intensity grid
+                    break;
+                case 'us-south':
+                    factors.electricity = 0.95;
+                    break;
+                case 'us-midwest':
+                    factors.electricity = 1.05; // Higher coal usage
+                    break;
+                case 'us-west':
+                    factors.electricity = 0.65; // More renewables
+                    break;
+                case 'canada':
+                    factors.electricity = 0.45; // Hydroelectric dominant
+                    break;
+                case 'europe':
+                    factors.electricity = 0.55; // EU average
+                    break;
+                case 'asia':
+                    factors.electricity = 1.15; // Higher coal usage
+                    break;
+            }
+            
+            return factors;
+        }
+        
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
+            const opt = {
+                margin: 1,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
+        
+        function shareCalculator(title) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`${title} - Professional HSE Tool`);
+            
+            return {
+                facebook: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank'),
+                twitter: () => window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank'),
+                linkedin: () => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank'),
+                whatsapp: () => window.open(`https://api.whatsapp.com/send?text=${text}: ${url}`, '_blank')
+            };
+        }
+    </script>
+    
+    <style>
+        .environmental-breakdown table {
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .environmental-breakdown td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid #27ae60;
+        }
+        
+        .metric-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #27ae60;
+            margin: 10px 0;
+        }
+        
+        .metric-description {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .improvement-tips ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .improvement-tips li {
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+        
+        .improvement-tips strong {
+            color: #2c3e50;
+        }
+    </style>
+</body>
+</html>
