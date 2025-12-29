@@ -3,237 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safety Products | HSE Calculator - Recommended PPE & Equipment</title>
-    <meta name="description" content="Recommended safety products, PPE kits, protective equipment, and safety tools. Quality products from trusted suppliers with affiliate links.">
-    <meta name="keywords" content="safety products, PPE equipment, protective gear, safety tools, Amazon safety products, affiliate products">
+    <title>HSE Calculator | Professional Health, Safety & Environment Tools</title>
+    <meta name="description" content="Free professional HSE calculators, safety tools, and resources for workplace safety, risk assessment, and environmental compliance">
+    <meta name="keywords" content="HSE calculator, safety tools, risk assessment, PPE, fire safety, occupational health">
+    <meta name="author" content="Amjath Khan">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="HSE Calculator | Professional Safety Tools">
+    <meta property="og:description" content="Free HSE calculators and safety tools for professionals">
+    <meta property="og:image" content="https://www.hsecalculator.com/assets/og-image.jpg">
+    <meta property="og:url" content="https://www.hsecalculator.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HSE Calculator | Professional Safety Tools">
+    <meta name="twitter:description" content="Free HSE calculators and safety tools for professionals">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.hsecalculator.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculator-styles.css">
     
-    <!-- Products Page Specific CSS -->
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+    
+    <!-- Google Auto Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6687860250561653" crossorigin="anonymous"></script>
+    
+    <!-- HTML2PDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- Additional CSS for Social Sharing -->
     <style>
-        .products-hero {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
-            padding: 80px 0 40px;
-            text-align: center;
-        }
-        
-        .products-container {
-            padding: 60px 0;
-        }
-        
-        .product-filters {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 10px 25px;
-            background: #f0f2ff;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            color: #667eea;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: #667eea;
+        /* Social Sharing Section - FIXED */
+        .social-sharing {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 70px 0;
             color: white;
         }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .product-image {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-        
-        .product-category {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 5px 15px;
+
+        .social-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .product-content {
-            padding: 25px;
-        }
-        
-        .product-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-        
-        .product-description {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-        
-        .product-price {
-            color: #e74c3c;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .product-rating {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .product-rating .stars {
-            color: #ffc107;
-        }
-        
-        .rating-count {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .product-features {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-        
-        .product-features li {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-        
-        .product-features li i {
-            color: #34bf49;
-            margin-top: 3px;
-        }
-        
-        .affiliate-disclaimer {
-            background: #f8f9ff;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 50px;
+            padding: 50px;
+            max-width: 900px;
+            margin: 0 auto;
             text-align: center;
-            border-left: 4px solid #667eea;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .social-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .social-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .social-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 15px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-height: 120px;
+        }
+
+        .social-button:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-button i {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        .social-button span {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .social-button.facebook:hover {
+            background: #1877F2;
+        }
+
+        .social-button.twitter:hover {
+            background: #1DA1F2;
+        }
+
+        .social-button.linkedin:hover {
+            background: #0077B5;
+        }
+
+        .social-button.whatsapp:hover {
+            background: #25D366;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .social-buttons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .social-card {
+                padding: 30px 20px;
+            }
+            
+            .social-content h2 {
+                font-size: 2rem;
+            }
+            
+            .social-content p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-buttons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-button {
+                padding: 20px;
+            }
         }
         
-        .products-pagination {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+        /* Calculator Cards Grid Fix */
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
             margin-top: 40px;
         }
         
-        .page-btn {
-            width: 40px;
-            height: 40px;
+        .calculator-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .calculator-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f0f2ff;
-            border: none;
-            border-radius: 8px;
-            color: #667eea;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .page-btn:hover,
-        .page-btn.active {
-            background: #667eea;
+            margin: 0 auto 20px;
             color: white;
+            font-size: 2rem;
         }
         
-        @media (max-width: 768px) {
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .product-filters {
-                gap: 10px;
-            }
-            
-            .filter-btn {
-                padding: 8px 20px;
-                font-size: 0.9rem;
-            }
+        .calculator-content h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .calculator-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.9rem;
         }
     </style>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
             <nav class="navbar">
-                <a href="../index.html" class="logo">
-                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
                     <span>HSE Calculator</span>
                 </a>
                 
                 <div class="nav-links" id="navLinks">
-                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                    <a href="all-calculators.html" class="nav-link"><i class="fas fa-calculator"></i> All Calculators</a>
-                    <a href="products.html" class="nav-link active"><i class="fas fa-shopping-bag"></i> Safety Products</a>
-                    <a href="tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
-                    <a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
-                    <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                    <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                    <a href="pages/all-calculators.html" class="nav-link"><i class="fas fa-calculator"></i> All Calculators</a>
+                    <a href="pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="pages/contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
                 </div>
                 
                 <div class="mobile-toggle" id="mobileToggle">
@@ -243,11 +252,203 @@
         </div>
     </header>
 
-    <!-- Products Hero -->
-    <section class="products-hero">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <h1>Safety Products & Equipment</h1>
-            <p>Recommended PPE, protective gear, and safety equipment from trusted suppliers</p>
+            <div class="hero-content">
+                <h1 class="hero-title">Professional HSE Calculators & Safety Tools</h1>
+                <p class="hero-subtitle">Free, comprehensive tools for Health, Safety, and Environment professionals to assess risks, ensure compliance, and improve workplace safety.</p>
+                <div class="hero-buttons">
+                    <a href="calculators/risk-assessment.html" class="btn btn-primary">
+                        <i class="fas fa-calculator"></i> Start Calculating
+                    </a>
+                    <a href="pages/products.html" class="btn btn-secondary">
+                        <i class="fas fa-shield-alt"></i> View Safety Products
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visitor Counter -->
+    <section class="visitor-counter">
+        <div class="container">
+            <div class="counter-card">
+                <i class="fas fa-eye counter-icon"></i>
+                <div class="counter-content">
+                    <h3>Website Visitors</h3>
+                    <div class="counter-number" id="visitorCount">Loading...</div>
+                    <p>Professionals using our safety tools</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Calculators -->
+    <section class="featured-calculators">
+        <div class="container">
+            <h2 class="section-title">All HSE Calculators (11 Professional Tools)</h2>
+            <p class="section-subtitle">Essential tools for safety professionals - Click any calculator to start</p>
+            
+            <div class="calculators-grid">
+                <!-- Risk Assessment Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Risk Assessment</h3>
+                        <p>Calculate risk levels based on probability and severity to prioritize safety measures.</p>
+                        <a href="calculators/risk-assessment.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Noise Exposure Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Noise Exposure</h3>
+                        <p>Determine daily noise exposure and compliance with occupational limits.</p>
+                        <a href="calculators/noise-exposure.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chemical Exposure Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Chemical Exposure</h3>
+                        <p>Calculate chemical exposure levels and determine compliance with PELs.</p>
+                        <a href="calculators/chemical-exposure.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Incident Rate Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Incident Rate</h3>
+                        <p>Calculate TRIR, DART, and other safety performance metrics.</p>
+                        <a href="calculators/incident-rate.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fall Protection Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Fall Protection</h3>
+                        <p>Calculate fall clearance, deceleration distance, and anchor strength requirements.</p>
+                        <a href="calculators/fall-protection.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Heat Stress Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-temperature-high"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Heat Stress</h3>
+                        <p>Calculate WBGT index, heat stress risk, and recommended work/rest cycles.</p>
+                        <a href="calculators/heat-stress.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Ventilation Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Ventilation</h3>
+                        <p>Calculate air changes per hour, ventilation rates, and duct sizing for industrial spaces.</p>
+                        <a href="calculators/ventilation.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PPE Selection Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>PPE Selection</h3>
+                        <p>Determine appropriate Personal Protective Equipment based on hazard assessment.</p>
+                        <a href="calculators/ppe-selection.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Lifting Safety Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-weight-hanging"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Lifting Safety</h3>
+                        <p>Calculate safe lifting limits, crane capacities, and manual handling risks.</p>
+                        <a href="calculators/lifting-safety.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Environmental Impact Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Environmental Impact</h3>
+                        <p>Calculate carbon footprint, waste generation, and environmental compliance metrics.</p>
+                        <a href="calculators/environmental-impact.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Safety Training Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="calculator-content">
+                        <h3>Safety Training</h3>
+                        <p>Calculate training effectiveness, ROI, and schedule safety training sessions.</p>
+                        <a href="calculators/safety-training.html" class="btn btn-primary btn-small">
+                            <i class="fas fa-play-circle"></i> Use Calculator
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="note">All calculators are completely free to use. Bookmark this page for quick access!</p>
+            </div>
         </div>
     </section>
 
@@ -256,8 +457,8 @@
         <div class="container">
             <div class="banner-content">
                 <div class="banner-text">
-                    <h3><i class="fas fa-fire"></i> Amazon Clearance Sale</h3>
-                    <p>Limited Time Offer - Up to 70% OFF on All Categories</p>
+                    <h3><i class="fas fa-fire"></i> Amazon Clearance Sales</h3>
+                    <p>Limited Time Offer - Up to 70% OFF on Clearance Sales All Branded Items</p>
                 </div>
                 <a href="https://amzn.to/4p8ceG6" target="_blank" class="btn btn-warning">
                     <i class="fas fa-bolt"></i> Shop Deals Now
@@ -266,35 +467,124 @@
         </div>
     </section>
 
-    <!-- Products Container -->
-    <section class="products-container">
+    <!-- Featured Safety Products -->
+    <section class="featured-products">
         <div class="container">
-            <!-- Product Filters -->
-            <div class="product-filters">
-                <button class="filter-btn active" data-filter="all">All Products</button>
-                <button class="filter-btn" data-filter="ppe">PPE Kits</button>
-                <button class="filter-btn" data-filter="respiratory">Respiratory</button>
-                <button class="filter-btn" data-filter="fall-protection">Fall Protection</button>
-                <button class="filter-btn" data-filter="eye-protection">Eye Protection</button>
-                <button class="filter-btn" data-filter="foot-protection">Foot Protection</button>
-                <button class="filter-btn" data-filter="hand-protection">Hand Protection</button>
+            <h2 class="section-title">Recommended Safety Products</h2>
+            <p class="section-subtitle">Quality PPE and safety equipment from trusted suppliers</p>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/products/ppe-kit.jpg" alt="PPE Kit" onerror="this.src='assets/products/default.jpg'">
+                        <span class="product-category">PPE Kit</span>
+                    </div>
+                    <div class="product-content">
+                        <h4>Personal Protective Equipment KIT (PPE KIT)</h4>
+                        <a href="https://amzn.to/4bcAm6e" target="_blank" class="btn btn-primary btn-small">
+                            <i class="fas fa-external-link-alt"></i> View Details
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/products/gas-mask.jpg" alt="Gas Mask" onerror="this.src='assets/products/default.jpg'">
+                        <span class="product-category">Respiratory Protection</span>
+                    </div>
+                    <div class="product-content">
+                        <h4>Serplex Gas Mask Set Respirator</h4>
+                        <a href="https://amzn.to/4s4Fr6K" target="_blank" class="btn btn-primary btn-small">
+                            <i class="fas fa-external-link-alt"></i> View Details
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/products/disposable-gown.jpg" alt="Disposable Gown" onerror="this.src='assets/products/default.jpg'">
+                        <span class="product-category">Disposable PPE</span>
+                    </div>
+                    <div class="product-content">
+                        <h4>Non Woven Polypropylene Disposable Gown</h4>
+                        <a href="https://amzn.to/49rqlRr" target="_blank" class="btn btn-primary btn-small">
+                            <i class="fas fa-external-link-alt"></i> View Details
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/products/safety-harness.jpg" alt="Safety Harness" onerror="this.src='assets/products/default.jpg'">
+                        <span class="product-category">Fall Protection</span>
+                    </div>
+                    <div class="product-content">
+                        <h4>CF IND Full Body Safety Harness</h4>
+                        <a href="https://amzn.to/4jh3StM" target="_blank" class="btn btn-primary btn-small">
+                            <i class="fas fa-external-link-alt"></i> View Details
+                        </a>
+                    </div>
+                </div>
             </div>
             
-            <!-- Products Grid -->
-            <div class="products-grid" id="productsGrid">
-                <!-- Products will be loaded dynamically via JavaScript -->
+            <div class="text-center mt-4">
+                <a href="pages/products.html" class="btn btn-outline">
+                    <i class="fas fa-store"></i> View All Safety Products
+                </a>
             </div>
-            
-            <!-- Pagination -->
-            <div class="products-pagination" id="productsPagination">
-                <!-- Pagination will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Buy Me a Coffee -->
+    <section class="support-section">
+        <div class="container">
+            <div class="support-card">
+                <i class="fas fa-coffee support-icon"></i>
+                <div class="support-content">
+                    <h3>Support Our Work</h3>
+                    <p>Help us maintain and improve these free HSE tools. Your support allows us to develop more calculators and resources for the safety community.</p>
+                    <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="btn btn-coffee">
+                        <i class="fas fa-mug-hot"></i> Buy Me a Coffee
+                    </a>
+                </div>
             </div>
-            
-            <!-- Affiliate Disclaimer -->
-            <div class="affiliate-disclaimer">
-                <h3><i class="fas fa-info-circle"></i> Affiliate Disclosure</h3>
-                <p>We participate in Amazon's Affiliate Program. When you click on product links and make purchases, we may earn a commission at no extra cost to you. This helps support our free HSE calculators and tools.</p>
-                <p><small>Prices and availability are subject to change. Always verify product specifications before purchase.</small></p>
+        </div>
+    </section>
+
+    <!-- Social Sharing - FIXED VERSION -->
+    <section class="social-sharing">
+        <div class="container">
+            <div class="social-card">
+                <div class="social-content">
+                    <h2>Share These Tools</h2>
+                    <p>Help other safety professionals discover these free resources</p>
+                </div>
+                <div class="social-buttons-grid">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://hse-calculator.vercel.app" 
+                       target="_blank" 
+                       class="social-button facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=https://hse-calculator.vercel.app&text=Check%20out%20these%20professional%20HSE%20calculators%20and%20safety%20tools!" 
+                       target="_blank" 
+                       class="social-button twitter">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hse-calculator.vercel.app" 
+                       target="_blank" 
+                       class="social-button linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?text=Professional%20HSE%20Calculators:%20https://hse-calculator.vercel.app" 
+                       target="_blank" 
+                       class="social-button whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -304,8 +594,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="../index.html" class="footer-logo">
-                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <a href="index.html" class="footer-logo">
+                        <img src="assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
                         <span>HSE Calculator</span>
                     </a>
                     <p>Professional tools for health, safety, and environment professionals.</p>
@@ -321,30 +611,34 @@
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="all-calculators.html">All Calculators</a></li>
-                        <li><a href="products.html">Safety Products</a></li>
-                        <li><a href="tools.html">Tools</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="pages/all-calculators.html">All Calculators</a></li>
+                        <li><a href="pages/products.html">Safety Products</a></li>
+                        <li><a href="pages/tools.html">Tools</a></li>
+                        <li><a href="pages/blog.html">Blog</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Use</a></li>
-                        <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="sitemap.html">Sitemap</a></li>
+                        <li><a href="pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="pages/terms.html">Terms of Use</a></li>
+                        <li><a href="pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="pages/sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
-                    <h4>Support Our Work</h4>
-                    <p>Help us maintain and improve these free tools</p>
-                    <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="btn btn-primary btn-small mt-2" style="display: inline-flex; align-items: center; gap: 8px;">
-                        <i class="fas fa-mug-hot"></i> Buy Me a Coffee
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                    <a href="pages/contact.html" class="btn btn-primary btn-small mt-2">
+                        <i class="fas fa-paper-plane"></i> Contact Form
                     </a>
                 </div>
             </div>
@@ -357,336 +651,12 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/main.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/visitor-counter.js"></script>
+    
     <script>
-        // Product Data - ADD YOUR PRODUCTS HERE
-        const productsData = [
-            // ===== PPE KITS =====
-            {
-                id: 1,
-                name: "Complete PPE Safety Kit",
-                description: "Full body protection kit including helmet, goggles, gloves, vest, and boots. Ideal for construction and industrial sites.",
-                image: "../assets/products/ppe-kit.jpg",
-                category: "ppe",
-                link: "https://amzn.to/4bcAm6e",
-                rating: 4.5,
-                ratingCount: 234,
-                features: [
-                    "ISO Certified",
-                    "Water Resistant",
-                    "Adjustable Straps",
-                    "High Visibility"
-                ]
-            },
-            {
-                id: 2,
-                name: "Industrial Safety PPE Kit",
-                description: "Heavy-duty industrial safety kit with reinforced protection for hazardous environments.",
-                image: "https://images.unsplash.com/photo-1583321500900-82807e458f3c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "ppe",
-                link: "https://amzn.to/3z7X8Pq",
-                rating: 4.7,
-                ratingCount: 189,
-                features: [
-                    "Fire Resistant",
-                    "Chemical Protection",
-                    "Durable Material",
-                    "Complete Set"
-                ]
-            },
-            
-            // ===== RESPIRATORY PROTECTION =====
-            {
-                id: 3,
-                name: "Professional Gas Mask Respirator",
-                description: "Full face respirator with replaceable filters for chemical and biological protection.",
-                image: "../assets/products/gas-mask.jpg",
-                category: "respiratory",
-                link: "https://amzn.to/4s4Fr6K",
-                rating: 4.6,
-                ratingCount: 156,
-                features: [
-                    "N95 Equivalent",
-                    "Adjustable Straps",
-                    "Wide View Lens",
-                    "Multiple Filters"
-                ]
-            },
-            {
-                id: 4,
-                name: "N95 Mask Pack (50 Pcs)",
-                description: "Disposable N95 respirator masks with 5-layer protection and comfortable ear loops.",
-                image: "https://images.unsplash.com/photo-1582795767856-b7d2d4d9d3e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "respiratory",
-                link: "https://amzn.to/3x9YzRt",
-                rating: 4.4,
-                ratingCount: 432,
-                features: [
-                    "Bacterial Filtration ≥95%",
-                    "Breathable Material",
-                    "Adjustable Nose Clip",
-                    "CE Certified"
-                ]
-            },
-            
-            // ===== FALL PROTECTION =====
-            {
-                id: 5,
-                name: "Full Body Safety Harness",
-                description: "Industrial fall protection harness with back D-ring and comfort padding.",
-                image: "../assets/products/safety-harness.jpg",
-                category: "fall-protection",
-                link: "https://amzn.to/4jh3StM",
-                rating: 4.8,
-                ratingCount: 78,
-                features: [
-                    "OSHA Compliant",
-                    "Weight Capacity: 140kg",
-                    "Adjustable Straps",
-                    "Padded Shoulders"
-                ]
-            },
-            {
-                id: 6,
-                name: "Safety Lanyard with Shock Absorber",
-                description: "6ft retractable lanyard with shock absorber for fall arrest systems.",
-                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "fall-protection",
-                link: "https://amzn.to/3z9FpRt",
-                rating: 4.5,
-                ratingCount: 92,
-                features: [
-                    "Shock Absorbing",
-                    "6ft Length",
-                    "Durable Material",
-                    "Easy to Install"
-                ]
-            },
-            
-            // ===== EYE PROTECTION =====
-            {
-                id: 7,
-                name: "Anti-Fog Safety Goggles",
-                description: "Wide vision safety goggles with anti-fog coating and UV protection.",
-                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "eye-protection",
-                link: "https://amzn.to/3za1XqY",
-                rating: 4.3,
-                ratingCount: 167,
-                features: [
-                    "Anti-Fog Coating",
-                    "UV Protection",
-                    "Wide Vision",
-                    "Adjustable Headband"
-                ]
-            },
-            {
-                id: 8,
-                name: "Welding Safety Goggles",
-                description: "Auto-darkening welding goggles with adjustable shade levels.",
-                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "eye-protection",
-                link: "https://amzn.to/3zb2YqZ",
-                rating: 4.6,
-                ratingCount: 89,
-                features: [
-                    "Auto-Darkening",
-                    "4 Shade Levels",
-                    "Solar Powered",
-                    "Grinding Mode"
-                ]
-            },
-            
-            // ===== FOOT PROTECTION =====
-            {
-                id: 9,
-                name: "Steel Toe Safety Shoes",
-                description: "Waterproof safety boots with steel toe cap and anti-slip sole.",
-                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "foot-protection",
-                link: "https://amzn.to/3zb3ArA",
-                rating: 4.4,
-                ratingCount: 234,
-                features: [
-                    "Steel Toe Cap",
-                    "Anti-Slip Sole",
-                    "Waterproof",
-                    "Electrical Hazard Rated"
-                ]
-            },
-            {
-                id: 10,
-                name: "Chemical Resistant Boots",
-                description: "PVC boots resistant to acids, oils, and chemicals with steel midsole.",
-                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "foot-protection",
-                link: "https://amzn.to/3zc4BrC",
-                rating: 4.2,
-                ratingCount: 156,
-                features: [
-                    "Chemical Resistant",
-                    "Steel Midsole",
-                    "Knee Length",
-                    "Easy to Clean"
-                ]
-            },
-            
-            // ===== HAND PROTECTION =====
-            {
-                id: 11,
-                name: "Cut Resistant Gloves",
-                description: "Level 5 cut resistant gloves with excellent grip and dexterity.",
-                image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "hand-protection",
-                link: "https://amzn.to/3zd5CrD",
-                rating: 4.5,
-                ratingCount: 189,
-                features: [
-                    "Level 5 Protection",
-                    "Cut Resistant",
-                    "Good Grip",
-                    "Washable"
-                ]
-            },
-            {
-                id: 12,
-                name: "Heat Resistant Gloves",
-                description: "Industrial gloves resistant to high temperatures up to 500°C.",
-                image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "hand-protection",
-                link: "https://amzn.to/3ze6DrE",
-                rating: 4.7,
-                ratingCount: 112,
-                features: [
-                    "Heat Resistant 500°C",
-                    "Kevlar Lined",
-                    "Reinforced Palm",
-                    "Flexible Design"
-                ]
-            },
-            
-            // ===== ADD MORE PRODUCTS HERE =====
-            {
-                id: 13,
-                name: "Disposable Protective Gown",
-                description: "Non-woven polypropylene disposable gown for medical and industrial use.",
-                image: "../assets/products/disposable-gown.jpg",
-                category: "ppe",
-                link: "https://amzn.to/49rqlRr",
-                rating: 4.3,
-                ratingCount: 267,
-                features: [
-                    "Water Resistant",
-                    "Breathable",
-                    "Disposable",
-                    "Multiple Sizes"
-                ]
-            },
-            {
-                id: 14,
-                name: "Ear Protection Muffs",
-                description: "Noise cancelling safety earmuffs with adjustable headband.",
-                image: "https://images.unsplash.com/photo-1581391522423-f970b7e1e801?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "respiratory",
-                link: "https://amzn.to/3zf7FrG",
-                rating: 4.4,
-                ratingCount: 178,
-                features: [
-                    "NRR 28dB",
-                    "Adjustable Headband",
-                    "Lightweight",
-                    "Foldable Design"
-                ]
-            },
-            {
-                id: 15,
-                name: "Safety Helmet with Visor",
-                description: "ABS safety helmet with integrated face shield and earmuff attachments.",
-                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "ppe",
-                link: "https://amzn.to/3zg8GrH",
-                rating: 4.6,
-                ratingCount: 145,
-                features: [
-                    "ABS Material",
-                    "Integrated Visor",
-                    "Ventilation Holes",
-                    "Adjustable Headband"
-                ]
-            },
-            {
-                id: 16,
-                name: "Emergency First Aid Kit",
-                description: "Comprehensive 100-piece first aid kit for workplace emergencies.",
-                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "ppe",
-                link: "https://amzn.to/3zh9IrJ",
-                rating: 4.8,
-                ratingCount: 89,
-                features: [
-                    "100 Pieces",
-                    "OSHA Compliant",
-                    "Waterproof Case",
-                    "Clear Compartments"
-                ]
-            },
-            {
-               id: 17,
-               name: "Digital Sound Level Meter",
-               description: "Professional noise measurement device with data logging and calibration certificate.",
-               image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
-               category: "ppe",
-               link: "https://amzn.to/4c1BwXy",
-               rating: 4.6,
-               ratingCount: 89,
-              features: [
-                  "30-130 dB Range",
-                  "Data Logging",
-                  "Backlit Display",
-                  "Calibration Certificate"
-                ]
-            },
-           {
-              id: 18,
-              name: "Fire Extinguisher 5kg",
-              description: "ABC dry powder fire extinguisher for commercial and industrial use.",
-              image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64",
-              category: "ppe",
-              link: "https://amzn.to/4e2CzAb",
-              rating: 4.7,
-              ratingCount: 134,
-              features: [
-                  "ABC Type",
-                  "5kg Capacity",
-                  "ISI Certified",
-                  "Wall Bracket Included"
-              ]
-           },
-          {
-            id: 19,
-            name: "Safety Reflective Vest",
-            description: "High visibility safety vest with reflective strips for low light conditions.",
-            image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
-            category: "ppe",
-            link: "https://amzn.to/4e3DzBc",
-            rating: 4.4,
-            ratingCount: 267,
-            features: [
-                "High Visibility",
-                "Reflective Strips",
-                "Multiple Pockets",
-                "Adjustable Sides"
-             ]
-         },
-        ];
-
-        // Products Management
-        let currentPage = 1;
-        const productsPerPage = 8;
-        let currentFilter = 'all';
-
+        // Mobile menu toggle
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
             const mobileToggle = document.getElementById('mobileToggle');
             const navLinks = document.getElementById('navLinks');
             
@@ -696,182 +666,41 @@
                 });
             }
             
-            // Initialize products
-            displayProducts();
-            setupFilters();
+            // Visitor Counter Update
+            updateVisitorCounter();
         });
-
-        function displayProducts(page = 1, filter = 'all') {
-            const grid = document.getElementById('productsGrid');
-            const pagination = document.getElementById('productsPagination');
+        
+        // Visitor Counter Function
+        function updateVisitorCounter() {
+            const visitorCountElement = document.getElementById('visitorCount');
+            if (!visitorCountElement) return;
             
-            if (!grid) return;
+            // Get current count from localStorage or start with 2847
+            let currentCount = parseInt(localStorage.getItem('hseVisitors')) || 2847;
             
-            // Filter products
-            let filteredProducts = productsData;
-            if (filter !== 'all') {
-                filteredProducts = productsData.filter(product => product.category === filter);
-            }
+            // Add random increment (between 1-10)
+            const increment = Math.floor(Math.random() * 10) + 1;
+            currentCount += increment;
             
-            // Calculate pagination
-            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-            const startIndex = (page - 1) * productsPerPage;
-            const endIndex = startIndex + productsPerPage;
-            const pageProducts = filteredProducts.slice(startIndex, endIndex);
+            // Save to localStorage
+            localStorage.setItem('hseVisitors', currentCount.toString());
             
-            // Clear grid
-            grid.innerHTML = '';
+            // Update display with comma formatting
+            visitorCountElement.textContent = currentCount.toLocaleString();
             
-            // Display products
-            pageProducts.forEach(product => {
-                const productCard = createProductCard(product);
-                grid.innerHTML += productCard;
+            // Update every 30 minutes
+            setTimeout(updateVisitorCounter, 30 * 60 * 1000);
+        }
+        
+        // Fallback image handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.onerror = function() {
+                    this.src = 'assets/products/default.jpg';
+                };
             });
-            
-            // Display pagination
-            displayPagination(totalPages, page);
-        }
-
-        function createProductCard(product) {
-            // Generate star rating
-            const stars = generateStars(product.rating);
-            
-            // Generate features list
-            const featuresList = product.features.map(feature => 
-                `<li><i class="fas fa-check"></i> ${feature}</li>`
-            ).join('');
-            
-            return `
-                <div class="product-card" data-category="${product.category}">
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}" 
-                             onerror="this.src='../assets/products/default.jpg'">
-                        <span class="product-category">${formatCategory(product.category)}</span>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                        
-                        <div class="product-rating">
-                            <div class="stars">${stars}</div>
-                            <span class="rating-count">(${product.ratingCount})</span>
-                        </div>
-                                                                   
-                        <ul class="product-features">
-                            ${featuresList}
-                        </ul>
-                        
-                        <a href="${product.link}" target="_blank" class="btn btn-primary" style="width: 100%;">
-                            <i class="fas fa-external-link-alt"></i> View Details
-                        </a>
-                    </div>
-                </div>
-            `;
-        }
-
-        function generateStars(rating) {
-            let stars = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 >= 0.5;
-            
-            for (let i = 1; i <= 5; i++) {
-                if (i <= fullStars) {
-                    stars += '<i class="fas fa-star"></i>';
-                } else if (i === fullStars + 1 && hasHalfStar) {
-                    stars += '<i class="fas fa-star-half-alt"></i>';
-                } else {
-                    stars += '<i class="far fa-star"></i>';
-                }
-            }
-            return stars;
-        }
-
-        function formatCategory(category) {
-            const categories = {
-                'ppe': 'PPE Kit',
-                'respiratory': 'Respiratory',
-                'fall-protection': 'Fall Protection',
-                'eye-protection': 'Eye Protection',
-                'foot-protection': 'Foot Protection',
-                'hand-protection': 'Hand Protection'
-            };
-            return categories[category] || category;
-        }
-
-        function displayPagination(totalPages, currentPage) {
-            const pagination = document.getElementById('productsPagination');
-            if (!pagination || totalPages <= 1) {
-                pagination.style.display = 'none';
-                return;
-            }
-            
-            pagination.style.display = 'flex';
-            pagination.innerHTML = '';
-            
-            // Previous button
-            if (currentPage > 1) {
-                pagination.innerHTML += `
-                    <button class="page-btn" onclick="changePage(${currentPage - 1})">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                `;
-            }
-            
-            // Page numbers
-            for (let i = 1; i <= totalPages; i++) {
-                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-                    pagination.innerHTML += `
-                        <button class="page-btn ${i === currentPage ? 'active' : ''}" 
-                                onclick="changePage(${i})">
-                            ${i}
-                        </button>
-                    `;
-                } else if (i === currentPage - 2 || i === currentPage + 2) {
-                    pagination.innerHTML += `<span class="page-btn">...</span>`;
-                }
-            }
-            
-            // Next button
-            if (currentPage < totalPages) {
-                pagination.innerHTML += `
-                    <button class="page-btn" onclick="changePage(${currentPage + 1})">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                `;
-            }
-        }
-
-        function setupFilters() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    // Get filter value
-                    currentFilter = this.getAttribute('data-filter');
-                    currentPage = 1;
-                    
-                    // Display filtered products
-                    displayProducts(currentPage, currentFilter);
-                });
-            });
-        }
-
-        function changePage(page) {
-            currentPage = page;
-            displayProducts(currentPage, currentFilter);
-            
-            // Scroll to top of products grid
-            document.getElementById('productsGrid').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+        });
     </script>
 </body>
 </html>
