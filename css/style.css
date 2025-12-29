@@ -1267,3 +1267,94 @@ a:hover {
 .cta-card .btn-primary:hover {
     background: #f0f2ff;
 }
+/* ===== SOCIAL SHARING FIXES ===== */
+.social-sharing {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 0;
+    color: white;
+    text-align: center;
+}
+
+.social-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-card h3 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.social-card p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 35px;
+}
+
+.social-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: none;
+    color: white;
+}
+
+.social-btn i {
+    font-size: 1.2rem;
+}
+
+.social-btn.facebook {
+    background: #1877F2;
+}
+
+.social-btn.twitter {
+    background: #1DA1F2;
+}
+
+.social-btn.linkedin {
+    background: #0077B5;
+}
+
+.social-btn.whatsapp {
+    background: #25D366;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .social-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .social-card {
+        padding: 30px 20px;
+    }
+    
+    .social-card h3 {
+        font-size: 1.8rem;
+    }
+}
