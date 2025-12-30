@@ -1,7 +1,7 @@
 /* calculator.css - Calculator-specific styles for HSE Calculator */
-/* This file depends on style.css variables */
+/* This file depends on style.css variables and utilities */
 
-/* ===== CALCULATOR FORM STYLES ===== */
+/* ===== CALCULATOR FORM STYLES (Enhancements) ===== */
 .calculator-form {
     background: var(--white);
     border-radius: var(--radius-lg);
@@ -13,11 +13,11 @@
     margin-right: auto;
 }
 
-.form-group {
+.calculator-form .form-group {
     margin-bottom: var(--spacing-lg);
 }
 
-.form-label {
+.calculator-form .form-label {
     display: block;
     margin-bottom: var(--spacing-xs);
     font-weight: 600;
@@ -25,7 +25,7 @@
     font-size: 1rem;
 }
 
-.form-control {
+.calculator-form .form-control {
     width: 100%;
     padding: 12px 16px;
     border: 2px solid var(--border-color);
@@ -36,30 +36,117 @@
     background: var(--white);
 }
 
-.form-control:focus {
+.calculator-form .form-control:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
 }
 
-.form-control:disabled {
+.calculator-form .form-control:disabled {
     background-color: var(--gray-light);
     cursor: not-allowed;
     opacity: 0.7;
 }
 
-.form-text {
+.calculator-form .form-text {
     display: block;
     margin-top: 6px;
     font-size: 0.875rem;
     color: var(--gray);
 }
 
-.form-row {
+.calculator-form .form-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
+}
+
+/* ===== CALCULATOR-SPECIFIC FORM CONTROLS ===== */
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group .form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.input-group .input-group-text {
+    background: var(--gray-light);
+    border: 2px solid var(--border-color);
+    border-left: none;
+    padding: 12px 16px;
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    color: var(--gray);
+    font-weight: 500;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--gray);
+    font-size: 0.8rem;
+}
+
+.range-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.range-value {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.checkbox-group, .radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.checkbox-label, .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast);
+}
+
+.checkbox-label:hover, .radio-label:hover {
+    background: var(--gray-light);
+}
+
+.checkbox-label input[type="checkbox"],
+.radio-label input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* ===== RESULT BOX ===== */
@@ -388,39 +475,6 @@
     gap: 10px;
 }
 
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    transition: background var(--transition-fast);
-}
-
-.checkbox-label:hover {
-    background: var(--gray-light);
-}
-
-.checkbox-label input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-}
-
-.form-actions {
-    display: flex;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-xl);
-}
-
 /* ===== RECORDS TABLE ===== */
 .records-controls {
     display: flex;
@@ -727,12 +781,16 @@
     right: 0;
     bottom: 0;
     background: rgba(0,0,0,0.7);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: var(--z-modal-backdrop);
     padding: var(--spacing-md);
     backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+    display: flex;
 }
 
 .modal-content {
@@ -822,7 +880,7 @@
     color: var(--white);
     font-weight: 600;
     z-index: var(--z-modal);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
@@ -830,6 +888,10 @@
     max-width: 400px;
     animation: slideInRight 0.3s ease;
     box-shadow: var(--shadow-lg);
+}
+
+.notification.active {
+    display: flex;
 }
 
 .notification button {
@@ -895,18 +957,6 @@
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(44, 90, 160, 0.4);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(44, 90, 160, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(44, 90, 160, 0);
     }
 }
 
