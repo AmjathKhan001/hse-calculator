@@ -7,6 +7,12 @@
     <meta name="description" content="Complete list of all 11 professional HSE calculators. Risk assessment, noise exposure, chemical exposure, incident rate, fall protection, and more.">
     <meta name="keywords" content="HSE calculators list, safety tools, risk assessment, noise exposure, chemical exposure, incident rate">
     
+    <!-- Open Graph for better social sharing -->
+    <meta property="og:title" content="All HSE Calculators | Complete List of Safety Tools">
+    <meta property="og:description" content="Complete list of all 11 professional HSE calculators. Risk assessment, noise exposure, chemical exposure, incident rate, fall protection, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hse-calculator.vercel.app/pages/all-calculators.html">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -34,434 +40,451 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <nav class="navbar">
+            <nav class="navbar" aria-label="Main navigation">
                 <a href="../index.html" class="logo">
                     <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
                     <span>HSE Calculator</span>
                 </a>
                 
                 <div class="nav-links" id="navLinks">
-                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                    <a href="all-calculators.html" class="nav-link active"><i class="fas fa-calculator"></i> All Calculators</a>
-                    <a href="products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
-                    <a href="tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
-                    <a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
-                    <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+                    <a href="all-calculators.html" class="nav-link active"><i class="fas fa-calculator" aria-hidden="true"></i> All Calculators</a>
+                    <a href="products.html" class="nav-link"><i class="fas fa-shopping-bag" aria-hidden="true"></i> Safety Products</a>
+                    <a href="tools.html" class="nav-link"><i class="fas fa-tools" aria-hidden="true"></i> Tools</a>
+                    <a href="blog.html" class="nav-link"><i class="fas fa-blog" aria-hidden="true"></i> Blog</a>
+                    <a href="contact.html" class="nav-link"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a>
                 </div>
                 
-                <div class="mobile-toggle" id="mobileToggle">
-                    <i class="fas fa-bars"></i>
-                </div>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
             </nav>
         </div>
     </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1 class="text-center">All HSE Calculators</h1>
-            <p class="text-lead text-center">Complete collection of 11 professional safety calculation tools for workplace compliance</p>
-        </div>
-    </section>
-
-    <!-- Calculators Grid -->
-    <section class="all-calculators section">
-        <div class="container">
-            <!-- Filter Options -->
-            <div class="calculator-filter mb-5">
-                <h3 class="mb-3">Filter by Category</h3>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">All Calculators</button>
-                    <button class="filter-btn" data-filter="risk">Risk Assessment</button>
-                    <button class="filter-btn" data-filter="exposure">Exposure</button>
-                    <button class="filter-btn" data-filter="safety">Safety Metrics</button>
-                    <button class="filter-btn" data-filter="environmental">Environmental</button>
-                    <button class="filter-btn" data-filter="training">Training</button>
-                </div>
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="page-header" aria-labelledby="page-title">
+            <div class="container">
+                <h1 id="page-title" class="text-center">All HSE Calculators</h1>
+                <p class="text-lead text-center">Complete collection of 11 professional safety calculation tools for workplace compliance</p>
             </div>
+        </section>
 
-            <!-- Calculators Grid -->
-            <div class="calculators-grid-detailed">
-                <!-- Calculator 1: Risk Assessment -->
-                <div class="calculator-card-detailed" data-category="risk">
-                    <div class="calculator-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Risk Assessment Calculator</h3>
-                            <span class="calculator-badge">Risk Assessment</span>
-                        </div>
-                        <p class="calculator-description mb-3">Calculate risk levels based on probability and severity matrices. Prioritize safety measures using quantitative risk assessment methods.</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Risk Matrix</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Probability Score</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Severity Rating</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Priority Ranking</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/risk-assessment.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
+        <!-- Calculators Grid -->
+        <section class="all-calculators section" aria-labelledby="calculators-title">
+            <div class="container">
+                <h2 id="calculators-title" class="sr-only">Available Calculators</h2>
+                
+                <!-- Filter Options -->
+                <div class="calculator-filter mb-5">
+                    <h3 class="mb-3">Filter by Category</h3>
+                    <div class="filter-buttons" role="group" aria-label="Calculator category filters">
+                        <button class="filter-btn active" data-filter="all" aria-pressed="true">All Calculators</button>
+                        <button class="filter-btn" data-filter="risk" aria-pressed="false">Risk Assessment</button>
+                        <button class="filter-btn" data-filter="exposure" aria-pressed="false">Exposure</button>
+                        <button class="filter-btn" data-filter="safety" aria-pressed="false">Safety Metrics</button>
+                        <button class="filter-btn" data-filter="environmental" aria-pressed="false">Environmental</button>
+                        <button class="filter-btn" data-filter="training" aria-pressed="false">Training</button>
                     </div>
                 </div>
 
-                <!-- Calculator 2: Noise Exposure -->
-                <div class="calculator-card-detailed" data-category="exposure">
-                    <div class="calculator-icon">
-                        <i class="fas fa-volume-up"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Noise Exposure Calculator</h3>
-                            <span class="calculator-badge">Exposure</span>
-                        </div>
-                        <p class="calculator-description mb-3">Determine daily noise exposure levels (LEP,d) and compliance with occupational exposure limits (OELs).</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> OSHA Compliance</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> TWA Calculation</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Dose Calculation</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Hearing Protection</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/noise-exposure.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 3: Chemical Exposure -->
-                <div class="calculator-card-detailed" data-category="exposure">
-                    <div class="calculator-icon">
-                        <i class="fas fa-flask"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Chemical Exposure Calculator</h3>
-                            <span class="calculator-badge">Exposure</span>
-                        </div>
-                        <p class="calculator-description mb-3">Calculate chemical exposure levels and determine compliance with Permissible Exposure Limits (PELs).</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> PEL Compliance</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> STEL/TWA</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Hazard Rating</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> PPE Recommendation</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/chemical-exposure.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 4: Incident Rate -->
-                <div class="calculator-card-detailed" data-category="safety">
-                    <div class="calculator-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Incident Rate Calculator</h3>
-                            <span class="calculator-badge">Safety Metrics</span>
-                        </div>
-                        <p class="calculator-description mb-3">Calculate TRIR, DART, LTIR, and other safety performance metrics for OSHA reporting.</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> TRIR Calculation</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> DART Rate</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> LTIFR</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Benchmarking</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/incident-rate.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 5: Fall Protection -->
-                <div class="calculator-card-detailed" data-category="safety">
-                    <div class="calculator-icon">
-                        <i class="fas fa-user-shield"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Fall Protection Calculator</h3>
-                            <span class="calculator-badge">Safety Metrics</span>
-                        </div>
-                        <p class="calculator-description mb-3">Calculate fall clearance requirements, deceleration distance, and anchor strength for fall arrest systems.</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Clearance Calc</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Force Analysis</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> OSHA Standards</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Equipment Check</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/fall-protection.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 6: Heat Stress -->
-                <div class="calculator-card-detailed" data-category="environmental">
-                    <div class="calculator-icon">
-                        <i class="fas fa-temperature-high"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Heat Stress Calculator</h3>
-                            <span class="calculator-badge">Environmental</span>
-                        </div>
-                        <p class="calculator-description mb-3">Calculate WBGT index, heat stress risk levels, and recommended work/rest cycles for hot environments.</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> WBGT Index</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Risk Assessment</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Work/Rest Schedule</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Hydration Guide</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/heat-stress.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 7: Ventilation -->
-                <div class="calculator-card-detailed" data-category="environmental">
-                    <div class="calculator-icon">
-                        <i class="fas fa-wind"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Ventilation Calculator</h3>
-                            <span class="calculator-badge">Environmental</span>
-                        </div>
-                        <p class="calculator-description mb-3">Calculate air changes per hour, ventilation rates, and duct sizing for industrial ventilation systems.</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> ACH Calculation</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> CFM Requirements</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Duct Sizing</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Fume Hood Design</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/ventilation.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 8: PPE Selection -->
-                <div class="calculator-card-detailed" data-category="safety">
-                    <div class="calculator-icon">
-                        <i class="fas fa-hard-hat"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">PPE Selection Calculator</h3>
-                            <span class="calculator-badge">Safety Metrics</span>
-                        </div>
-                        <p class="calculator-description mb-3">Determine appropriate Personal Protective Equipment based on hazard assessment and job tasks.</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Hazard Matching</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> PPE Hierarchy</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Compliance Check</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Budget Planning</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/ppe-selection.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 9: Lifting Safety -->
-                <div class="calculator-card-detailed" data-category="risk">
-                    <div class="calculator-icon">
-                        <i class="fas fa-weight-hanging"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Lifting Safety Calculator</h3>
-                            <span class="calculator-badge">Risk Assessment</span>
-                        </div>
-                        <p class="calculator-description mb-3">Calculate safe lifting limits, crane capacities, and manual handling risks using NIOSH lifting equation.</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> NIOSH Equation</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Load Capacity</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Risk Assessment</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Ergonomics</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/lifting-safety.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 10: Environmental Impact -->
-                <div class="calculator-card-detailed" data-category="environmental">
-                    <div class="calculator-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Environmental Impact Calculator</h3>
-                            <span class="calculator-badge">Environmental</span>
-                        </div>
-                        <p class="calculator-description mb-3">Calculate carbon footprint, waste generation rates, and environmental compliance metrics.</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Carbon Footprint</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Waste Metrics</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Compliance Tracking</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Sustainability Score</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/environmental-impact.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 11: Safety Training -->
-                <div class="calculator-card-detailed" data-category="training">
-                    <div class="calculator-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="calculator-content">
-                        <div class="calculator-header">
-                            <h3 class="mb-2">Safety Training Calculator</h3>
-                            <span class="calculator-badge">Training</span>
-                        </div>
-                        <p class="calculator-description mb-3">Calculate training effectiveness, ROI, competency assessment, and schedule safety training sessions.</p>
-                        <div class="calculator-features mb-3">
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> ROI Calculation</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Competency Assessment</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Training Scheduling</span>
-                            <span class="feature-tag"><i class="fas fa-check-circle"></i> Certification Tracking</span>
-                        </div>
-                        <div class="calculator-footer">
-                            <a href="../calculators/safety-training.html" class="btn btn-primary">
-                                <i class="fas fa-play-circle"></i> Open Calculator
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i> Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Calculator Stats -->
-            <div class="calculator-stats mt-5 mb-5">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                        <div class="stat-value">11</div>
-                        <div class="stat-label">Calculators</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-value">1000+</div>
-                        <div class="stat-label">Users</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
+                <!-- Calculators Grid -->
+                <div class="calculators-grid-detailed" role="list">
+                    <!-- Calculator 1: Risk Assessment -->
+                    <article class="calculator-card-detailed" data-category="risk" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                        <div class="stat-value">95%</div>
-                        <div class="stat-label">Accuracy</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-clock"></i>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Risk Assessment Calculator</h3>
+                                <span class="calculator-badge">Risk Assessment</span>
+                            </div>
+                            <p class="calculator-description mb-3">Calculate risk levels based on probability and severity matrices. Prioritize safety measures using quantitative risk assessment methods.</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Risk Matrix</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Probability Score</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Severity Rating</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Priority Ranking</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/risk-assessment.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Risk Assessment Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
                         </div>
-                        <div class="stat-value">24/7</div>
-                        <div class="stat-label">Availability</div>
+                    </article>
+
+                    <!-- Calculator 2: Noise Exposure -->
+                    <article class="calculator-card-detailed" data-category="exposure" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Noise Exposure Calculator</h3>
+                                <span class="calculator-badge">Exposure</span>
+                            </div>
+                            <p class="calculator-description mb-3">Determine daily noise exposure levels (LEP,d) and compliance with occupational exposure limits (OELs).</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> OSHA Compliance</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> TWA Calculation</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Dose Calculation</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Hearing Protection</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/noise-exposure.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Noise Exposure Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Calculator 3: Chemical Exposure -->
+                    <article class="calculator-card-detailed" data-category="exposure" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Chemical Exposure Calculator</h3>
+                                <span class="calculator-badge">Exposure</span>
+                            </div>
+                            <p class="calculator-description mb-3">Calculate chemical exposure levels and determine compliance with Permissible Exposure Limits (PELs).</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> PEL Compliance</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> STEL/TWA</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Hazard Rating</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> PPE Recommendation</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/chemical-exposure.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Chemical Exposure Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Calculator 4: Incident Rate -->
+                    <article class="calculator-card-detailed" data-category="safety" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Incident Rate Calculator</h3>
+                                <span class="calculator-badge">Safety Metrics</span>
+                            </div>
+                            <p class="calculator-description mb-3">Calculate TRIR, DART, LTIR, and other safety performance metrics for OSHA reporting.</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> TRIR Calculation</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> DART Rate</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> LTIFR</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Benchmarking</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/incident-rate.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Incident Rate Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Calculator 5: Fall Protection -->
+                    <article class="calculator-card-detailed" data-category="safety" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Fall Protection Calculator</h3>
+                                <span class="calculator-badge">Safety Metrics</span>
+                            </div>
+                            <p class="calculator-description mb-3">Calculate fall clearance requirements, deceleration distance, and anchor strength for fall arrest systems.</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Clearance Calc</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Force Analysis</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> OSHA Standards</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Equipment Check</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/fall-protection.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Fall Protection Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Calculator 6: Heat Stress -->
+                    <article class="calculator-card-detailed" data-category="environmental" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Heat Stress Calculator</h3>
+                                <span class="calculator-badge">Environmental</span>
+                            </div>
+                            <p class="calculator-description mb-3">Calculate WBGT index, heat stress risk levels, and recommended work/rest cycles for hot environments.</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> WBGT Index</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Risk Assessment</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Work/Rest Schedule</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Hydration Guide</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/heat-stress.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Heat Stress Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Calculator 7: Ventilation -->
+                    <article class="calculator-card-detailed" data-category="environmental" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Ventilation Calculator</h3>
+                                <span class="calculator-badge">Environmental</span>
+                            </div>
+                            <p class="calculator-description mb-3">Calculate air changes per hour, ventilation rates, and duct sizing for industrial ventilation systems.</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> ACH Calculation</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> CFM Requirements</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Duct Sizing</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Fume Hood Design</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/ventilation.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Ventilation Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Calculator 8: PPE Selection -->
+                    <article class="calculator-card-detailed" data-category="safety" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">PPE Selection Calculator</h3>
+                                <span class="calculator-badge">Safety Metrics</span>
+                            </div>
+                            <p class="calculator-description mb-3">Determine appropriate Personal Protective Equipment based on hazard assessment and job tasks.</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Hazard Matching</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> PPE Hierarchy</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Compliance Check</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Budget Planning</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/ppe-selection.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about PPE Selection Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Calculator 9: Lifting Safety -->
+                    <article class="calculator-card-detailed" data-category="risk" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-weight-hanging"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Lifting Safety Calculator</h3>
+                                <span class="calculator-badge">Risk Assessment</span>
+                            </div>
+                            <p class="calculator-description mb-3">Calculate safe lifting limits, crane capacities, and manual handling risks using NIOSH lifting equation.</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> NIOSH Equation</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Load Capacity</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Risk Assessment</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Ergonomics</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/lifting-safety.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Lifting Safety Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Calculator 10: Environmental Impact -->
+                    <article class="calculator-card-detailed" data-category="environmental" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Environmental Impact Calculator</h3>
+                                <span class="calculator-badge">Environmental</span>
+                            </div>
+                            <p class="calculator-description mb-3">Calculate carbon footprint, waste generation rates, and environmental compliance metrics.</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Carbon Footprint</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Waste Metrics</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Compliance Tracking</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Sustainability Score</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/environmental-impact.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Environmental Impact Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Calculator 11: Safety Training -->
+                    <article class="calculator-card-detailed" data-category="training" role="listitem">
+                        <div class="calculator-icon" aria-hidden="true">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <div class="calculator-header">
+                                <h3 class="mb-2">Safety Training Calculator</h3>
+                                <span class="calculator-badge">Training</span>
+                            </div>
+                            <p class="calculator-description mb-3">Calculate training effectiveness, ROI, competency assessment, and schedule safety training sessions.</p>
+                            <div class="calculator-features mb-3">
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> ROI Calculation</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Competency Assessment</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Training Scheduling</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle" aria-hidden="true"></i> Certification Tracking</span>
+                            </div>
+                            <div class="calculator-footer">
+                                <a href="../calculators/safety-training.html" class="btn btn-primary">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i> Open Calculator
+                                </a>
+                                <button class="btn btn-outline" aria-label="Learn more about Safety Training Calculator">
+                                    <i class="fas fa-info-circle" aria-hidden="true"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Calculator Stats -->
+                <div class="calculator-stats mt-5 mb-5">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" aria-hidden="true">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <div class="stat-value">11</div>
+                            <div class="stat-label">Calculators</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" aria-hidden="true">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-value">1000+</div>
+                            <div class="stat-label">Users</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" aria-hidden="true">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-value">95%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" aria-hidden="true">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">Availability</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Sharing Section -->
+                <section class="social-sharing" aria-labelledby="social-sharing-title">
+                    <div class="container">
+                        <div class="social-card compact">
+                            <h3 id="social-sharing-title">Share These Tools</h3>
+                            <p>Help other safety professionals discover these resources</p>
+                            <div class="social-buttons">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https://hse-calculator.vercel.app/pages/all-calculators.html" 
+                                   target="_blank" 
+                                   class="social-btn facebook"
+                                   aria-label="Share on Facebook">
+                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url=https://hse-calculator.vercel.app/pages/all-calculators.html&text=Check%20out%20these%2011%20professional%20HSE%20calculators!" 
+                                   target="_blank" 
+                                   class="social-btn twitter"
+                                   aria-label="Share on Twitter">
+                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hse-calculator.vercel.app/pages/all-calculators.html" 
+                                   target="_blank" 
+                                   class="social-btn linkedin"
+                                   aria-label="Share on LinkedIn">
+                                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://api.whatsapp.com/send?text=Professional%20HSE%20Calculators:%20https://hse-calculator.vercel.app/pages/all-calculators.html" 
+                                   target="_blank" 
+                                   class="social-btn whatsapp"
+                                   aria-label="Share on WhatsApp">
+                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Support Call to Action -->
+                <div class="support-section mt-5">
+                    <div class="support-card compact">
+                        <i class="fas fa-coffee support-icon" aria-hidden="true"></i>
+                        <h3>Support Our Work</h3>
+                        <p>If you find these tools useful, consider supporting us to keep them free for everyone.</p>
+                        <a href="https://www.buymeacoffee.com/amjathkhan" target="_blank" class="btn btn-coffee mt-3">
+                            <i class="fas fa-coffee" aria-hidden="true"></i> Buy me a coffee
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <!-- Social Sharing Section -->
-            <section class="social-sharing">
-                <div class="container">
-                    <div class="social-card compact">
-                        <h3>Share These Tools</h3>
-                        <p>Help other safety professionals discover these resources</p>
-                        <div class="social-buttons">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://hse-calculator.vercel.app/pages/all-calculators.html" target="_blank" class="social-btn facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="https://twitter.com/intent/tweet?url=https://hse-calculator.vercel.app/pages/all-calculators.html&text=Check%20out%20these%2011%20professional%20HSE%20calculators!" target="_blank" class="social-btn twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hse-calculator.vercel.app/pages/all-calculators.html" target="_blank" class="social-btn linkedin">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://api.whatsapp.com/send?text=Professional%20HSE%20Calculators:%20https://hse-calculator.vercel.app/pages/all-calculators.html" target="_blank" class="social-btn whatsapp">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Support Call to Action -->
-            <div class="support-section mt-5">
-                <div class="support-card compact">
-                    <i class="fas fa-coffee support-icon"></i>
-                    <h3>Support Our Work</h3>
-                    <p>If you find these tools useful, consider supporting us to keep them free for everyone.</p>
-                    <a href="https://www.buymeacoffee.com/amjathkhan" target="_blank" class="btn btn-coffee mt-3">
-                        <i class="fas fa-coffee"></i> Buy me a coffee
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -474,10 +497,18 @@
                     </a>
                     <p>Professional tools for health, safety, and environment professionals.</p>
                     <div class="footer-social">
-                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/amjathkhan_official" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://x.com/amjikhan" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.instagram.com/amjathkhan_official" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
                 
@@ -503,9 +534,9 @@
                 
                 <div class="footer-col">
                     <h4>Contact</h4>
-                    <p><i class="fas fa-envelope"></i> contact@amjathkhan.com</p>
+                    <p><i class="fas fa-envelope" aria-hidden="true"></i> contact@amjathkhan.com</p>
                     <a href="contact.html" class="btn btn-primary btn-small mt-2">
-                        <i class="fas fa-paper-plane"></i> Contact Us
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i> Contact Us
                     </a>
                 </div>
             </div>
@@ -525,12 +556,20 @@
             const filterButtons = document.querySelectorAll('.filter-btn');
             const calculatorCards = document.querySelectorAll('.calculator-card-detailed');
             
+            // Add loaded class
+            document.body.classList.add('loaded');
+            
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
+                    
                     // Add active class to clicked button
                     this.classList.add('active');
+                    this.setAttribute('aria-pressed', 'true');
                     
                     const filterValue = this.getAttribute('data-filter');
                     
@@ -559,16 +598,19 @@
             
             if (mobileToggle) {
                 mobileToggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
                     navLinks.classList.toggle('active');
                 });
             }
-        });
-         <!-- JavaScript -->
-    <script src="../js/main.js"></script>
-    <script>
-        // Add loaded class when page is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.classList.add('loaded');
+            
+            // Update aria-expanded on window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 767) {
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    navLinks.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>
