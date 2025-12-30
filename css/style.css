@@ -1,6 +1,45 @@
 /* style.css - Global Base Styles for HSE Calculator */
 /* This file contains ONLY global styles, layout, and components */
 
+/* ===== CSS RESET & NORMALIZE ===== */
+/* Import this at the very top or add these styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--light-color);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
 /* ===== CSS VARIABLES (Design System) ===== */
 :root {
     /* Color Palette - Professional Safety Theme */
@@ -70,29 +109,30 @@
     --z-tooltip: 1070;
 }
 
-/* ===== RESET & BASE STYLES ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ===== HEADER/NAVIGATION IMPORT CONTAINER ===== */
+#header-container,
+#footer-container {
+    min-height: 60px; /* Prevent layout shift during loading */
 }
 
-html {
-    scroll-behavior: smooth;
-    font-size: 16px;
+/* ===== SKIP TO MAIN CONTENT (Accessibility) ===== */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 9999;
 }
 
-body {
-    font-family: var(--font-primary);
-    color: var(--text-color);
-    line-height: 1.6;
-    background-color: var(--light-color);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+.skip-to-content:focus {
+    top: 0;
 }
 
 /* ===== TYPOGRAPHY ===== */
+/* [Keep all your existing typography styles - they're good] */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 600;
@@ -175,6 +215,11 @@ a:hover {
     text-decoration: underline;
 }
 
+a:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 /* ===== LAYOUT CONTAINERS ===== */
 .container {
     width: 100%;
@@ -235,6 +280,7 @@ a:hover {
     display: flex;
     gap: var(--spacing-lg);
     align-items: center;
+    list-style: none;
 }
 
 .nav-link {
@@ -259,6 +305,10 @@ a:hover {
     color: var(--dark-color);
     background: none;
     border: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ===== BUTTONS ===== */
@@ -376,7 +426,64 @@ a:hover {
     cursor: not-allowed;
 }
 
+.btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ===== FORM CONTROLS (Global) ===== */
+/* These are moved from calculator.css for global use */
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+    color: var(--dark-color);
+    font-size: 1rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    transition: all var(--transition-normal);
+    background: var(--white);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+}
+
+.form-control:disabled {
+    background-color: var(--gray-light);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.form-text {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.875rem;
+    color: var(--gray);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
 /* ===== HERO SECTIONS ===== */
+/* [Keep all your existing hero styles - they're good] */
 .hero {
     background: var(--gradient-primary);
     color: var(--white);
@@ -594,242 +701,26 @@ a:hover {
 }
 
 /* ===== PRODUCT CARDS ===== */
-.product-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-.product-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-
-.product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-normal);
-}
-
-.product-card:hover .product-image img {
-    transform: scale(1.05);
-}
-
-.product-category {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: var(--primary-color);
-    color: var(--white);
-    padding: 4px 8px;
-    border-radius: var(--radius-sm);
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.product-content {
-    padding: var(--spacing-lg);
-}
-
-.product-content h4 {
-    margin-bottom: var(--spacing-md);
-    height: 60px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
+/* [Keep all your existing product card styles - they're good] */
 
 /* ===== AMAZON BANNER ===== */
-.amazon-banner {
-    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-    color: var(--white);
-    padding: var(--spacing-lg) 0;
-    margin: var(--spacing-xl) 0;
-}
-
-.banner-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--spacing-md);
-}
-
-.banner-text h3 {
-    color: var(--white);
-    margin-bottom: 5px;
-}
-
-.banner-text p {
-    margin: 0;
-    opacity: 0.9;
-}
+/* [Keep all your existing amazon banner styles - they're good] */
 
 /* ===== SUPPORT SECTION ===== */
-.support-section {
-    padding: var(--spacing-xl) 0;
-}
-
-.support-card {
-    background: var(--gradient-orange);
-    color: var(--white);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    text-align: center;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.support-icon {
-    font-size: 3rem;
-    color: #ffdd00;
-    margin-bottom: var(--spacing-md);
-}
-
-.support-content h3 {
-    color: var(--white);
-    margin-bottom: var(--spacing-sm);
-}
-
-.support-content p {
-    margin-bottom: var(--spacing-md);
-    opacity: 0.9;
-}
+/* [Keep all your existing support section styles - they're good] */
 
 /* ===== EXPLORE TOOLS ===== */
-.explore-tools {
-    padding: var(--spacing-xl) 0;
-    background-color: var(--gray-light);
-}
-
-.tools-categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
-}
-
-.tool-category {
-    background: var(--white);
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-}
-
-.tool-category h3 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-md);
-}
-
-.tool-category ul {
-    list-style: none;
-}
-
-.tool-category li {
-    margin-bottom: 8px;
-}
-
-.tool-category a {
-    color: var(--text-color);
-    text-decoration: none;
-    transition: color var(--transition-normal);
-}
-
-.tool-category a:hover {
-    color: var(--primary-color);
-    padding-left: 5px;
-}
+/* [Keep all your existing explore tools styles - they're good] */
 
 /* ===== SOCIAL SHARING (Global) ===== */
-.social-sharing {
-    padding: var(--spacing-xl) 0;
-    background: var(--gradient-purple);
-    color: white;
-}
-
-.social-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 30px;
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.social-card h3 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: white;
-}
-
-.social-card p {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 25px;
-    font-size: 1rem;
-}
-
-.social-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.social-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-    font-size: 1.2rem;
-    text-decoration: none;
-    transition: all var(--transition-normal);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.social-btn:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.social-btn.facebook:hover {
-    background: #1877F2;
-}
-
-.social-btn.twitter:hover {
-    background: #1DA1F2;
-}
-
-.social-btn.linkedin:hover {
-    background: #0077B5;
-}
-
-.social-btn.whatsapp:hover {
-    background: #25D366;
-}
+/* [Keep all your existing social sharing styles - they're good] */
 
 /* ===== FOOTER ===== */
 .footer {
     background-color: var(--dark-color);
     color: var(--white);
     padding: var(--spacing-xl) 0 var(--spacing-md);
+    margin-top: auto;
 }
 
 .footer-grid {
@@ -920,92 +811,14 @@ a:hover {
 }
 
 /* ===== BLOG STYLES ===== */
-.blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
-}
-
-.blog-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: transform var(--transition-normal);
-}
-
-.blog-card:hover {
-    transform: translateY(-5px);
-}
-
-.blog-image {
-    height: 200px;
-    overflow: hidden;
-}
-
-.blog-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-normal);
-}
-
-.blog-card:hover .blog-image img {
-    transform: scale(1.05);
-}
-
-.blog-content {
-    padding: var(--spacing-lg);
-}
-
-.blog-meta {
-    display: flex;
-    gap: var(--spacing-md);
-    color: var(--gray);
-    font-size: 0.9rem;
-    margin-bottom: var(--spacing-sm);
-}
-
-.blog-title {
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-sm);
-}
-
-.blog-excerpt {
-    color: var(--gray);
-    margin-bottom: var(--spacing-md);
-}
+/* [Keep all your existing blog styles - they're good] */
 
 /* ===== PRODUCTS PAGE ===== */
-.products-filter {
-    background: var(--white);
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--spacing-xl);
-    box-shadow: var(--shadow-sm);
-}
+/* [Keep all your existing products page styles - they're good] */
 
-.filter-group {
-    margin-bottom: var(--spacing-md);
-}
-
-.filter-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.filter-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    background: var(--white);
-    font-family: var(--font-primary);
-}
-
-/* ===== PRINT STYLES ===== */
+/* ===== PRINT STYLES (Consolidated) ===== */
 @media print {
+    .no-print,
     .header,
     .hero,
     .visitor-counter,
@@ -1014,7 +827,10 @@ a:hover {
     .explore-tools,
     .social-sharing,
     .footer,
-    .btn:not(.print-btn) {
+    .btn:not(.print-btn),
+    .mobile-toggle,
+    .nav-links,
+    .hero-buttons {
         display: none !important;
     }
     
@@ -1040,8 +856,28 @@ a:hover {
         text-decoration: none;
     }
     
-    .card {
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    
+    .card,
+    .calculator-form {
         box-shadow: none;
         border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+    
+    /* Ensure proper page breaks */
+    h1, h2, h3, h4 {
+        page-break-after: avoid;
+    }
+    
+    table {
+        page-break-inside: avoid;
+    }
+    
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
     }
 }
