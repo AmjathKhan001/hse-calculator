@@ -4,99 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noise Exposure Calculator | HSE Calculator</title>
-    <meta name="description" content="Calculate daily noise exposure levels and assess compliance with occupational noise limits.">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-     <!-- CSS -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/utilities.css">
-    <link rel="stylesheet" href="../css/calculator.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DRRTSHLC01');
-    </script>
-    
-    <!-- HTML2PDF for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <meta name="description" content="Calculate noise exposure levels, daily noise dose, and compliance with occupational noise limits.">
+    <!-- Same head content as chemical-exposure.html -->
 </head>
 <body>
-    <!-- Header (Same as risk-assessment.html) -->
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="../index.html" class="logo">
-                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
-                    <span>HSE Calculator</span>
-                </a>
-                
-                <div class="nav-links" id="navLinks">
-                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
-                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
-                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
-                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
-                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
-                </div>
-                
-                <div class="mobile-toggle" id="mobileToggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Calculator Content -->
+    <!-- Same header as chemical-exposure.html -->
+    
     <section class="calculator-section">
         <div class="container">
             <h1 class="section-title">Noise Exposure Calculator</h1>
-            <p class="section-subtitle">Calculate daily noise exposure levels and assess compliance with occupational noise limits.</p>
+            <p class="section-subtitle">Calculate noise exposure levels and assess compliance with occupational noise regulations.</p>
             
             <div class="calculator-form" id="noise-calculator-form">
+                <!-- Single Measurement Option -->
                 <div class="form-group">
-                    <label for="noise-level" class="form-label">Noise Level (dB):</label>
-                    <input type="number" id="noise-level" class="form-control" min="70" max="130" value="85" 
-                           data-tooltip="Enter the average noise level in decibels">
-                    <small class="form-text">Typical range: 70-130 dB. OSHA PEL is 90 dB for 8 hours.</small>
+                    <label class="form-label">Measurement Type:</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="measurement-type" value="single" checked>
+                            <span class="radio-text">Single Noise Level Measurement</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="measurement-type" value="multiple">
+                            <span class="radio-text">Multiple Time-Weighted Measurements</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Single Measurement Section -->
+                <div id="single-measurement" class="measurement-section">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="noise-level" class="form-label">Noise Level (dBA):</label>
+                            <input type="number" id="noise-level" class="form-control" min="40" max="140" step="0.1" value="85">
+                            <small class="form-text">Measured A-weighted sound level</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exposure-time" class="form-label">Exposure Duration:</label>
+                            <div class="input-group">
+                                <input type="number" id="exposure-time" class="form-control" min="0.1" max="24" step="0.1" value="8">
+                                <span class="input-group-text">hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Multiple Measurements Section (initially hidden) -->
+                <div id="multiple-measurements" class="measurement-section" style="display: none;">
+                    <div class="measurement-table">
+                        <h5>Enter Noise Levels and Durations</h5>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Noise Level (dBA)</th>
+                                    <th>Duration (hours)</th>
+                                    <th>Task/Area</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="measurement-rows">
+                                <tr>
+                                    <td><input type="number" class="form-control noise-level" min="40" max="140" value="85"></td>
+                                    <td><input type="number" class="form-control duration" min="0.1" max="24" value="4"></td>
+                                    <td><input type="text" class="form-control task" placeholder="Machine operation"></td>
+                                    <td><button type="button" class="btn btn-danger btn-sm remove-row"><i class="fas fa-trash"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" id="add-measurement" class="btn btn-secondary btn-sm mt-2">
+                            <i class="fas fa-plus"></i> Add Measurement
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Additional Parameters -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="exchange-rate" class="form-label">Exchange Rate:</label>
+                        <select id="exchange-rate" class="form-control">
+                            <option value="3">3 dB (OSHA, EU)</option>
+                            <option value="5">5 dB (ACGIH, ISO)</option>
+                        </select>
+                        <small class="form-text">Noise level increase that doubles the dose</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="criterion-level" class="form-label">Criterion Level:</label>
+                        <select id="criterion-level" class="form-control">
+                            <option value="85">85 dBA (ACGIH TLV)</option>
+                            <option value="87">87 dBA (EU Directive)</option>
+                            <option value="90" selected>90 dBA (OSHA PEL)</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="exposure-time" class="form-label">Exposure Time (hours):</label>
-                    <input type="number" id="exposure-time" class="form-control" min="0.5" max="12" step="0.5" value="8" 
-                           data-tooltip="Enter daily exposure duration in hours">
-                    <small class="form-text">Enter time spent in the noise environment per day</small>
+                    <label for="work-days" class="form-label">Work Days per Week:</label>
+                    <input type="number" id="work-days" class="form-control" min="1" max="7" value="5">
                 </div>
                 
+                <!-- Hearing Protection -->
                 <div class="form-group">
-                    <label for="noise-type" class="form-label">Noise Type:</label>
-                    <select id="noise-type" class="form-control" data-tooltip="Select the type of noise exposure">
-                        <option value="continuous">Continuous/Steady-state</option>
-                        <option value="impact">Impact/Impulse</option>
-                        <option value="intermittent">Intermittent</option>
-                    </select>
+                    <label class="form-label">Hearing Protection:</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="hearing-protection" value="none" checked>
+                            <span class="radio-text">None</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="hearing-protection" value="earplugs">
+                            <span class="radio-text">Earplugs (NRR: 25-33 dB)</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="hearing-protection" value="earmuffs">
+                            <span class="radio-text">Earmuffs (NRR: 20-30 dB)</span>
+                        </label>
+                    </div>
                 </div>
                 
-                <button id="calculate-noise" class="btn btn-primary">
+                <button id="calculate-noise" class="btn btn-primary btn-lg">
                     <i class="fas fa-volume-up"></i> Calculate Noise Exposure
                 </button>
                 
-                <div id="noise-result" class="result-box">
-                    <h3>Noise Exposure Result</h3>
-                    <div class="result-value" id="noise-value"></div>
-                    <div class="result-interpretation" id="noise-interpretation"></div>
+                <div id="noise-result" class="result-box" style="display: none;">
+                    <h3><i class="fas fa-ear-deaf"></i> Noise Exposure Assessment</h3>
                     
-                    <div class="exposure-details mt-3" id="exposure-details"></div>
+                    <div class="result-summary">
+                        <div class="summary-card" id="dose-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Noise Dose</h5>
+                                <div class="summary-value" id="noise-dose">0%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card" id="twa-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>TWA</h5>
+                                <div class="summary-value" id="twa-value">0 dBA</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card" id="compliance-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Compliance</h5>
+                                <div class="summary-value" id="compliance-status">Compliant</div>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div class="print-actions">
+                    <div class="exposure-details mt-4">
+                        <h5><i class="fas fa-info-circle"></i> Exposure Details</h5>
+                        <div id="exposure-details-content"></div>
+                    </div>
+                    
+                    <div class="recommendations mt-4">
+                        <h5><i class="fas fa-lightbulb"></i> Recommendations</h5>
+                        <div id="recommendations-list"></div>
+                    </div>
+                    
+                    <div class="print-actions mt-4">
                         <button class="btn btn-primary print-btn" onclick="generatePDF('noise-calculator-form', 'noise-exposure')">
-                            <i class="fas fa-file-pdf"></i> Save as PDF
+                            <i class="fas fa-file-pdf"></i> Save as PDF Report
                         </button>
                         <button class="btn btn-secondary" onclick="window.print()">
                             <i class="fas fa-print"></i> Print
@@ -105,292 +181,477 @@
                 </div>
                 
                 <div class="calculator-info mt-4">
-                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
-                    <p>1. <strong>Noise Level:</strong> Enter the average sound pressure level in decibels (dB).</p>
-                    <p>2. <strong>Exposure Time:</strong> Enter the duration of exposure in hours.</p>
-                    <p>3. <strong>Noise Type:</strong> Select the characteristic of the noise.</p>
-                    <p>4. <strong>Calculation:</strong> The calculator determines the daily noise dose and compliance status.</p>
+                    <h4><i class="fas fa-info-circle"></i> Noise Exposure Guidelines</h4>
                     
-                    <h5 class="mt-3">Noise Exposure Limits</h5>
-                    <table class="risk-matrix">
-                        <thead>
-                            <tr>
-                                <th>Standard</th>
-                                <th>Limit (8 hours)</th>
-                                <th>Action Level</th>
-                                <th>Doubling Rate</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>OSHA PEL</td>
-                                <td>90 dB</td>
-                                <td>85 dB</td>
-                                <td>5 dB</td>
-                            </tr>
-                            <tr>
-                                <td>NIOSH REL</td>
-                                <td>85 dB</td>
-                                <td>82 dB</td>
-                                <td>3 dB</td>
-                            </tr>
-                            <tr>
-                                <td>EU Directive</td>
-                                <td>87 dB</td>
-                                <td>85 dB</td>
-                                <td>3 dB</td>
-                            </tr>
-                            <tr>
-                                <td>ACGIH TLV</td>
-                                <td>85 dB</td>
-                                <td>80 dB</td>
-                                <td>3 dB</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="noise-limits-table">
+                        <h5>Occupational Noise Exposure Limits</h5>
+                        <table class="risk-matrix">
+                            <thead>
+                                <tr>
+                                    <th>Standard</th>
+                                    <th>Action Level</th>
+                                    <th>PEL/TLV</th>
+                                    <th>Exchange Rate</th>
+                                    <th>Maximum Peak</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>OSHA (USA)</td>
+                                    <td>85 dBA</td>
+                                    <td>90 dBA</td>
+                                    <td>5 dB</td>
+                                    <td>140 dB</td>
+                                </tr>
+                                <tr>
+                                    <td>ACGIH (TLV)</td>
+                                    <td>85 dBA</td>
+                                    <td>85 dBA</td>
+                                    <td>3 dB</td>
+                                    <td>140 dB</td>
+                                </tr>
+                                <tr>
+                                    <td>EU Directive</td>
+                                    <td>80 dBA</td>
+                                    <td>85 dBA</td>
+                                    <td>3 dB</td>
+                                    <td>137 dB</td>
+                                </tr>
+                                <tr>
+                                    <td>NIOSH (REL)</td>
+                                    <td>82 dBA</td>
+                                    <td>85 dBA</td>
+                                    <td>3 dB</td>
+                                    <td>140 dB</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="hearing-protection-table mt-4">
+                        <h5><i class="fas fa-ear-listen"></i> Hearing Protection Guide</h5>
+                        <table class="risk-matrix">
+                            <thead>
+                                <tr>
+                                    <th>Noise Level (dBA)</th>
+                                    <th>Recommended Protection</th>
+                                    <th>Required NRR</th>
+                                    <th>Action Required</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>80-85</td>
+                                    <td>Optional</td>
+                                    <td>NRR 10-15</td>
+                                    <td>Hearing conservation program</td>
+                                </tr>
+                                <tr>
+                                    <td>85-90</td>
+                                    <td>Required</td>
+                                    <td>NRR 15-20</td>
+                                    <td>Mandatory hearing protection</td>
+                                </tr>
+                                <tr>
+                                    <td>90-100</td>
+                                    <td>Required</td>
+                                    <td>NRR 20-25</td>
+                                    <td>Double protection considered</td>
+                                </tr>
+                                <tr>
+                                    <td>100+</td>
+                                    <td>Required</td>
+                                    <td>NRR 25+</td>
+                                    <td>Double protection required</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             
-            <!-- Social Sharing -->
-            <div class="social-sharing mt-4">
-                <div class="social-card">
-                    <h3>Share This Calculator</h3>
-                    <p>Help other safety professionals discover this tool</p>
-                    <div class="social-buttons">
-                        <a href="#" class="social-btn facebook" onclick="shareCalculator('Noise Exposure Calculator').facebook()">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-btn twitter" onclick="shareCalculator('Noise Exposure Calculator').twitter()">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-btn linkedin" onclick="shareCalculator('Noise Exposure Calculator').linkedin()">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Noise Exposure Calculator').whatsapp()">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <!-- Social Sharing & Related Calculators -->
+            <!-- Same as chemical-exposure.html -->
             
-            <!-- Related Calculators -->
-            <div class="related-calculators mt-4">
-                <h3 class="section-title">Related Calculators</h3>
-                <div class="calculators-grid">
-                    <div class="calculator-card">
-                        <div class="calculator-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="calculator-content">
-                            <h3>Risk Assessment Calculator</h3>
-                            <p>Calculate risk levels based on probability and severity to prioritize safety measures.</p>
-                            <a href="risk-assessment.html" class="btn btn-primary btn-small">
-                                <i class="fas fa-play-circle"></i> Use Calculator
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="calculator-card">
-                        <div class="calculator-icon">
-                            <i class="fas fa-skull-crossbones"></i>
-                        </div>
-                        <div class="calculator-content">
-                            <h3>Chemical Exposure Calculator</h3>
-                            <p>Calculate chemical exposure levels and assess workplace compliance.</p>
-                            <a href="chemical-exposure.html" class="btn btn-primary btn-small">
-                                <i class="fas fa-play-circle"></i> Use Calculator
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="calculator-card">
-                        <div class="calculator-icon">
-                            <i class="fas fa-temperature-high"></i>
-                        </div>
-                        <div class="calculator-content">
-                            <h3>Heat Stress Calculator</h3>
-                            <p>Assess heat stress risk based on temperature, humidity, and work intensity.</p>
-                            <a href="heat-stress.html" class="btn btn-primary btn-small">
-                                <i class="fas fa-play-circle"></i> Use Calculator
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Footer (Same as risk-assessment.html) -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="../index.html" class="footer-logo">
-                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
-                        <span>HSE Calculator</span>
-                    </a>
-                    <p>Professional tools for health, safety, and environment professionals.</p>
-                    <div class="footer-social">
-                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="risk-assessment.html">Calculators</a></li>
-                        <li><a href="../pages/products.html">Safety Products</a></li>
-                        <li><a href="../pages/tools.html">Tools</a></li>
-                        <li><a href="../pages/blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
-                        <li><a href="../pages/terms.html">Terms of Use</a></li>
-                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Contact Us</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
-                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
-                <p>Professional tools for workplace safety and compliance</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer -->
+    <!-- Same as chemical-exposure.html -->
 
-    <!-- JavaScript -->
-    <script src="../js/main.js"></script>
-    <script src="../js/calculators.js"></script>
-    
     <script>
-        // Noise Exposure Calculator specific logic
-        function initNoiseExposureCalculator() {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize event listeners
+            initializeNoiseCalculator();
+        });
+
+        function initializeNoiseCalculator() {
+            // Toggle between single and multiple measurements
+            const measurementTypeRadios = document.querySelectorAll('input[name="measurement-type"]');
+            measurementTypeRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const singleSection = document.getElementById('single-measurement');
+                    const multipleSection = document.getElementById('multiple-measurements');
+                    
+                    if (this.value === 'single') {
+                        singleSection.style.display = 'block';
+                        multipleSection.style.display = 'none';
+                    } else {
+                        singleSection.style.display = 'none';
+                        multipleSection.style.display = 'block';
+                    }
+                });
+            });
+
+            // Add measurement row
+            document.getElementById('add-measurement').addEventListener('click', function() {
+                addMeasurementRow();
+            });
+
+            // Calculate button
             document.getElementById('calculate-noise').addEventListener('click', calculateNoiseExposure);
         }
-        
+
+        function addMeasurementRow() {
+            const tbody = document.getElementById('measurement-rows');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><input type="number" class="form-control noise-level" min="40" max="140" value="85"></td>
+                <td><input type="number" class="form-control duration" min="0.1" max="24" value="1"></td>
+                <td><input type="text" class="form-control task" placeholder="Task description"></td>
+                <td><button type="button" class="btn btn-danger btn-sm remove-row"><i class="fas fa-trash"></i></button></td>
+            `;
+            tbody.appendChild(newRow);
+            
+            // Add remove functionality
+            newRow.querySelector('.remove-row').addEventListener('click', function() {
+                if (tbody.children.length > 1) {
+                    tbody.removeChild(newRow);
+                } else {
+                    alert('At least one measurement row is required.');
+                }
+            });
+        }
+
         function calculateNoiseExposure() {
-            const noiseLevel = validateNumberInput(document.getElementById('noise-level'), 70, 130);
-            const exposureTime = validateNumberInput(document.getElementById('exposure-time'), 0.5, 12);
-            const noiseType = document.getElementById('noise-type').value;
+            const measurementType = document.querySelector('input[name="measurement-type"]:checked').value;
+            const exchangeRate = parseInt(document.getElementById('exchange-rate').value);
+            const criterionLevel = parseInt(document.getElementById('criterion-level').value);
+            const workDays = parseInt(document.getElementById('work-days').value);
+            const hearingProtection = document.querySelector('input[name="hearing-protection"]:checked').value;
             
-            if (noiseLevel === null || exposureTime === null) {
-                alert('Please enter valid values for noise level (70-130 dB) and exposure time (0.5-12 hours).');
-                return;
-            }
+            let measurements = [];
             
-            // Calculate noise dose (simplified formula)
-            // OSHA formula: Dose = 100 * (C1/T1 + C2/T2 + ... + Cn/Tn)
-            // Where T = 8 / 2^((L-90)/5)
-            const oshaTLV = 90; // OSHA 8-hour TWA PEL
-            const doublingRate = 5; // OSHA doubling rate
-            const allowedExposureTime = 8 / Math.pow(2, (noiseLevel - oshaTLV) / doublingRate);
-            
-            let noiseDose = 0;
-            if (allowedExposureTime > 0) {
-                noiseDose = (exposureTime / allowedExposureTime) * 100;
-            }
-            
-            // NIOSH REL calculation
-            const nioshTLV = 85;
-            const nioshDoublingRate = 3;
-            const nioshAllowedTime = 8 / Math.pow(2, (noiseLevel - nioshTLV) / nioshDoublingRate);
-            let nioshDose = 0;
-            if (nioshAllowedTime > 0) {
-                nioshDose = (exposureTime / nioshAllowedTime) * 100;
-            }
-            
-            // Determine compliance status
-            let complianceStatus = '';
-            let interpretation = '';
-            let actionRequired = '';
-            
-            if (noiseDose <= 50) {
-                complianceStatus = 'Compliant';
-                interpretation = 'Within acceptable limits';
-                actionRequired = 'Routine monitoring recommended';
-            } else if (noiseDose <= 100) {
-                complianceStatus = 'Action Level Exceeded';
-                interpretation = 'Above action level, below PEL';
-                actionRequired = 'Implement hearing conservation program';
+            if (measurementType === 'single') {
+                const noiseLevel = parseFloat(document.getElementById('noise-level').value);
+                const exposureTime = parseFloat(document.getElementById('exposure-time').value);
+                
+                measurements.push({
+                    level: noiseLevel,
+                    duration: exposureTime,
+                    task: 'Main task'
+                });
             } else {
-                complianceStatus = 'Non-Compliant';
-                interpretation = 'Exceeds permissible exposure limit (PEL)';
-                actionRequired = 'Immediate engineering/administrative controls required';
+                // Multiple measurements
+                const rows = document.querySelectorAll('#measurement-rows tr');
+                rows.forEach(row => {
+                    const level = parseFloat(row.querySelector('.noise-level').value);
+                    const duration = parseFloat(row.querySelector('.duration').value);
+                    const task = row.querySelector('.task').value || 'Task';
+                    
+                    if (!isNaN(level) && !isNaN(duration)) {
+                        measurements.push({
+                            level: level,
+                            duration: duration,
+                            task: task
+                        });
+                    }
+                });
             }
+            
+            // Calculate noise dose and TWA
+            const result = calculateNoiseMetrics(measurements, criterionLevel, exchangeRate);
+            
+            // Adjust for hearing protection
+            let protectedLevels = applyHearingProtection(result.twa, hearingProtection);
+            
+            // Determine compliance
+            const compliance = assessNoiseCompliance(result.dose, result.twa, criterionLevel);
             
             // Display results
-            document.getElementById('noise-value').innerHTML = `
-                <div class="result-item">
-                    <strong>Noise Dose (OSHA):</strong> ${noiseDose.toFixed(1)}%
-                </div>
-                <div class="result-item">
-                    <strong>Compliance Status:</strong> <span class="status-${complianceStatus.toLowerCase().replace(' ', '-')}">${complianceStatus}</span>
-                </div>
-                <div class="result-item">
-                    <strong>Noise Type:</strong> ${noiseType.charAt(0).toUpperCase() + noiseType.slice(1)}
-                </div>
+            displayNoiseResults(result, measurements, compliance, protectedLevels);
+            
+            // Show result section
+            document.getElementById('noise-result').style.display = 'block';
+        }
+
+        function calculateNoiseMetrics(measurements, criterionLevel, exchangeRate) {
+            let totalDose = 0;
+            let totalTime = 0;
+            
+            measurements.forEach(measurement => {
+                // Calculate partial dose using the equal energy principle
+                const partialDose = (measurement.duration / 8) * Math.pow(10, (measurement.level - criterionLevel) / exchangeRate);
+                totalDose += partialDose;
+                totalTime += measurement.duration;
+            });
+            
+            // Convert to percentage
+            const dosePercentage = totalDose * 100;
+            
+            // Calculate TWA
+            const twa = criterionLevel + (exchangeRate * Math.log10(totalDose));
+            
+            // Calculate daily average
+            const dailyAverage = totalTime > 0 ? twa : 0;
+            
+            // Calculate weekly exposure
+            const weeklyExposure = dailyAverage * Math.sqrt(workDays / 5);
+            
+            return {
+                dose: dosePercentage,
+                twa: twa,
+                dailyAverage: dailyAverage,
+                weeklyExposure: weeklyExposure,
+                totalTime: totalTime
+            };
+        }
+
+        function applyHearingProtection(twa, protectionType) {
+            let nrr = 0;
+            let actualReduction = 0;
+            
+            switch(protectionType) {
+                case 'earplugs':
+                    nrr = 29; // Average NRR for earplugs
+                    break;
+                case 'earmuffs':
+                    nrr = 25; // Average NRR for earmuffs
+                    break;
+                default:
+                    nrr = 0;
+            }
+            
+            // OSHA derating: NRR - 7 dB for C-weighted, divide by 2 for A-weighted
+            actualReduction = (nrr - 7) / 2;
+            
+            const protectedTWA = Math.max(twa - actualReduction, 0);
+            
+            return {
+                nrr: nrr,
+                actualReduction: actualReduction,
+                protectedTWA: protectedTWA,
+                isEffective: protectedTWA < 85
+            };
+        }
+
+        function assessNoiseCompliance(dose, twa, criterionLevel) {
+            const actionLevel = criterionLevel - 5; // Typically 5 dB below PEL
+            
+            let complianceStatus = 'Compliant';
+            let riskLevel = 'Low';
+            let colorClass = 'status-low';
+            let requirements = [];
+            
+            if (twa < actionLevel) {
+                complianceStatus = 'Well Below Limits';
+                riskLevel = 'Very Low';
+                colorClass = 'status-low';
+                requirements = ['Continue routine monitoring'];
+            } else if (twa < criterionLevel) {
+                complianceStatus = 'At Action Level';
+                riskLevel = 'Moderate';
+                colorClass = 'status-moderate';
+                requirements = [
+                    'Implement hearing conservation program',
+                    'Provide hearing protection',
+                    'Conduct audiometric testing'
+                ];
+            } else if (twa < criterionLevel + 5) {
+                complianceStatus = 'Above PEL';
+                riskLevel = 'High';
+                colorClass = 'status-high';
+                requirements = [
+                    'Mandatory hearing protection',
+                    'Engineering controls required',
+                    'Regular audiometric testing',
+                    'Noise area signage required'
+                ];
+            } else {
+                complianceStatus = 'Significantly Above PEL';
+                riskLevel = 'Very High';
+                colorClass = 'status-very-high';
+                requirements = [
+                    'IMMEDIATE CONTROLS REQUIRED',
+                    'Double hearing protection',
+                    'Engineering controls mandatory',
+                    'Consider administrative controls',
+                    'Limit exposure time'
+                ];
+            }
+            
+            // Add dose-based requirements
+            if (dose > 50) {
+                requirements.push('Implement exposure monitoring program');
+            }
+            if (dose > 100) {
+                requirements.push('Redesign work process to reduce noise');
+                requirements.push('Consider job rotation');
+            }
+            
+            return {
+                status: complianceStatus,
+                risk: riskLevel,
+                color: colorClass,
+                requirements: requirements
+            };
+        }
+
+        function displayNoiseResults(result, measurements, compliance, protection) {
+            // Update summary cards
+            document.getElementById('noise-dose').textContent = result.dose.toFixed(1) + '%';
+            document.getElementById('twa-value').textContent = result.twa.toFixed(1) + ' dBA';
+            document.getElementById('compliance-status').textContent = compliance.status;
+            
+            // Update card colors
+            document.getElementById('dose-card').className = `summary-card ${compliance.color}`;
+            document.getElementById('twa-card').className = `summary-card ${compliance.color}`;
+            document.getElementById('compliance-card').className = `summary-card ${compliance.color}`;
+            
+            // Display exposure details
+            let detailsHtml = `
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Exposure Time</td>
+                            <td>${result.totalTime.toFixed(1)}</td>
+                            <td>hours</td>
+                        </tr>
+                        <tr>
+                            <td>Noise Dose</td>
+                            <td>${result.dose.toFixed(1)}</td>
+                            <td>%</td>
+                        </tr>
+                        <tr>
+                            <td>Time-Weighted Average (TWA)</td>
+                            <td>${result.twa.toFixed(1)}</td>
+                            <td>dBA</td>
+                        </tr>
+                        <tr>
+                            <td>Daily Average Exposure</td>
+                            <td>${result.dailyAverage.toFixed(1)}</td>
+                            <td>dBA</td>
+                        </tr>
+                        <tr>
+                            <td>Weekly Exposure</td>
+                            <td>${result.weeklyExposure.toFixed(1)}</td>
+                            <td>dBA</td>
+                        </tr>
             `;
             
-            document.getElementById('noise-interpretation').innerHTML = `
-                <p><strong>Interpretation:</strong> ${interpretation}</p>
-                <p><strong>Action Required:</strong> ${actionRequired}</p>
-            `;
+            // Add hearing protection details if used
+            if (protection.nrr > 0) {
+                detailsHtml += `
+                    <tr>
+                        <td>Hearing Protection NRR</td>
+                        <td>${protection.nrr}</td>
+                        <td>dB</td>
+                    </tr>
+                    <tr>
+                        <td>Actual Protection</td>
+                        <td>${protection.actualReduction.toFixed(1)}</td>
+                        <td>dB</td>
+                    </tr>
+                    <tr>
+                        <td>Protected TWA</td>
+                        <td>${protection.protectedTWA.toFixed(1)}</td>
+                        <td>dBA</td>
+                    </tr>
+                `;
+            }
             
-            // Show exposure details
-            document.getElementById('exposure-details').innerHTML = `
-                <div class="exposure-table">
+            detailsHtml += `</tbody></table>`;
+            
+            // Add measurement details
+            if (measurements.length > 0) {
+                detailsHtml += `
+                    <h6 class="mt-3">Measurement Details</h6>
                     <table class="result-table">
                         <thead>
                             <tr>
-                                <th>Standard</th>
-                                <th>Exposure Limit</th>
-                                <th>Allowed Time</th>
-                                <th>Calculated Dose</th>
+                                <th>Task/Area</th>
+                                <th>Noise Level</th>
+                                <th>Duration</th>
+                                <th>Partial Dose</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>OSHA PEL (90 dB)</td>
-                                <td>90 dB for 8 hours</td>
-                                <td>${allowedExposureTime.toFixed(2)} hours</td>
-                                <td>${noiseDose.toFixed(1)}%</td>
-                            </tr>
-                            <tr>
-                                <td>NIOSH REL (85 dB)</td>
-                                <td>85 dB for 8 hours</td>
-                                <td>${nioshAllowedTime.toFixed(2)} hours</td>
-                                <td>${nioshDose.toFixed(1)}%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            `;
+                `;
+                
+                measurements.forEach(measurement => {
+                    const partialDose = (measurement.duration / 8) * Math.pow(10, (measurement.level - 90) / 5) * 100;
+                    detailsHtml += `
+                        <tr>
+                            <td>${measurement.task}</td>
+                            <td>${measurement.level.toFixed(1)} dBA</td>
+                            <td>${measurement.duration.toFixed(1)} hours</td>
+                            <td>${partialDose.toFixed(1)}%</td>
+                        </tr>
+                    `;
+                });
+                
+                detailsHtml += `</tbody></table>`;
+            }
             
-            document.getElementById('noise-result').classList.add('active');
+            document.getElementById('exposure-details-content').innerHTML = detailsHtml;
+            
+            // Display recommendations
+            const recommendationsList = document.getElementById('recommendations-list');
+            recommendationsList.innerHTML = '';
+            
+            compliance.requirements.forEach(req => {
+                const li = document.createElement('li');
+                li.className = 'recommendation-item';
+                li.innerHTML = `<i class="fas fa-bullhorn"></i> ${req}`;
+                recommendationsList.appendChild(li);
+            });
+            
+            // Add general recommendations
+            const generalRecs = [
+                'Conduct regular noise monitoring',
+                'Maintain hearing protection equipment',
+                'Provide training on noise hazards',
+                'Post warning signs in high noise areas'
+            ];
+            
+            generalRecs.forEach(rec => {
+                const li = document.createElement('li');
+                li.className = 'recommendation-item';
+                li.innerHTML = `<i class="fas fa-check-circle"></i> ${rec}`;
+                recommendationsList.appendChild(li);
+            });
         }
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            initNoiseExposureCalculator();
-        });
+
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
+            const opt = {
+                margin: 0.5,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
     </script>
 </body>
 </html>
