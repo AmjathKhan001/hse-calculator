@@ -10,41 +10,74 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+    <link rel="stylesheet" href="../css/responsive.css">
     
+    <!-- Sitemap Specific Styles -->
     <style>
         .sitemap-page {
-            padding: var(--spacing-xl) 0;
+            padding: 80px 0 60px;
+            background: #f8f9fa;
+            min-height: calc(100vh - 400px);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 2.5rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
         }
         
         .sitemap-container {
             display: grid;
-            gap: var(--spacing-xl);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
         
         .sitemap-section {
-            background: var(--white);
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .sitemap-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
         .sitemap-section h2 {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: var(--spacing-md);
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: var(--spacing-sm);
+            gap: 12px;
+            margin-bottom: 20px;
+            color: #3498db;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .sitemap-section h2 i {
+            color: #3498db;
         }
         
         .sitemap-section h3 {
-            margin-top: var(--spacing-md);
-            margin-bottom: var(--spacing-sm);
-            color: var(--dark-color);
+            margin-top: 20px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.2rem;
+            border-left: 3px solid #3498db;
+            padding-left: 10px;
         }
         
         .sitemap-section ul {
@@ -53,57 +86,78 @@
         }
         
         .sitemap-section li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            padding-left: 5px;
+            border-left: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .sitemap-section li:hover {
+            border-left: 2px solid #3498db;
+            padding-left: 10px;
         }
         
         .sitemap-section a {
-            color: var(--text-color);
+            color: #34495e;
             text-decoration: none;
-            transition: all 0.3s ease;
             display: block;
-            padding: 5px 0;
-            border-left: 3px solid transparent;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+            font-size: 1rem;
         }
         
         .sitemap-section a:hover {
-            color: var(--primary-color);
-            padding-left: 10px;
-            border-left: 3px solid var(--primary-color);
+            color: #3498db;
+        }
+        
+        .sitemap-section a i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
         }
         
         .contact-list li {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: var(--spacing-sm);
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 8px 0;
+        }
+        
+        .contact-list i {
+            color: #3498db;
+            width: 20px;
         }
         
         .sitemap-info {
-            background: var(--light-color);
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-md);
-            margin-top: var(--spacing-xl);
+            background: #e8f4fc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 50px;
+            border-left: 4px solid #3498db;
         }
         
         .sitemap-info h3 {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: var(--spacing-md);
+            gap: 12px;
+            margin-bottom: 15px;
+            color: #2c3e50;
         }
         
         .sitemap-info code {
-            background: var(--dark-color);
-            color: var(--white);
+            background: #2c3e50;
+            color: white;
             padding: 10px 15px;
-            border-radius: var(--radius-sm);
+            border-radius: 5px;
             display: inline-block;
-            font-family: monospace;
-            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            font-size: 0.9rem;
         }
         
         .sitemap-info a {
-            color: var(--white);
+            color: white;
             text-decoration: none;
         }
         
@@ -111,15 +165,46 @@
             text-decoration: underline;
         }
         
-        .external-links {
-            background: var(--warning-light);
-            border-left: 4px solid var(--warning-color);
-            padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
+        .mt-2 {
+            margin-top: 20px;
         }
         
-        .mt-2 {
-            margin-top: var(--spacing-sm);
+        .external-note {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .external-note i {
+            color: #ff9800;
+            margin-right: 8px;
+        }
+        
+        .last-updated {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .sitemap-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .sitemap-page {
+                padding: 60px 0 40px;
+            }
         }
     </style>
 </head>
@@ -160,12 +245,12 @@
                 <div class="sitemap-section">
                     <h2><i class="fas fa-home"></i> Main Pages</h2>
                     <ul>
-                        <li><a href="../index.html">Home Page</a></li>
-                        <li><a href="all-calculators.html">All Calculators</a></li>
-                        <li><a href="products.html">Safety Products</a></li>
-                        <li><a href="tools.html">Tools Library</a></li>
-                        <li><a href="blog.html">Blog & Articles</a></li>
-                        <li><a href="contact.html">Contact Page</a></li>
+                        <li><a href="../index.html"><i class="fas fa-home"></i> Home Page</a></li>
+                        <li><a href="all-calculators.html"><i class="fas fa-calculator"></i> All Calculators</a></li>
+                        <li><a href="products.html"><i class="fas fa-shopping-bag"></i> Safety Products</a></li>
+                        <li><a href="tools.html"><i class="fas fa-tools"></i> Tools Library</a></li>
+                        <li><a href="blog.html"><i class="fas fa-blog"></i> Blog & Articles</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Page</a></li>
                     </ul>
                 </div>
                 
@@ -173,17 +258,17 @@
                 <div class="sitemap-section">
                     <h2><i class="fas fa-calculator"></i> HSE Calculators</h2>
                     <ul>
-                        <li><a href="../calculators/risk-assessment.html">Risk Assessment Calculator</a></li>
-                        <li><a href="../calculators/noise-exposure.html">Noise Exposure Calculator</a></li>
-                        <li><a href="../calculators/chemical-exposure.html">Chemical Exposure Calculator</a></li>
-                        <li><a href="../calculators/incident-rate.html">Incident Rate Calculator</a></li>
-                        <li><a href="../calculators/fall-protection.html">Fall Protection Calculator</a></li>
-                        <li><a href="../calculators/heat-stress.html">Heat Stress Calculator</a></li>
-                        <li><a href="../calculators/ventilation.html">Ventilation Calculator</a></li>
-                        <li><a href="../calculators/ppe-selection.html">PPE Selection Calculator</a></li>
-                        <li><a href="../calculators/lifting-safety.html">Lifting Safety Calculator</a></li>
-                        <li><a href="../calculators/environmental-impact.html">Environmental Impact Calculator</a></li>
-                        <li><a href="../calculators/safety-training.html">Safety Training Calculator</a></li>
+                        <li><a href="../calculators/risk-assessment.html"><i class="fas fa-clipboard-check"></i> Risk Assessment Calculator</a></li>
+                        <li><a href="../calculators/noise-exposure.html"><i class="fas fa-volume-up"></i> Noise Exposure Calculator</a></li>
+                        <li><a href="../calculators/chemical-exposure.html"><i class="fas fa-flask"></i> Chemical Exposure Calculator</a></li>
+                        <li><a href="../calculators/incident-rate.html"><i class="fas fa-chart-line"></i> Incident Rate Calculator</a></li>
+                        <li><a href="../calculators/fall-protection.html"><i class="fas fa-user-shield"></i> Fall Protection Calculator</a></li>
+                        <li><a href="../calculators/heat-stress.html"><i class="fas fa-thermometer-full"></i> Heat Stress Calculator</a></li>
+                        <li><a href="../calculators/ventilation.html"><i class="fas fa-wind"></i> Ventilation Calculator</a></li>
+                        <li><a href="../calculators/ppe-selection.html"><i class="fas fa-hard-hat"></i> PPE Selection Calculator</a></li>
+                        <li><a href="../calculators/lifting-safety.html"><i class="fas fa-weight-hanging"></i> Lifting Safety Calculator</a></li>
+                        <li><a href="../calculators/environmental-impact.html"><i class="fas fa-leaf"></i> Environmental Impact Calculator</a></li>
+                        <li><a href="../calculators/safety-training.html"><i class="fas fa-graduation-cap"></i> Safety Training Calculator</a></li>
                     </ul>
                 </div>
                 
@@ -191,44 +276,40 @@
                 <div class="sitemap-section">
                     <h2><i class="fas fa-gavel"></i> Legal Pages</h2>
                     <ul>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Use</a></li>
-                        <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="../sitemap.html">Sitemap</a></li>
+                        <li><a href="privacy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                        <li><a href="terms.html"><i class="fas fa-file-contract"></i> Terms of Use</a></li>
+                        <li><a href="affiliate-disclosure.html"><i class="fas fa-handshake"></i> Affiliate Disclosure</a></li>
+                        <li><a href="../sitemap.html"><i class="fas fa-sitemap"></i> Sitemap</a></li>
                     </ul>
                 </div>
                 
                 <!-- Partner Tools Section -->
                 <div class="sitemap-section">
-                    <h2><i class="fas fa-handshake"></i> Partner Tools & Resources</h2>
+                    <h2><i class="fas fa-handshake"></i> Partner Resources</h2>
                     
-                    <div class="external-links">
-                        <p><i class="fas fa-external-link-alt"></i> <strong>Note:</strong> Below are external tools and resources from our partners. These open in new tabs.</p>
+                    <div class="external-note">
+                        <p><i class="fas fa-external-link-alt"></i> <strong>Note:</strong> Below are external tools from our partners. These open in new tabs.</p>
                     </div>
                     
                     <h3>HSE & Safety Tools</h3>
                     <ul>
-                        <li><a href="https://hse-toolkit.vercel.app/" target="_blank" rel="noopener noreferrer">HSE Toolkit</a></li>
-                        <li><a href="https://www.ppemarts.com/" target="_blank" rel="noopener noreferrer">PPE Marts & Calculator</a></li>
+                        <li><a href="https://hse-toolkit.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-toolbox"></i> HSE Toolkit</a></li>
+                        <li><a href="https://www.ppemarts.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-shopping-cart"></i> PPE Marts & Calculator</a></li>
                     </ul>
                     
                     <h3>Fire Safety Tools</h3>
                     <ul>
-                        <li><a href="https://www.firesafetytool.com/" target="_blank" rel="noopener noreferrer">Fire Safety Calculators</a></li>
-                        <li><a href="https://safetyguide360-ceilingmounted-firee.vercel.app/" target="_blank" rel="noopener noreferrer">Ceiling Mounted Fire Extinguisher Estimator</a></li>
-                        <li><a href="https://safetyguide360-fire-extinguisher-au.vercel.app/" target="_blank" rel="noopener noreferrer">Fire Extinguisher Health Checkup Audit Tool</a></li>
-                        <li><a href="https://safetyguide360-firesafety-assessmen.vercel.app/" target="_blank" rel="noopener noreferrer">Fire Safety Assessment Tool</a></li>
-                        <li><a href="https://safetyguide360-fire-extinguisher-ca.vercel.app/" target="_blank" rel="noopener noreferrer">Fire Extinguisher Estimation Tool</a></li>
-                        <li><a href="https://safetyguide360-kitchen-fire-suppres.vercel.app/" target="_blank" rel="noopener noreferrer">Kitchen Suppression System Estimation Tool</a></li>
-                        <li><a href="https://safetyguide360-room-flooding-system.vercel.app/" target="_blank" rel="noopener noreferrer">Room Flooding System Estimation Tool</a></li>
-                        <li><a href="https://safetyguide360-panel-fire-suppressi.vercel.app/" target="_blank" rel="noopener noreferrer">Panel Fire Suppression Calculator</a></li>
+                        <li><a href="https://www.firesafetytool.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-fire-extinguisher"></i> Fire Safety Calculators</a></li>
+                        <li><a href="https://safetyguide360-ceilingmounted-firee.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-fire"></i> Ceiling Mounted Fire Extinguisher Estimator</a></li>
+                        <li><a href="https://safetyguide360-fire-extinguisher-au.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-clipboard-list"></i> Fire Extinguisher Health Checkup Audit Tool</a></li>
+                        <li><a href="https://safetyguide360-firesafety-assessmen.vercel.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-search"></i> Fire Safety Assessment Tool</a></li>
                     </ul>
                     
                     <h3>Utility Tools</h3>
                     <ul>
-                        <li><a href="https://www.dailysmarttool.com/" target="_blank" rel="noopener noreferrer">Daily Smart Tool</a></li>
-                        <li><a href="https://www.webtoolsdaily.com/" target="_blank" rel="noopener noreferrer">Web Tools Daily</a></li>
-                        <li><a href="https://www.auratext.online/" target="_blank" rel="noopener noreferrer">Aura Text</a></li>
+                        <li><a href="https://www.dailysmarttool.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-tools"></i> Daily Smart Tool</a></li>
+                        <li><a href="https://www.webtoolsdaily.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> Web Tools Daily</a></li>
+                        <li><a href="https://www.auratext.online/" target="_blank" rel="noopener noreferrer"><i class="fas fa-font"></i> Aura Text</a></li>
                     </ul>
                 </div>
                 
@@ -248,8 +329,10 @@
                 <h3><i class="fas fa-sitemap"></i> XML Sitemap</h3>
                 <p>For search engines and web crawlers, you can access our XML sitemap at:</p>
                 <code><a href="../sitemap.xml">https://www.hsecalculator.com/sitemap.xml</a></code>
-                <p class="mt-2">This sitemap was last updated on: <strong>March 15, 2025</strong></p>
-                <p>Total pages indexed: <strong>19 pages</strong></p>
+                <div class="last-updated">
+                    <p>This sitemap was last updated on: <strong>March 15, 2025</strong></p>
+                    <p>Total pages indexed: <strong>19 pages</strong> | Total external resources: <strong>15 tools</strong></p>
+                </div>
             </div>
         </div>
     </section>
