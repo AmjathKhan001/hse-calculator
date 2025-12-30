@@ -368,81 +368,6 @@
     border-color: var(--primary-color);
 }
 
-/* ===== CALCULATOR DETAILED CARD ===== */
-.calculator-card-detailed {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    box-shadow: var(--shadow-md);
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-lg);
-    transition: all var(--transition-normal);
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.calculator-card-detailed:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.calculator-card-detailed .calculator-icon {
-    flex-shrink: 0;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gradient-primary);
-    border-radius: var(--radius-lg);
-    color: var(--white);
-    font-size: 2rem;
-}
-
-.calculator-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: var(--spacing-sm);
-}
-
-.calculator-badge {
-    background: var(--gray-light);
-    color: var(--primary-color);
-    padding: 4px 12px;
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.feature-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--gray-light);
-    color: var(--text-color);
-    padding: 4px 12px;
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    margin-right: 8px;
-    margin-bottom: 8px;
-}
-
-.feature-tag i {
-    color: var(--success-color);
-    font-size: 0.7rem;
-}
-
-.calculator-footer {
-    display: flex;
-    gap: var(--spacing-sm);
-    margin-top: var(--spacing-md);
-    flex-wrap: wrap;
-}
-
 /* ===== CALCULATOR STATS ===== */
 .calculator-stats {
     background: var(--white);
@@ -466,10 +391,6 @@
     .featured-content {
         flex: 1;
     }
-    
-    .calculator-card-detailed {
-        flex-direction: row;
-    }
 }
 
 @media (max-width: 767px) {
@@ -487,22 +408,8 @@
         grid-template-columns: 1fr;
     }
     
-    .calculator-card-detailed {
-        flex-direction: column;
+    .calculator-filter {
         text-align: center;
-    }
-    
-    .calculator-card-detailed .calculator-icon {
-        margin: 0 auto;
-    }
-    
-    .calculator-header {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-    }
-    
-    .calculator-footer {
-        justify-content: center;
     }
     
     .filter-buttons {
@@ -526,9 +433,5 @@
     .tag {
         padding: 6px 12px;
         font-size: 0.75rem;
-    }
-    
-    .calculator-card-detailed {
-        padding: var(--spacing-md);
     }
 }
