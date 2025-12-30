@@ -3,449 +3,904 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safety Training Record | HSE Calculator</title>
-    <meta name="description" content="Create and manage safety training records for your organization.">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-     <!-- CSS -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/utilities.css">
-    <link rel="stylesheet" href="../css/calculator.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DRRTSHLC01');
-    </script>
-    
-    <!-- HTML2PDF for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>Safety Training Calculator | HSE Calculator</title>
+    <meta name="description" content="Calculate training needs, effectiveness, and ROI for workplace safety training programs.">
+    <!-- Same head content -->
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="../index.html" class="logo">
-                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
-                    <span>HSE Calculator</span>
-                </a>
-                
-                <div class="nav-links" id="navLinks">
-                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
-                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
-                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
-                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
-                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
-                </div>
-                
-                <div class="mobile-toggle" id="mobileToggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <!-- Same header -->
 
-    <!-- Safety Training Section -->
     <section class="calculator-section">
         <div class="container">
-            <h1 class="section-title">Safety Training Record System</h1>
-            <p class="section-subtitle">Create, manage, and document safety training records for your organization.</p>
+            <h1 class="section-title">Safety Training Calculator</h1>
+            <p class="section-subtitle">Calculate training needs, effectiveness, and ROI for workplace safety training programs.</p>
             
-            <div class="training-container">
-                <!-- Training Input Form -->
-                <div class="training-form-card" id="training-form">
-                    <h3><i class="fas fa-edit"></i> Training Record Form</h3>
-                    
-                    <form id="safety-training-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="employee-name">Employee Name *</label>
-                                <input type="text" id="employee-name" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="employee-id">Employee ID</label>
-                                <input type="text" id="employee-id" class="form-control">
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="department">Department *</label>
-                                <select id="department" class="form-control" required>
-                                    <option value="">Select Department</option>
-                                    <option value="production">Production</option>
-                                    <option value="maintenance">Maintenance</option>
-                                    <option value="quality">Quality Control</option>
-                                    <option value="warehouse">Warehouse</option>
-                                    <option value="office">Office</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="position">Position/Title</label>
-                                <input type="text" id="position" class="form-control">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="training-title">Training Title *</label>
-                            <select id="training-title" class="form-control" required>
-                                <option value="">Select Training</option>
-                                <option value="hazcom">Hazard Communication</option>
-                                <option value="lockout-tagout">Lockout/Tagout</option>
-                                <option value="ppe">Personal Protective Equipment</option>
-                                <option value="emergency-response">Emergency Response</option>
-                                <option value="fire-safety">Fire Safety</option>
-                                <option value="first-aid">First Aid/CPR</option>
-                                <option value="forklift">Forklift Operation</option>
-                                <option value="fall-protection">Fall Protection</option>
-                                <option value="electrical-safety">Electrical Safety</option>
-                                <option value="confined-space">Confined Space Entry</option>
-                                <option value="other-training">Other</option>
-                            </select>
-                            <input type="text" id="other-training" class="form-control mt-2" placeholder="Specify other training" style="display: none;">
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="training-date">Training Date *</label>
-                                <input type="date" id="training-date" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="expiry-date">Expiry/Retraining Date</label>
-                                <input type="date" id="expiry-date" class="form-control">
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="trainer-name">Trainer Name *</label>
-                                <input type="text" id="trainer-name" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="trainer-qualification">Trainer Qualification</label>
-                                <input type="text" id="trainer-qualification" class="form-control" placeholder="e.g., Certified Safety Professional">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="training-hours">Training Duration (hours) *</label>
-                            <input type="number" id="training-hours" class="form-control" min="0.5" max="40" step="0.5" value="2" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="training-location">Training Location *</label>
-                            <input type="text" id="training-location" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Training Method *</label>
-                            <div class="checkbox-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="training-method" value="classroom"> Classroom
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="training-method" value="hands-on"> Hands-on
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="training-method" value="online"> Online
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="training-method" value="on-the-job"> On-the-job
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="assessment-method">Assessment Method</label>
-                            <select id="assessment-method" class="form-control">
-                                <option value="">Select Method</option>
-                                <option value="written-test">Written Test</option>
-                                <option value="practical-demo">Practical Demonstration</option>
-                                <option value="oral-quiz">Oral Quiz</option>
-                                <option value="observation">Observation</option>
-                                <option value="no-assessment">No Formal Assessment</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="result">Training Result *</label>
-                            <select id="result" class="form-control" required>
-                                <option value="">Select Result</option>
-                                <option value="passed">Passed</option>
-                                <option value="failed">Failed</option>
-                                <option value="incomplete">Incomplete</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="comments">Comments/Notes</label>
-                            <textarea id="comments" class="form-control" rows="3" placeholder="Additional notes about the training..."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="attachment">Attach Certificate (optional)</label>
-                            <input type="file" id="attachment" class="form-control" accept=".pdf,.jpg,.png">
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Save Training Record
-                            </button>
-                            <button type="button" class="btn btn-secondary" onclick="clearTrainingForm()">
-                                <i class="fas fa-redo"></i> Clear Form
-                            </button>
-                        </div>
-                    </form>
+            <div class="calculator-form" id="training-calculator-form">
+                <div class="form-group">
+                    <label for="company-size-training" class="form-label">Company Size:</label>
+                    <select id="company-size-training" class="form-control">
+                        <option value="small">Small (1-50 employees)</option>
+                        <option value="medium" selected>Medium (51-250 employees)</option>
+                        <option value="large">Large (251-1000 employees)</option>
+                        <option value="enterprise">Enterprise (1000+ employees)</option>
+                    </select>
                 </div>
                 
-                <!-- Training Records Display -->
-                <div class="training-records-card" id="training-records">
-                    <h3><i class="fas fa-list"></i> Training Records</h3>
+                <div class="form-group">
+                    <label for="industry-training" class="form-label">Industry:</label>
+                    <select id="industry-training" class="form-control">
+                        <option value="construction">Construction</option>
+                        <option value="manufacturing" selected>Manufacturing</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="office">Office/Administrative</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="training-needs">
+                    <h4 class="section-title">Training Needs Assessment</h4>
                     
-                    <div class="records-controls">
-                        <div class="search-box">
-                            <input type="text" id="search-records" class="form-control" placeholder="Search records...">
-                            <button class="btn btn-small"><i class="fas fa-search"></i></button>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employees-trained" class="form-label">Employees to be Trained:</label>
+                            <input type="number" id="employees-trained" class="form-control" min="1" max="10000" value="100">
                         </div>
-                        <button class="btn btn-primary" onclick="exportToExcel()">
-                            <i class="fas fa-file-excel"></i> Export to Excel
-                        </button>
+                        
+                        <div class="form-group">
+                            <label for="training-type" class="form-label">Training Type:</label>
+                            <select id="training-type" class="form-control">
+                                <option value="new-hire">New Hire Orientation</option>
+                                <option value="annual-refresher" selected>Annual Refresher</option>
+                                <option value="specialized">Specialized/Certification</option>
+                                <option value="emergency">Emergency Response</option>
+                                <option value="management">Management/Supervisor</option>
+                            </select>
+                        </div>
                     </div>
                     
-                    <div class="records-table-container">
-                        <table class="records-table" id="training-table">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="training-duration" class="form-label">Training Duration:</label>
+                            <div class="input-group">
+                                <input type="number" id="training-duration" class="form-control" min="0.5" max="40" step="0.5" value="4">
+                                <span class="input-group-text">hours</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="training-frequency" class="form-label">Training Frequency:</label>
+                            <select id="training-frequency" class="form-control">
+                                <option value="one-time">One-time</option>
+                                <option value="annual" selected>Annual</option>
+                                <option value="semi-annual">Semi-annual</option>
+                                <option value="quarterly">Quarterly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="delivery-method" class="form-label">Delivery Method:</label>
+                        <select id="delivery-method" class="form-control">
+                            <option value="classroom">Classroom (In-person)</option>
+                            <option value="online" selected>Online/E-learning</option>
+                            <option value="blended">Blended Learning</option>
+                            <option value="on-job">On-the-Job Training</option>
+                            <option value="workshop">Workshop/Simulation</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="cost-calculation">
+                    <h4 class="section-title">Cost Calculation</h4>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="trainer-cost" class="form-label">Trainer Cost per Hour:</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" id="trainer-cost" class="form-control" min="0" step="10" value="100">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="employee-wage" class="form-label">Average Employee Wage:</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" id="employee-wage" class="form-control" min="10" step="5" value="25">
+                                <span class="input-group-text">/hour</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="material-cost" class="form-label">Training Materials Cost:</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" id="material-cost" class="form-control" min="0" step="10" value="50">
+                                <span class="input-group-text">per employee</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="facility-cost" class="form-label">Facility/Equipment Cost:</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" id="facility-cost" class="form-control" min="0" step="100" value="500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="current-performance">
+                    <h4 class="section-title">Current Safety Performance</h4>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="current-incident-rate" class="form-label">Current Incident Rate:</label>
+                            <div class="input-group">
+                                <input type="number" id="current-incident-rate" class="form-control" min="0" max="20" step="0.1" value="3.5">
+                                <span class="input-group-text">TRIR</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="industry-incident-rate" class="form-label">Industry Average:</label>
+                            <div class="input-group">
+                                <input type="number" id="industry-incident-rate" class="form-control" min="0" max="20" step="0.1" value="3.0">
+                                <span class="input-group-text">TRIR</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="training-effectiveness" class="form-label">Expected Training Effectiveness:</label>
+                            <select id="training-effectiveness" class="form-control">
+                                <option value="low">Low (10% reduction)</option>
+                                <option value="medium" selected>Medium (25% reduction)</option>
+                                <option value="high">High (40% reduction)</option>
+                                <option value="very-high">Very High (60% reduction)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="retention-rate" class="form-label">Knowledge Retention Rate:</label>
+                            <div class="input-group">
+                                <input type="number" id="retention-rate" class="form-control" min="0" max="100" step="5" value="70">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Additional Training Features:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="assessment-included" checked>
+                            <span class="checkbox-text">Assessment/Testing Included</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="certification-provided">
+                            <span class="checkbox-text">Certification Provided</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="record-keeping">
+                            <span class="checkbox-text">Automated Record Keeping</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="multilingual">
+                            <span class="checkbox-text">Multilingual Support</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button id="calculate-training" class="btn btn-primary btn-lg">
+                    <i class="fas fa-user-graduate"></i> Calculate Training ROI
+                </button>
+                
+                <div id="training-result" class="result-box" style="display: none;">
+                    <h3><i class="fas fa-chart-line"></i> Training ROI Analysis</h3>
+                    
+                    <div class="result-summary">
+                        <div class="summary-card" id="cost-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Total Training Cost</h5>
+                                <div class="summary-value" id="total-cost">$0</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card" id="savings-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Potential Savings</h5>
+                                <div class="summary-value" id="potential-savings">$0</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card" id="roi-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>ROI</h5>
+                                <div class="summary-value" id="roi-value">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="training-breakdown mt-4">
+                        <h5><i class="fas fa-calculator"></i> Cost Breakdown</h5>
+                        <div id="cost-breakdown-chart"></div>
+                    </div>
+                    
+                    <div class="training-details mt-4">
+                        <h5><i class="fas fa-info-circle"></i> Training Program Details</h5>
+                        <div class="details-grid" id="training-details"></div>
+                    </div>
+                    
+                    <div class="effectiveness-analysis mt-4">
+                        <h5><i class="fas fa-chart-bar"></i> Effectiveness Analysis</h5>
+                        <div id="effectiveness-chart"></div>
+                    </div>
+                    
+                    <div class="recommendations mt-4">
+                        <h5><i class="fas fa-lightbulb"></i> Training Program Recommendations</h5>
+                        <div id="training-recommendations"></div>
+                    </div>
+                    
+                    <div class="print-actions mt-4">
+                        <button class="btn btn-primary print-btn" onclick="generatePDF('training-calculator-form', 'safety-training')">
+                            <i class="fas fa-file-pdf"></i> Save as PDF Report
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calculator-info mt-4">
+                    <h4><i class="fas fa-info-circle"></i> Training Standards & Best Practices</h4>
+                    
+                    <div class="training-standards-table">
+                        <h5>Recommended Training Hours by Industry</h5>
+                        <table class="risk-matrix">
                             <thead>
                                 <tr>
-                                    <th>Employee</th>
-                                    <th>Training</th>
-                                    <th>Date</th>
-                                    <th>Trainer</th>
-                                    <th>Result</th>
-                                    <th>Actions</th>
+                                    <th>Industry</th>
+                                    <th>New Hire</th>
+                                    <th>Annual Refresher</th>
+                                    <th>Specialized</th>
+                                    <th>Regulatory Requirements</th>
                                 </tr>
                             </thead>
-                            <tbody id="training-table-body">
-                                <!-- Records will be added here dynamically -->
+                            <tbody>
+                                <tr>
+                                    <td>Construction</td>
+                                    <td>40 hours</td>
+                                    <td>8 hours</td>
+                                    <td>16-40 hours</td>
+                                    <td>OSHA 10/30, Fall Protection</td>
+                                </tr>
+                                <tr>
+                                    <td>Manufacturing</td>
+                                    <td>24 hours</td>
+                                    <td>8 hours</td>
+                                    <td>8-24 hours</td>
+                                    <td>Lockout/Tagout, Hazard Communication</td>
+                                </tr>
+                                <tr>
+                                    <td>Healthcare</td>
+                                    <td>32 hours</td>
+                                    <td>12 hours</td>
+                                    <td>8-16 hours</td>
+                                    <td>Bloodborne Pathogens, HIPAA</td>
+                                </tr>
+                                <tr>
+                                    <td>Transportation</td>
+                                    <td>40 hours</td>
+                                    <td>8 hours</td>
+                                    <td>16-32 hours</td>
+                                    <td>DOT, HAZMAT, Defensive Driving</td>
+                                </tr>
+                                <tr>
+                                    <td>Office</td>
+                                    <td>8 hours</td>
+                                    <td>4 hours</td>
+                                    <td>4-8 hours</td>
+                                    <td>Emergency Evacuation, Ergonomics</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     
-                    <div class="records-summary">
-                        <div class="summary-item">
-                            <span class="summary-label">Total Records:</span>
-                            <span class="summary-value" id="total-records">0</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-label">Passed:</span>
-                            <span class="summary-value" id="passed-count">0</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-label">Expiring Soon:</span>
-                            <span class="summary-value" id="expiring-count">0</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Print/Export Section -->
-            <div class="training-export mt-4" id="training-export-section">
-                <div class="export-card">
-                    <h3><i class="fas fa-download"></i> Export Training Records</h3>
-                    <p>Generate professional reports of training records</p>
-                    
-                    <div class="export-options">
-                        <button class="btn btn-primary" onclick="generateTrainingPDF()">
-                            <i class="fas fa-file-pdf"></i> Generate PDF Report
-                        </button>
-                        <button class="btn btn-success" onclick="exportToExcel()">
-                            <i class="fas fa-file-excel"></i> Export to Excel
-                        </button>
-                        <button class="btn btn-info" onclick="printTrainingRecords()">
-                            <i class="fas fa-print"></i> Print Records
-                        </button>
-                        <button class="btn btn-warning" onclick="generateTrainingCertificate()">
-                            <i class="fas fa-certificate"></i> Generate Certificate
-                        </button>
-                    </div>
-                    
-                    <div class="export-filters">
-                        <div class="form-group">
-                            <label>Filter by Date Range:</label>
-                            <div class="date-range">
-                                <input type="date" id="start-date" class="form-control">
-                                <span>to</span>
-                                <input type="date" id="end-date" class="form-control">
+                    <div class="training-effectiveness mt-4">
+                        <h5><i class="fas fa-chart-line"></i> Training Effectiveness Factors</h5>
+                        <div class="effectiveness-factors">
+                            <div class="factor-item">
+                                <div class="factor-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="factor-content">
+                                    <h6>Engagement Level</h6>
+                                    <p>Interactive training increases retention by 40-60%</p>
+                                </div>
+                            </div>
+                            <div class="factor-item">
+                                <div class="factor-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="factor-content">
+                                    <h6>Timing & Frequency</h6>
+                                    <p>Spaced repetition improves long-term retention</p>
+                                </div>
+                            </div>
+                            <div class="factor-item">
+                                <div class="factor-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="factor-content">
+                                    <h6>Assessment</h6>
+                                    <p>Testing increases retention by 25-50%</p>
+                                </div>
+                            </div>
+                            <div class="factor-item">
+                                <div class="factor-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="factor-content">
+                                    <h6>Management Support</h6>
+                                    <p>Leadership involvement increases effectiveness by 30%</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Filter by Department:</label>
-                            <select id="filter-department" class="form-control">
-                                <option value="">All Departments</option>
-                                <option value="production">Production</option>
-                                <option value="maintenance">Maintenance</option>
-                                <option value="quality">Quality Control</option>
-                                <option value="warehouse">Warehouse</option>
-                                <option value="office">Office</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Sample Training Records (for demo) -->
-            <div class="sample-records mt-4">
-                <h4><i class="fas fa-lightbulb"></i> Sample Training Records</h4>
-                <p>Try these sample records to see how the system works:</p>
-                <div class="sample-buttons">
-                    <button class="btn btn-small" onclick="loadSampleRecords()">
-                        <i class="fas fa-magic"></i> Load Sample Records
-                    </button>
-                    <button class="btn btn-small btn-secondary" onclick="clearAllRecords()">
-                        <i class="fas fa-trash"></i> Clear All Records
-                    </button>
-                </div>
-            </div>
+            <!-- Social Sharing & Related Calculators -->
+            <!-- Same as previous -->
             
-            <!-- Training Statistics -->
-            <div class="training-stats mt-4">
-                <h3><i class="fas fa-chart-bar"></i> Training Statistics</h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h4>Employees Trained</h4>
-                            <div class="stat-value" id="stat-trained">0</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h4>Total Training Hours</h4>
-                            <div class="stat-value" id="stat-hours">0</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-percentage"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h4>Pass Rate</h4>
-                            <div class="stat-value" id="stat-pass-rate">0%</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-calendar-exclamation"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h4>Expiring Soon</h4>
-                            <div class="stat-value" id="stat-expiring">0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <!-- Same footer as other pages -->
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="../index.html" class="footer-logo">
-                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
-                        <span>HSE Calculator</span>
-                    </a>
-                    <p>Professional tools for health, safety, and environment professionals.</p>
-                    <div class="footer-social">
-                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="risk-assessment.html">Calculators</a></li>
-                        <li><a href="../pages/products.html">Safety Products</a></li>
-                        <li><a href="../pages/tools.html">Tools</a></li>
-                        <li><a href="../pages/blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
-                        <li><a href="../pages/terms.html">Terms of Use</a></li>
-                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Contact Us</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
-                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
-                <p>Professional tools for workplace safety and compliance</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Same as previous -->
 
-    <!-- JavaScript -->
-    <script src="../js/main.js"></script>
-    <script src="../js/calculators.js"></script>
-    <script src="../js/safety-training.js"></script>
-    
     <script>
-        // Initialize safety training system
-        function initSafetyTraining() {
-            // Load existing records from localStorage
-            loadTrainingRecords();
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculate-training').addEventListener('click', calculateTrainingROI);
+        });
+
+        function calculateTrainingROI() {
+            // Get input values
+            const companySize = document.getElementById('company-size-training').value;
+            const industry = document.getElementById('industry-training').value;
+            const employeesTrained = parseInt(document.getElementById('employees-trained').value);
+            const trainingType = document.getElementById('training-type').value;
+            const trainingDuration = parseFloat(document.getElementById('training-duration').value);
+            const trainingFrequency = document.getElementById('training-frequency').value;
+            const deliveryMethod = document.getElementById('delivery-method').value;
             
-            // Setup form submission
-            document.getElementById('safety-training-form').addEventListener('submit', saveTrainingRecord);
+            // Cost parameters
+            const trainerCost = parseFloat(document.getElementById('trainer-cost').value);
+            const employeeWage = parseFloat(document.getElementById('employee-wage').value);
+            const materialCost = parseFloat(document.getElementById('material-cost').value);
+            const facilityCost = parseFloat(document.getElementById('facility-cost').value);
             
-            // Setup training type change
-            document.getElementById('training-title').addEventListener('change', function() {
-                const otherInput = document.getElementById('other-training');
-                otherInput.style.display = this.value === 'other-training' ? 'block' : 'none';
+            // Performance parameters
+            const currentIncidentRate = parseFloat(document.getElementById('current-incident-rate').value);
+            const industryIncidentRate = parseFloat(document.getElementById('industry-incident-rate').value);
+            const trainingEffectiveness = document.getElementById('training-effectiveness').value;
+            const retentionRate = parseFloat(document.getElementById('retention-rate').value);
+            
+            // Additional features
+            const assessmentIncluded = document.getElementById('assessment-included').checked;
+            const certificationProvided = document.getElementById('certification-provided').checked;
+            const recordKeeping = document.getElementById('record-keeping').checked;
+            const multilingual = document.getElementById('multilingual').checked;
+            
+            // Calculate training costs
+            const costs = calculateTrainingCosts(
+                employeesTrained, trainingDuration, trainingFrequency,
+                trainerCost, employeeWage, materialCost, facilityCost,
+                deliveryMethod, assessmentIncluded, certificationProvided,
+                recordKeeping, multilingual
+            );
+            
+            // Calculate potential savings
+            const savings = calculateTrainingSavings(
+                employeesTrained, currentIncidentRate, industryIncidentRate,
+                trainingEffectiveness, retentionRate, industry
+            );
+            
+            // Calculate ROI
+            const roi = calculateROI(costs.totalCost, savings.annualSavings);
+            
+            // Analyze training effectiveness
+            const effectiveness = analyzeTrainingEffectiveness(
+                trainingType, deliveryMethod, retentionRate,
+                assessmentIncluded, trainingEffectiveness
+            );
+            
+            // Generate recommendations
+            const recommendations = generateTrainingRecommendations(
+                costs, savings, roi, effectiveness,
+                deliveryMethod, trainingType, employeesTrained
+            );
+            
+            // Display results
+            displayTrainingResults({
+                companySize,
+                industry,
+                employeesTrained,
+                trainingType,
+                trainingDuration,
+                trainingFrequency,
+                deliveryMethod,
+                costs,
+                savings,
+                roi,
+                effectiveness,
+                recommendations
             });
             
-            // Setup search
-            document.getElementById('search-records').addEventListener('input', filterTrainingRecords);
-            
-            // Update statistics
-            updateTrainingStatistics();
+            document.getElementById('training-result').style.display = 'block';
         }
-        
-        // Run initialization
-        document.addEventListener('DOMContentLoaded', initSafetyTraining);
+
+        function calculateTrainingCosts(
+            employeesTrained, trainingDuration, trainingFrequency,
+            trainerCost, employeeWage, materialCost, facilityCost,
+            deliveryMethod, assessmentIncluded, certificationProvided,
+            recordKeeping, multilingual
+        ) {
+            // Calculate frequency multiplier
+            const frequencyMultipliers = {
+                'one-time': 1,
+                'annual': 1,
+                'semi-annual': 2,
+                'quarterly': 4,
+                'monthly': 12
+            };
+            
+            const frequencyMultiplier = frequencyMultipliers[trainingFrequency] || 1;
+            
+            // Trainer costs
+            let trainerHours = trainingDuration;
+            let trainerSessions = Math.ceil(employeesTrained / 20); // Assume 20 per session
+            
+            if (deliveryMethod === 'online') {
+                trainerHours *= 0.5; // Less trainer time for online
+                trainerSessions = 1; // One session for development
+            } else if (deliveryMethod === 'on-job') {
+                trainerHours *= 1.5; // More time for OJT
+            }
+            
+            const totalTrainerCost = trainerHours * trainerCost * trainerSessions * frequencyMultiplier;
+            
+            // Employee time costs (lost productivity)
+            const employeeTimeCost = employeesTrained * trainingDuration * employeeWage * frequencyMultiplier;
+            
+            // Material costs
+            let materialMultiplier = 1;
+            if (deliveryMethod === 'online') materialMultiplier = 0.3;
+            if (deliveryMethod === 'blended') materialMultiplier = 0.7;
+            
+            const totalMaterialCost = employeesTrained * materialCost * materialMultiplier * frequencyMultiplier;
+            
+            // Facility/equipment costs
+            let facilityMultiplier = 1;
+            if (deliveryMethod === 'online') facilityMultiplier = 0.1;
+            if (deliveryMethod === 'blended') facilityMultiplier = 0.5;
+            
+            const totalFacilityCost = facilityCost * facilityMultiplier * frequencyMultiplier;
+            
+            // Additional feature costs
+            let featureCosts = 0;
+            if (assessmentIncluded) featureCosts += employeesTrained * 10;
+            if (certificationProvided) featureCosts += employeesTrained * 25;
+            if (recordKeeping) featureCosts += 500 * frequencyMultiplier;
+            if (multilingual) featureCosts += employeesTrained * 15;
+            
+            // Total costs
+            const totalCost = totalTrainerCost + employeeTimeCost + totalMaterialCost + 
+                            totalFacilityCost + featureCosts;
+            
+            // Cost per employee
+            const costPerEmployee = totalCost / employeesTrained;
+            
+            return {
+                trainer: totalTrainerCost,
+                employeeTime: employeeTimeCost,
+                materials: totalMaterialCost,
+                facility: totalFacilityCost,
+                features: featureCosts,
+                totalCost: totalCost,
+                perEmployee: costPerEmployee,
+                annualCost: trainingFrequency === 'one-time' ? totalCost : totalCost * frequencyMultiplier
+            };
+        }
+
+        function calculateTrainingSavings(
+            employeesTrained, currentIncidentRate, industryIncidentRate,
+            trainingEffectiveness, retentionRate, industry
+        ) {
+            // Average cost per incident by industry
+            const incidentCosts = {
+                'construction': 74000,
+                'manufacturing': 42000,
+                'healthcare': 38000,
+                'transportation': 65000,
+                'office': 25000,
+                'other': 35000
+            };
+            
+            const avgIncidentCost = incidentCosts[industry] || 35000;
+            
+            // Effectiveness multipliers
+            const effectivenessMultipliers = {
+                'low': 0.1,
+                'medium': 0.25,
+                'high': 0.4,
+                'very-high': 0.6
+            };
+            
+            const effectiveness = effectivenessMultipliers[trainingEffectiveness] || 0.25;
+            
+            // Adjust for retention rate
+            const adjustedEffectiveness = effectiveness * (retentionRate / 100);
+            
+            // Calculate expected incident reduction
+            const incidentsPer100 = currentIncidentRate;
+            const expectedIncidents = (incidentsPer100 * employeesTrained) / 100;
+            
+            // Calculate reduced incidents
+            const reducedIncidents = expectedIncidents * adjustedEffectiveness;
+            
+            // Calculate cost savings
+            const directSavings = reducedIncidents * avgIncidentCost;
+            
+            // Indirect savings (typically 4x direct costs)
+            const indirectSavings = directSavings * 4;
+            
+            // Total savings
+            const totalSavings = directSavings + indirectSavings;
+            
+            // Calculate break-even point
+            const trainingCost = calculateTrainingCosts(
+                employeesTrained, 4, 'annual', 100, 25, 50, 500,
+                'classroom', true, false, false, false
+            ).totalCost;
+            
+            const breakEvenIncidents = trainingCost / avgIncidentCost;
+            
+            return {
+                directSavings: directSavings,
+                indirectSavings: indirectSavings,
+                totalSavings: totalSavings,
+                reducedIncidents: reducedIncidents,
+                effectiveness: adjustedEffectiveness,
+                breakEvenIncidents: breakEvenIncidents,
+                annualSavings: totalSavings
+            };
+        }
+
+        function calculateROI(trainingCost, annualSavings) {
+            if (trainingCost === 0) return 0;
+            
+            const roi = ((annualSavings - trainingCost) / trainingCost) * 100;
+            return roi;
+        }
+
+        function analyzeTrainingEffectiveness(trainingType, deliveryMethod, retentionRate, assessmentIncluded, trainingEffectiveness) {
+            let effectivenessScore = 50; // Base score
+            
+            // Training type impact
+            const typeScores = {
+                'new-hire': 60,
+                'annual-refresher': 50,
+                'specialized': 70,
+                'emergency': 80,
+                'management': 65
+            };
+            effectivenessScore = (effectivenessScore + typeScores[trainingType]) / 2;
+            
+            // Delivery method impact
+            const methodScores = {
+                'classroom': 70,
+                'online': 60,
+                'blended': 80,
+                'on-job': 75,
+                'workshop': 85
+            };
+            effectivenessScore = (effectivenessScore + methodScores[deliveryMethod]) / 2;
+            
+            // Retention rate impact
+            effectivenessScore *= (retentionRate / 100);
+            
+            // Assessment impact
+            if (assessmentIncluded) effectivenessScore *= 1.2;
+            
+            // Training effectiveness level
+            const effectivenessMultipliers = {
+                'low': 0.8,
+                'medium': 1.0,
+                'high': 1.2,
+                'very-high': 1.4
+            };
+            effectivenessScore *= effectivenessMultipliers[trainingEffectiveness];
+            
+            // Cap at 100
+            effectivenessScore = Math.min(effectivenessScore, 100);
+            
+            // Determine effectiveness level
+            let level, colorClass;
+            if (effectivenessScore >= 80) {
+                level = 'Excellent';
+                colorClass = 'status-low';
+            } else if (effectivenessScore >= 60) {
+                level = 'Good';
+                colorClass = 'status-low';
+            } else if (effectivenessScore >= 40) {
+                level = 'Average';
+                colorClass = 'status-moderate';
+            } else if (effectivenessScore >= 20) {
+                level = 'Below Average';
+                colorClass = 'status-high';
+            } else {
+                level = 'Poor';
+                colorClass = 'status-very-high';
+            }
+            
+            return {
+                score: effectivenessScore,
+                level: level,
+                colorClass: colorClass,
+                retentionRate: retentionRate
+            };
+        }
+
+        function generateTrainingRecommendations(costs, savings, roi, effectiveness, deliveryMethod, trainingType, employeesTrained) {
+            const recommendations = [];
+            
+            // Cost-related recommendations
+            if (costs.perEmployee > 500) {
+                recommendations.push('Consider alternative delivery methods to reduce costs');
+                recommendations.push('Explore group training discounts');
+                recommendations.push('Negotiate trainer rates for bulk sessions');
+            }
+            
+            // ROI-related recommendations
+            if (roi < 100) {
+                recommendations.push('Increase training effectiveness through better engagement');
+                recommendations.push('Consider more targeted training for high-risk areas');
+                recommendations.push('Implement pre- and post-training assessments');
+            }
+            
+            if (roi > 300) {
+                recommendations.push('Excellent ROI - Consider expanding training program');
+                recommendations.push('Document success metrics for management reporting');
+                recommendations.push('Share best practices across organization');
+            }
+            
+            // Delivery method recommendations
+            if (deliveryMethod === 'classroom' && employeesTrained > 50) {
+                recommendations.push('Consider blended learning for large groups');
+                recommendations.push('Implement train-the-trainer program');
+            }
+            
+            if (deliveryMethod === 'online' && effectiveness.score < 60) {
+                recommendations.push('Enhance online training with interactive elements');
+                recommendations.push('Add virtual instructor-led sessions');
+                recommendations.push('Implement learning management system tracking');
+            }
+            
+            // Effectiveness recommendations
+            if (effectiveness.score < 60) {
+                recommendations.push('Improve training engagement through interactive methods');
+                recommendations.push('Implement spaced repetition for better retention');
+                recommendations.push('Add practical exercises and simulations');
+            }
+            
+            // General recommendations
+            recommendations.push('Establish training competency assessment');
+            recommendations.push('Create training feedback mechanism');
+            recommendations.push('Align training with organizational safety goals');
+            recommendations.push('Track training effectiveness metrics over time');
+            
+            return recommendations;
+        }
+
+        function displayTrainingResults(data) {
+            // Update summary cards
+            document.getElementById('total-cost').textContent = 
+                `$${data.costs.totalCost.toLocaleString()}`;
+            document.getElementById('potential-savings').textContent = 
+                `$${data.savings.annualSavings.toLocaleString()}`;
+            document.getElementById('roi-value').textContent = 
+                `${data.roi.toFixed(0)}%`;
+            
+            // Update card colors
+            const roiColor = data.roi >= 100 ? 'status-low' : 
+                           data.roi >= 50 ? 'status-moderate' : 'status-high';
+            
+            document.getElementById('cost-card').className = `summary-card ${roiColor}`;
+            document.getElementById('savings-card').className = `summary-card ${roiColor}`;
+            document.getElementById('roi-card').className = `summary-card ${roiColor}`;
+            
+            // Create cost breakdown chart
+            const costChartHtml = createCostChart(data.costs);
+            document.getElementById('cost-breakdown-chart').innerHTML = costChartHtml;
+            
+            // Display training details
+            const detailsHtml = `
+                <div class="detail-item">
+                    <div class="detail-label">Employees Trained:</div>
+                    <div class="detail-value">${data.employeesTrained.toLocaleString()}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Training Duration:</div>
+                    <div class="detail-value">${data.trainingDuration} hours</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Training Frequency:</div>
+                    <div class="detail-value">${data.trainingFrequency}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Delivery Method:</div>
+                    <div class="detail-value">${data.deliveryMethod}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Cost per Employee:</div>
+                    <div class="detail-value">$${data.costs.perEmployee.toFixed(2)}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Expected Incident Reduction:</div>
+                    <div class="detail-value">${(data.savings.effectiveness * 100).toFixed(1)}%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Reduced Incidents:</div>
+                    <div class="detail-value">${data.savings.reducedIncidents.toFixed(1)}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Break-even Incidents:</div>
+                    <div class="detail-value">${data.savings.breakEvenIncidents.toFixed(1)}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Training Effectiveness:</div>
+                    <div class="detail-value ${data.effectiveness.colorClass}">
+                        ${data.effectiveness.level} (${data.effectiveness.score.toFixed(0)}%)
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Knowledge Retention:</div>
+                    <div class="detail-value">${data.effectiveness.retentionRate}%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Payback Period:</div>
+                    <div class="detail-value">${(data.costs.totalCost / data.savings.annualSavings * 12).toFixed(1)} months</div>
+                </div>
+            `;
+            document.getElementById('training-details').innerHTML = detailsHtml;
+            
+            // Create effectiveness chart
+            const effectivenessHtml = createEffectivenessChart(data);
+            document.getElementById('effectiveness-chart').innerHTML = effectivenessHtml;
+            
+            // Display recommendations
+            const recList = document.getElementById('training-recommendations');
+            recList.innerHTML = '';
+            
+            data.recommendations.forEach(rec => {
+                const div = document.createElement('div');
+                div.className = 'recommendation-item';
+                div.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <span>${rec}</span>
+                `;
+                recList.appendChild(div);
+            });
+        }
+
+        function createCostChart(costs) {
+            const categories = [
+                { name: 'Trainer', value: costs.trainer, color: '#4CAF50' },
+                { name: 'Employee Time', value: costs.employeeTime, color: '#2196F3' },
+                { name: 'Materials', value: costs.materials, color: '#FF9800' },
+                { name: 'Facility', value: costs.facility, color: '#9C27B0' },
+                { name: 'Features', value: costs.features, color: '#F44336' }
+            ];
+            
+            const total = costs.totalCost;
+            
+            let html = '<div class="cost-chart">';
+            
+            categories.forEach(category => {
+                if (category.value > 0) {
+                    const percentage = (category.value / total) * 100;
+                    html += `
+                        <div class="cost-category">
+                            <div class="category-label">
+                                <span class="category-color" style="background-color: ${category.color}"></span>
+                                <span>${category.name}</span>
+                            </div>
+                            <div class="category-bar">
+                                <div class="bar-fill" style="width: ${percentage}%; background-color: ${category.color}"></div>
+                            </div>
+                            <div class="category-value">$${category.value.toLocaleString()}</div>
+                            <div class="category-percentage">${percentage.toFixed(1)}%</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        function createEffectivenessChart(data) {
+            const effectiveness = data.effectiveness.score;
+            const roi = data.roi;
+            const retention = data.effectiveness.retentionRate;
+            
+            const html = `
+                <div class="effectiveness-metrics">
+                    <div class="metric-row">
+                        <div class="metric-item">
+                            <div class="metric-label">Training Effectiveness</div>
+                            <div class="metric-value ${data.effectiveness.colorClass}">${effectiveness.toFixed(0)}%</div>
+                            <div class="metric-bar">
+                                <div class="bar-fill" style="width: ${effectiveness}%"></div>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Return on Investment</div>
+                            <div class="metric-value ${roi >= 100 ? 'status-low' : roi >= 50 ? 'status-moderate' : 'status-high'}">${roi.toFixed(0)}%</div>
+                            <div class="metric-bar">
+                                <div class="bar-fill" style="width: ${Math.min(roi, 500)/5}%"></div>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Knowledge Retention</div>
+                            <div class="metric-value ${retention >= 80 ? 'status-low' : retention >= 60 ? 'status-moderate' : 'status-high'}">${retention}%</div>
+                            <div class="metric-bar">
+                                <div class="bar-fill" style="width: ${retention}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="roi-note">
+                        <p><strong>ROI Interpretation:</strong> 
+                        ${roi > 0 ? `Every $1 invested returns $${(1 + roi/100).toFixed(2)}` : 'Training costs exceed benefits'}
+                        </p>
+                        <p><strong>Break-even:</strong> ${(data.costs.totalCost / data.savings.annualSavings * 12).toFixed(1)} months</p>
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
+            const opt = {
+                margin: 0.5,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
     </script>
 </body>
 </html>
