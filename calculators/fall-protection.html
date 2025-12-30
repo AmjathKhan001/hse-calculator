@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fall Protection Calculator | HSE Calculator</title>
-    <meta name="description" content="Calculate fall distances, clearance requirements, and anchor point strength for fall protection systems.">
+    <meta name="description" content="Calculate fall protection requirements, clearance distances, and anchor point strengths for working at height safety.">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -57,66 +57,175 @@
     <section class="calculator-section">
         <div class="container">
             <h1 class="section-title">Fall Protection Calculator</h1>
-            <p class="section-subtitle">Calculate fall distances, clearance requirements, and anchor point strength for fall protection systems.</p>
+            <p class="section-subtitle">Calculate fall clearance distances, anchor requirements, and system compatibility for working at height.</p>
             
             <div class="calculator-form" id="fall-calculator-form">
                 <div class="form-group">
-                    <label for="fall-height" class="form-label">Working Height (feet):</label>
-                    <input type="number" id="fall-height" class="form-control" min="1" max="1000" value="20" 
-                           data-tooltip="Enter the working height above the lower level">
-                    <small class="form-text">OSHA requires fall protection at 6 feet for construction, 4 feet for general industry</small>
+                    <label for="work-height" class="form-label">Working Height:</label>
+                    <div class="input-group">
+                        <input type="number" id="work-height" class="form-control" min="1" max="1000" step="0.1" value="6">
+                        <span class="input-group-text">meters</span>
+                    </div>
+                    <small class="form-text">Height from working surface to ground/next level</small>
                 </div>
                 
                 <div class="form-group">
-                    <label for="worker-weight" class="form-label">Worker Weight (lbs):</label>
-                    <input type="number" id="worker-weight" class="form-control" min="100" max="400" value="220" 
-                           data-tooltip="Include worker weight plus tools and equipment">
-                    <small class="form-text">Include tools and equipment (typically 220-310 lbs total)</small>
-                </div>
-                
-                <div class="form-group">
-                    <label for="lanyard-length" class="form-label">Lanyard Length (feet):</label>
-                    <input type="number" id="lanyard-length" class="form-control" min="1" max="30" value="6" 
-                           data-tooltip="Enter the length of the shock-absorbing lanyard">
-                </div>
-                
-                <div class="form-group">
-                    <label for="deceleration-distance" class="form-label">Deceleration Distance (feet):</label>
-                    <input type="number" id="deceleration-distance" class="form-control" min="1" max="10" value="3.5" 
-                           data-tooltip="Typical shock absorber elongation (3.5 ft for most lanyards)">
-                </div>
-                
-                <div class="form-group">
-                    <label for="safety-factor" class="form-label">Safety Factor:</label>
-                    <select id="safety-factor" class="form-control" data-tooltip="Select the required safety factor">
-                        <option value="2">2:1 (General Use)</option>
-                        <option value="4">4:1 (High Risk)</option>
-                        <option value="5">5:1 (Construction)</option>
-                        <option value="6">6:1 (Rescue Operations)</option>
+                    <label for="fall-arrest-system" class="form-label">Fall Arrest System Type:</label>
+                    <select id="fall-arrest-system" class="form-control">
+                        <option value="full-body-harness">Full Body Harness</option>
+                        <option value="lanyard">Lanyard with Shock Absorber</option>
+                        <option value="self-retracting">Self-Retracting Lifeline</option>
+                        <option value="rope-grab">Rope Grab Device</option>
+                        <option value="positioning">Positioning System</option>
                     </select>
                 </div>
                 
-                <div class="form-group">
-                    <label for="anchor-strength" class="form-label">Anchor Point Strength (lbs):</label>
-                    <input type="number" id="anchor-strength" class="form-control" min="1000" max="10000" value="5000" 
-                           data-tooltip="Enter the rated strength of the anchor point">
-                    <small class="form-text">OSHA requires 5,000 lbs per employee for non-certified anchors</small>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lanyard-length" class="form-label">Lanyard/Lifeline Length:</label>
+                        <div class="input-group">
+                            <input type="number" id="lanyard-length" class="form-control" min="0.5" max="30" step="0.1" value="2">
+                            <span class="input-group-text">meters</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deceleration-distance" class="form-label">Deceleration Distance:</label>
+                        <div class="input-group">
+                            <input type="number" id="deceleration-distance" class="form-control" min="0.5" max="5" step="0.1" value="1.8">
+                            <span class="input-group-text">meters</span>
+                        </div>
+                        <small class="form-text">Shock absorber deployment + harness stretch</small>
+                    </div>
                 </div>
                 
-                <button id="calculate-fall" class="btn btn-primary">
-                    <i class="fas fa-mountain"></i> Calculate Fall Protection
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="anchor-height" class="form-label">Anchor Point Height:</label>
+                        <div class="input-group">
+                            <input type="number" id="anchor-height" class="form-control" min="0" max="50" step="0.1" value="2">
+                            <span class="input-group-text">meters</span>
+                        </div>
+                        <small class="form-text">Height above working surface</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="worker-height" class="form-label">Worker Height:</label>
+                        <div class="input-group">
+                            <input type="number" id="worker-height" class="form-control" min="1" max="2.5" step="0.01" value="1.8">
+                            <span class="input-group-text">meters</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="worker-weight" class="form-label">Worker Weight (with tools):</label>
+                    <div class="input-group">
+                        <input type="number" id="worker-weight" class="form-control" min="40" max="200" step="1" value="100">
+                        <span class="input-group-text">kg</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="anchor-strength" class="form-label">Anchor Point Strength:</label>
+                    <select id="anchor-strength" class="form-control">
+                        <option value="5000">5,000 lbf (22.2 kN) - OSHA Minimum</option>
+                        <option value="2250">2,250 lbf (10 kN) - Temporary Anchor</option>
+                        <option value="10000">10,000 lbf (44.5 kN) - Permanent Anchor</option>
+                        <option value="custom">Custom Strength</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="custom-anchor-group" style="display: none;">
+                    <label for="custom-anchor-strength" class="form-label">Custom Anchor Strength:</label>
+                    <div class="input-group">
+                        <input type="number" id="custom-anchor-strength" class="form-control" min="1000" step="100" placeholder="Enter strength in lbf">
+                        <span class="input-group-text">lbf</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Hazards Below:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="hazard-obstacles" checked>
+                            <span class="checkbox-text">Obstacles/Equipment</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="hazard-traffic">
+                            <span class="checkbox-text">Vehicle Traffic</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="hazard-water">
+                            <span class="checkbox-text">Water Hazards</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="hazard-electrical">
+                            <span class="checkbox-text">Electrical Hazards</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button id="calculate-fall" class="btn btn-primary btn-lg">
+                    <i class="fas fa-hard-hat"></i> Calculate Fall Protection
+                </button>
+                <button id="reset-fall" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-redo"></i> Reset
                 </button>
                 
-                <div id="fall-result" class="result-box">
-                    <h3>Fall Protection Analysis</h3>
-                    <div class="result-value" id="fall-value"></div>
-                    <div class="result-interpretation" id="fall-interpretation"></div>
+                <div id="fall-result" class="result-box" style="display: none;">
+                    <h3><i class="fas fa-shield-alt"></i> Fall Protection Analysis</h3>
                     
-                    <div class="fall-details mt-3" id="fall-details"></div>
+                    <div class="result-summary">
+                        <div class="summary-card" id="clearance-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-ruler-vertical"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Required Clearance</h5>
+                                <div class="summary-value" id="required-clearance">0 m</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card" id="safety-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Safety Margin</h5>
+                                <div class="summary-value" id="safety-margin">0 m</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card" id="force-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-weight-hanging"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Arrest Force</h5>
+                                <div class="summary-value" id="arrest-force">0 kN</div>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div class="print-actions">
+                    <div class="clearance-diagram mt-4">
+                        <h5><i class="fas fa-project-diagram"></i> Clearance Diagram</h5>
+                        <div class="diagram-container" id="fall-diagram"></div>
+                    </div>
+                    
+                    <div class="calculation-details mt-4">
+                        <h5><i class="fas fa-calculator"></i> Calculation Details</h5>
+                        <div class="details-table" id="fall-details"></div>
+                    </div>
+                    
+                    <div class="recommendations mt-4">
+                        <h5><i class="fas fa-lightbulb"></i> Safety Recommendations</h5>
+                        <div id="fall-recommendations"></div>
+                    </div>
+                    
+                    <div class="print-actions mt-4">
                         <button class="btn btn-primary print-btn" onclick="generatePDF('fall-calculator-form', 'fall-protection')">
-                            <i class="fas fa-file-pdf"></i> Save as PDF
+                            <i class="fas fa-file-pdf"></i> Save as PDF Report
                         </button>
                         <button class="btn btn-secondary" onclick="window.print()">
                             <i class="fas fa-print"></i> Print
@@ -125,69 +234,113 @@
                 </div>
                 
                 <div class="calculator-info mt-4">
-                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
-                    <p>1. <strong>Working Height:</strong> Enter the height where work is being performed.</p>
-                    <p>2. <strong>Worker Weight:</strong> Include worker weight plus tools and equipment.</p>
-                    <p>3. <strong>Lanyard Length:</strong> Enter the length of the shock-absorbing lanyard.</p>
-                    <p>4. <strong>Calculations:</strong> The calculator determines total fall distance, clearance requirements, and anchor strength.</p>
+                    <h4><i class="fas fa-info-circle"></i> Fall Protection Standards</h4>
                     
-                    <h5 class="mt-3">Fall Protection Requirements</h5>
-                    <table class="risk-matrix">
-                        <thead>
-                            <tr>
-                                <th>Standard</th>
-                                <th>Fall Protection Height</th>
-                                <th>Anchor Strength</th>
-                                <th>Clearance Required</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>OSHA Construction</td>
-                                <td>6 feet</td>
-                                <td>5,000 lbs</td>
-                                <td>18.5 feet</td>
-                            </tr>
-                            <tr>
-                                <td>OSHA General Industry</td>
-                                <td>4 feet</td>
-                                <td>5,000 lbs</td>
-                                <td>15.5 feet</td>
-                            </tr>
-                            <tr>
-                                <td>ANSI Z359</td>
-                                <td>4 feet</td>
-                                <td>5,000 lbs</td>
-                                <td>18.5 feet</td>
-                            </tr>
-                            <tr>
-                                <td>Work at Height Regs</td>
-                                <td>6.6 feet (2m)</td>
-                                <td>12 kN (2,700 lbs)</td>
-                                <td>Depends on system</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="standards-table">
+                        <h5>Regulatory Requirements</h5>
+                        <table class="risk-matrix">
+                            <thead>
+                                <tr>
+                                    <th>Standard</th>
+                                    <th>Free Fall Limit</th>
+                                    <th>Arrest Force Limit</th>
+                                    <th>Clearance Safety Factor</th>
+                                    <th>Anchor Strength</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>OSHA 1926.502</td>
+                                    <td>1.8 m (6 ft)</td>
+                                    <td>8 kN (1,800 lbf)</td>
+                                    <td>2.1 m (7 ft)</td>
+                                    <td>22.2 kN (5,000 lbf)</td>
+                                </tr>
+                                <tr>
+                                    <td>ANSI Z359</td>
+                                    <td>1.8 m (6 ft)</td>
+                                    <td>8 kN (1,800 lbf)</td>
+                                    <td>1.8 m (6 ft)</td>
+                                    <td>22.2 kN (5,000 lbf)</td>
+                                </tr>
+                                <tr>
+                                    <td>CSA Z259</td>
+                                    <td>1.2 m (4 ft)</td>
+                                    <td>6 kN (1,350 lbf)</td>
+                                    <td>1.5 m (5 ft)</td>
+                                    <td>22.2 kN (5,000 lbf)</td>
+                                </tr>
+                                <tr>
+                                    <td>EN 795</td>
+                                    <td>2.0 m (6.6 ft)</td>
+                                    <td>6 kN (1,350 lbf)</td>
+                                    <td>1.0 m (3.3 ft)</td>
+                                    <td>12 kN (2,700 lbf)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="hierarchy-fall-protection mt-4">
+                        <h5><i class="fas fa-sitemap"></i> Hierarchy of Fall Protection</h5>
+                        <div class="hierarchy-steps">
+                            <div class="hierarchy-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h6>Elimination</h6>
+                                    <p>Work from ground level using extended tools</p>
+                                </div>
+                            </div>
+                            <div class="hierarchy-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h6>Passive Protection</h6>
+                                    <p>Guardrails, safety nets, hole covers</p>
+                                </div>
+                            </div>
+                            <div class="hierarchy-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h6>Work Positioning</h6>
+                                    <p>Restraint systems that prevent falls</p>
+                                </div>
+                            </div>
+                            <div class="hierarchy-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h6>Fall Arrest</h6>
+                                    <p>Systems that stop a fall in progress</p>
+                                </div>
+                            </div>
+                            <div class="hierarchy-step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <h6>Administrative Controls</h6>
+                                    <p>Training, procedures, supervision</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Social Sharing -->
             <div class="social-sharing mt-4">
                 <div class="social-card">
-                    <h3>Share This Calculator</h3>
+                    <h3><i class="fas fa-share-alt"></i> Share This Calculator</h3>
                     <p>Help other safety professionals discover this tool</p>
                     <div class="social-buttons">
                         <a href="#" class="social-btn facebook" onclick="shareCalculator('Fall Protection Calculator').facebook()">
-                            <i class="fab fa-facebook-f"></i>
+                            <i class="fab fa-facebook-f"></i> Facebook
                         </a>
                         <a href="#" class="social-btn twitter" onclick="shareCalculator('Fall Protection Calculator').twitter()">
-                            <i class="fab fa-twitter"></i>
+                            <i class="fab fa-twitter"></i> Twitter
                         </a>
                         <a href="#" class="social-btn linkedin" onclick="shareCalculator('Fall Protection Calculator').linkedin()">
-                            <i class="fab fa-linkedin-in"></i>
+                            <i class="fab fa-linkedin-in"></i> LinkedIn
                         </a>
                         <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Fall Protection Calculator').whatsapp()">
-                            <i class="fab fa-whatsapp"></i>
+                            <i class="fab fa-whatsapp"></i> WhatsApp
                         </a>
                     </div>
                 </div>
@@ -195,7 +348,7 @@
             
             <!-- Related Calculators -->
             <div class="related-calculators mt-4">
-                <h3 class="section-title">Related Calculators</h3>
+                <h3 class="section-title"><i class="fas fa-calculator"></i> Related Calculators</h3>
                 <div class="calculators-grid">
                     <div class="calculator-card">
                         <div class="calculator-icon">
@@ -212,11 +365,11 @@
                     
                     <div class="calculator-card">
                         <div class="calculator-icon">
-                            <i class="fas fa-cogs"></i>
+                            <i class="fas fa-cubes"></i>
                         </div>
                         <div class="calculator-content">
                             <h3>Lifting Safety Calculator</h3>
-                            <p>Calculate safe working loads, center of gravity, and lifting equipment requirements.</p>
+                            <p>Calculate safe lifting limits and manual handling risks.</p>
                             <a href="lifting-safety.html" class="btn btn-primary btn-small">
                                 <i class="fas fa-play-circle"></i> Use Calculator
                             </a>
@@ -229,7 +382,7 @@
                         </div>
                         <div class="calculator-content">
                             <h3>PPE Selection Calculator</h3>
-                            <p>Determine appropriate Personal Protective Equipment based on hazard assessment.</p>
+                            <p>Select appropriate personal protective equipment for various hazards.</p>
                             <a href="ppe-selection.html" class="btn btn-primary btn-small">
                                 <i class="fas fa-play-circle"></i> Use Calculator
                             </a>
@@ -292,6 +445,7 @@
             <div class="footer-bottom">
                 <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
                 <p>Professional tools for workplace safety and compliance</p>
+                <p class="disclaimer"><small><i class="fas fa-exclamation-triangle"></i> Disclaimer: This calculator provides estimates only. Always consult with qualified professionals for fall protection systems.</small></p>
             </div>
         </div>
     </footer>
@@ -301,161 +455,429 @@
     <script src="../js/calculators.js"></script>
     
     <script>
-        // Fall Protection Calculator specific logic
         document.addEventListener('DOMContentLoaded', function() {
+            // Show/hide custom anchor strength
+            document.getElementById('anchor-strength').addEventListener('change', function() {
+                const customGroup = document.getElementById('custom-anchor-group');
+                customGroup.style.display = this.value === 'custom' ? 'block' : 'none';
+            });
+            
+            // Calculate button
             document.getElementById('calculate-fall').addEventListener('click', calculateFallProtection);
+            document.getElementById('reset-fall').addEventListener('click', resetFallForm);
         });
-        
+
         function calculateFallProtection() {
             // Get input values
-            const fallHeight = parseFloat(document.getElementById('fall-height').value);
-            const workerWeight = parseFloat(document.getElementById('worker-weight').value);
+            const workHeight = parseFloat(document.getElementById('work-height').value);
+            const systemType = document.getElementById('fall-arrest-system').value;
             const lanyardLength = parseFloat(document.getElementById('lanyard-length').value);
             const decelerationDistance = parseFloat(document.getElementById('deceleration-distance').value);
-            const safetyFactor = parseInt(document.getElementById('safety-factor').value);
-            const anchorStrength = parseFloat(document.getElementById('anchor-strength').value);
+            const anchorHeight = parseFloat(document.getElementById('anchor-height').value);
+            const workerHeight = parseFloat(document.getElementById('worker-height').value);
+            const workerWeight = parseFloat(document.getElementById('worker-weight').value);
+            const anchorStrength = getAnchorStrength();
             
-            // Validate inputs
-            if (isNaN(fallHeight) || fallHeight <= 0) {
-                alert('Please enter a valid working height.');
-                return;
-            }
+            // Get hazard checkboxes
+            const hasObstacles = document.getElementById('hazard-obstacles').checked;
+            const hasTraffic = document.getElementById('hazard-traffic').checked;
+            const hasWater = document.getElementById('hazard-water').checked;
+            const hasElectrical = document.getElementById('hazard-electrical').checked;
             
-            if (isNaN(workerWeight) || workerWeight < 100 || workerWeight > 400) {
-                alert('Please enter a valid worker weight (100-400 lbs).');
-                return;
-            }
+            // Calculate fall clearance
+            const clearance = calculateFallClearance(
+                workHeight, systemType, lanyardLength, 
+                decelerationDistance, anchorHeight, workerHeight
+            );
             
-            // Calculate total fall distance
-            // Formula: Free fall distance + Deceleration distance + Harness stretch + Safety margin
-            const freeFallDistance = lanyardLength; // Assuming full extension
-            const harnessStretch = 1; // Typical harness stretch in feet
-            const safetyMargin = 3; // OSHA recommended safety margin
+            // Calculate arresting force
+            const arrestingForce = calculateArrestingForce(
+                workerWeight, lanyardLength, systemType
+            );
             
-            const totalFallDistance = freeFallDistance + decelerationDistance + harnessStretch + safetyMargin;
+            // Check anchor adequacy
+            const anchorAdequate = checkAnchorAdequacy(arrestingForce, anchorStrength);
             
-            // Calculate required clearance
-            const requiredClearance = totalFallDistance + 2; // Add 2 feet for worker height
+            // Calculate safety margin
+            const safetyMargin = workHeight - clearance.totalClearance;
             
-            // Calculate arrest force
-            // Simplified formula: Arrest force = (Worker weight × Free fall distance) / Deceleration distance
-            const arrestForce = (workerWeight * freeFallDistance) / decelerationDistance;
-            
-            // Calculate required anchor strength
-            const requiredAnchorStrength = arrestForce * safetyFactor;
-            
-            // Calculate fall energy
-            const fallEnergy = 0.5 * (workerWeight / 32.2) * Math.pow(fallHeight, 2); // ft-lbs
-            
-            // Determine compliance status
-            let clearanceStatus, anchorStatus, recommendations;
-            
-            if (requiredClearance <= fallHeight) {
-                clearanceStatus = 'Insufficient Clearance';
-                recommendations = 'Use shorter lanyard, reposition anchor point, or use retractable lifeline.';
-            } else {
-                clearanceStatus = 'Adequate Clearance';
-                recommendations = 'Current setup appears adequate. Verify all components are properly rated.';
-            }
-            
-            if (requiredAnchorStrength > anchorStrength) {
-                anchorStatus = 'Anchor Strength Insufficient';
-                recommendations += ' Upgrade anchor point or reduce free fall distance.';
-            } else {
-                anchorStatus = 'Anchor Strength Adequate';
-            }
+            // Assess risks
+            const riskAssessment = assessFallRisks(
+                clearance, safetyMargin, anchorAdequate,
+                hasObstacles, hasTraffic, hasWater, hasElectrical
+            );
             
             // Display results
-            document.getElementById('fall-value').innerHTML = `
-                <div class="result-item">
-                    <strong>Total Fall Distance:</strong> ${totalFallDistance.toFixed(1)} feet
-                </div>
-                <div class="result-item">
-                    <strong>Required Clearance:</strong> ${requiredClearance.toFixed(1)} feet
-                </div>
-                <div class="result-item">
-                    <strong>Arrest Force:</strong> ${arrestForce.toFixed(0)} lbs
-                </div>
-                <div class="result-item">
-                    <strong>Anchor Status:</strong> <span class="status-${anchorStatus.includes('Adequate') ? 'adequate' : 'insufficient'}">${anchorStatus}</span>
-                </div>
-            `;
+            displayFallResults({
+                workHeight,
+                systemType,
+                lanyardLength,
+                decelerationDistance,
+                anchorHeight,
+                workerHeight,
+                workerWeight,
+                anchorStrength,
+                clearance,
+                arrestingForce,
+                anchorAdequate,
+                safetyMargin,
+                riskAssessment
+            });
             
-            document.getElementById('fall-interpretation').innerHTML = `
-                <p><strong>Clearance Analysis:</strong> ${clearanceStatus}</p>
-                <p><strong>Recommendations:</strong> ${recommendations}</p>
-                <p><strong>Warning:</strong> Total fall distance (${totalFallDistance.toFixed(1)} ft) exceeds working height (${fallHeight} ft) - this setup may not be safe!</p>
-            `;
-            
-            // Show detailed calculations
-            document.getElementById('fall-details').innerHTML = `
-                <div class="fall-calculations">
-                    <table class="result-table">
-                        <thead>
-                            <tr>
-                                <th>Parameter</th>
-                                <th>Value</th>
-                                <th>Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Working Height</td>
-                                <td>${fallHeight} ft</td>
-                                <td>${fallHeight >= 6 ? 'Fall protection required (OSHA)' : 'Below OSHA threshold'}</td>
-                            </tr>
-                            <tr>
-                                <td>Free Fall Distance</td>
-                                <td>${freeFallDistance} ft</td>
-                                <td>Should be limited to 6 ft maximum</td>
-                            </tr>
-                            <tr>
-                                <td>Deceleration Distance</td>
-                                <td>${decelerationDistance} ft</td>
-                                <td>Shock absorber elongation</td>
-                            </tr>
-                            <tr>
-                                <td>Total Fall Distance</td>
-                                <td>${totalFallDistance.toFixed(1)} ft</td>
-                                <td>Free fall + deceleration + stretch + margin</td>
-                            </tr>
-                            <tr>
-                                <td>Required Anchor Strength</td>
-                                <td>${requiredAnchorStrength.toFixed(0)} lbs</td>
-                                <td>Arrest force × Safety factor (${safetyFactor}:1)</td>
-                            </tr>
-                            <tr>
-                                <td>Available Anchor Strength</td>
-                                <td>${anchorStrength} lbs</td>
-                                <td>${requiredAnchorStrength <= anchorStrength ? '✓ Meets requirements' : '✗ Insufficient'}</td>
-                            </tr>
-                            <tr>
-                                <td>Fall Energy</td>
-                                <td>${fallEnergy.toFixed(0)} ft-lbs</td>
-                                <td>Kinetic energy at impact</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            `;
-            
-            document.getElementById('fall-result').classList.add('active');
+            // Show result section
+            document.getElementById('fall-result').style.display = 'block';
         }
-        
+
+        function getAnchorStrength() {
+            const anchorSelect = document.getElementById('anchor-strength');
+            if (anchorSelect.value === 'custom') {
+                return parseFloat(document.getElementById('custom-anchor-strength').value);
+            }
+            return parseFloat(anchorSelect.value);
+        }
+
+        function calculateFallClearance(workHeight, systemType, lanyardLength, decelerationDistance, anchorHeight, workerHeight) {
+            // Free fall distance based on system type
+            let freeFallDistance = lanyardLength;
+            
+            // Adjust for system type
+            switch(systemType) {
+                case 'self-retracting':
+                    freeFallDistance = Math.min(lanyardLength, 0.6); // SRLs typically limit to 0.6m
+                    break;
+                case 'rope-grab':
+                    freeFallDistance = 0.3; // Rope grabs limit free fall
+                    break;
+                case 'positioning':
+                    freeFallDistance = 0; // Positioning systems prevent falls
+                    break;
+            }
+            
+            // Calculate total clearance required
+            const totalClearance = 
+                anchorHeight + // Anchor point above work surface
+                freeFallDistance + // Free fall before arrest
+                decelerationDistance + // Shock absorber deployment
+                workerHeight + // Worker height
+                1.0; // Safety factor (1 meter minimum)
+            
+            // Calculate swing fall radius if anchor is not directly above
+            const swingFallRadius = Math.sqrt(Math.pow(anchorHeight, 2) + Math.pow(lanyardLength, 2));
+            
+            return {
+                freeFallDistance: freeFallDistance,
+                totalClearance: totalClearance,
+                swingFallRadius: swingFallRadius,
+                isAdequate: totalClearance < workHeight
+            };
+        }
+
+        function calculateArrestingForce(workerWeight, lanyardLength, systemType) {
+            // Convert weight to mass (kg to N)
+            const weightN = workerWeight * 9.81; // Weight in Newtons
+            
+            // Calculate fall factor (f = h/L)
+            const fallFactor = lanyardLength > 0 ? (lanyardLength / lanyardLength) : 1; // Simplified
+            
+            // Maximum arresting force based on standards
+            let maxForce;
+            switch(systemType) {
+                case 'full-body-harness':
+                    maxForce = 8000; // 8 kN OSHA limit
+                    break;
+                case 'lanyard':
+                    maxForce = 6000; // 6 kN with shock absorber
+                    break;
+                case 'self-retracting':
+                    maxForce = 4000; // 4 kN typical for SRL
+                    break;
+                case 'rope-grab':
+                    maxForce = 6000; // 6 kN
+                    break;
+                case 'positioning':
+                    maxForce = 3000; // 3 kN for positioning
+                    break;
+                default:
+                    maxForce = 6000;
+            }
+            
+            // Calculate actual force (simplified)
+            const force = Math.min(weightN * fallFactor * 3, maxForce); // 3g deceleration
+            
+            return {
+                forceN: force,
+                forcekN: force / 1000,
+                forcelbf: force * 0.2248,
+                isWithinLimit: force <= maxForce
+            };
+        }
+
+        function checkAnchorAdequacy(arrestingForce, anchorStrength) {
+            // Convert anchor strength from lbf to N if needed
+            const anchorStrengthN = anchorStrength * 4.44822; // lbf to N
+            
+            const safetyFactor = 2.0; // Required safety factor
+            const requiredStrength = arrestingForce.forceN * safetyFactor;
+            
+            return {
+                anchorStrengthN: anchorStrengthN,
+                requiredStrength: requiredStrength,
+                safetyFactor: anchorStrengthN / arrestingForce.forceN,
+                isAdequate: anchorStrengthN >= requiredStrength
+            };
+        }
+
+        function assessFallRisks(clearance, safetyMargin, anchorAdequate, hasObstacles, hasTraffic, hasWater, hasElectrical) {
+            let riskLevel = 'Low';
+            let colorClass = 'status-low';
+            let recommendations = [];
+            
+            // Check clearance adequacy
+            if (safetyMargin < 0) {
+                riskLevel = 'Extreme';
+                colorClass = 'status-extreme';
+                recommendations.push('INSUFFICIENT CLEARANCE - Fall would result in impact');
+                recommendations.push('Reduce working height or increase anchor height');
+                recommendations.push('Consider alternative fall protection methods');
+            } else if (safetyMargin < 1.0) {
+                riskLevel = 'High';
+                colorClass = 'status-high';
+                recommendations.push('Marginal clearance - Increase safety margin');
+                recommendations.push('Use shorter lanyard or higher anchor point');
+            } else if (safetyMargin < 2.0) {
+                riskLevel = 'Moderate';
+                colorClass = 'status-moderate';
+                recommendations.push('Adequate clearance - Maintain current setup');
+            } else {
+                riskLevel = 'Low';
+                colorClass = 'status-low';
+                recommendations.push('Good clearance margin - System is adequate');
+            }
+            
+            // Check anchor adequacy
+            if (!anchorAdequate.isAdequate) {
+                riskLevel = 'Very High';
+                colorClass = 'status-very-high';
+                recommendations.push('ANCHOR POINT INADEQUATE - Upgrade required');
+                recommendations.push(`Required strength: ${(anchorAdequate.requiredStrength/1000).toFixed(1)} kN`);
+                recommendations.push(`Current strength: ${(anchorAdequate.anchorStrengthN/1000).toFixed(1)} kN`);
+            }
+            
+            // Check swing fall hazard
+            if (clearance.swingFallRadius > clearance.totalClearance * 0.5) {
+                recommendations.push('Potential swing fall hazard - Position anchor directly above work area');
+            }
+            
+            // Check hazards below
+            if (hasObstacles) {
+                recommendations.push('Clear obstacles from fall zone');
+                recommendations.push('Use warning signs or barriers');
+            }
+            
+            if (hasTraffic) {
+                riskLevel = riskLevel === 'Low' ? 'Moderate' : riskLevel;
+                recommendations.push('Implement traffic control measures');
+                recommendations.push('Use spotters for traffic awareness');
+            }
+            
+            if (hasWater) {
+                recommendations.push('Provide water rescue equipment');
+                recommendations.push('Ensure workers can swim or wear PFDs');
+            }
+            
+            if (hasElectrical) {
+                riskLevel = riskLevel === 'Low' ? 'High' : 'Very High';
+                recommendations.push('USE NON-CONDUCTIVE FALL PROTECTION EQUIPMENT');
+                recommendations.push('Maintain safe distance from electrical sources');
+                recommendations.push('De-energize equipment if possible');
+            }
+            
+            // Add general recommendations
+            recommendations.push('Inspect all equipment before each use');
+            recommendations.push('Provide fall protection training');
+            recommendations.push('Develop rescue plan for fallen worker');
+            recommendations.push('Conduct regular equipment inspections');
+            
+            return {
+                riskLevel: riskLevel,
+                colorClass: colorClass,
+                recommendations: recommendations
+            };
+        }
+
+        function displayFallResults(data) {
+            // Update summary cards
+            document.getElementById('required-clearance').textContent = 
+                `${data.clearance.totalClearance.toFixed(1)} m`;
+            document.getElementById('safety-margin').textContent = 
+                `${data.safetyMargin.toFixed(1)} m`;
+            document.getElementById('arrest-force').textContent = 
+                `${data.arrestingForce.forcekN.toFixed(1)} kN`;
+            
+            // Update card colors
+            const safetyColor = data.safetyMargin < 1.0 ? 'status-high' : 
+                              data.safetyMargin < 2.0 ? 'status-moderate' : 'status-low';
+            
+            document.getElementById('clearance-card').className = `summary-card ${safetyColor}`;
+            document.getElementById('safety-card').className = `summary-card ${safetyColor}`;
+            document.getElementById('force-card').className = `summary-card ${data.arrestingForce.isWithinLimit ? 'status-low' : 'status-high'}`;
+            
+            // Create clearance diagram
+            const diagramHtml = `
+                <div class="diagram">
+                    <div class="diagram-scale">
+                        <div class="scale-label">Ground Level</div>
+                        <div class="scale-line" style="height: ${data.workHeight * 10}px">
+                            <div class="work-surface" style="bottom: 0">
+                                <span>Work Surface</span>
+                            </div>
+                            <div class="anchor-point" style="bottom: ${data.anchorHeight * 10}px">
+                                <span>Anchor Point</span>
+                            </div>
+                            <div class="fall-clearance" style="height: ${data.clearance.totalClearance * 10}px; bottom: 0">
+                                <span>Required Clearance: ${data.clearance.totalClearance.toFixed(1)}m</span>
+                            </div>
+                            <div class="safety-margin" style="height: ${Math.max(data.safetyMargin, 0) * 10}px; bottom: ${data.clearance.totalClearance * 10}px">
+                                <span>Safety Margin: ${data.safetyMargin.toFixed(1)}m</span>
+                            </div>
+                        </div>
+                        <div class="scale-label">Working Height: ${data.workHeight.toFixed(1)}m</div>
+                    </div>
+                    <div class="diagram-legend">
+                        <div class="legend-item">
+                            <span class="legend-color work-surface"></span>
+                            <span>Work Surface</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color anchor-point"></span>
+                            <span>Anchor Point</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color fall-clearance"></span>
+                            <span>Required Clearance</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color safety-margin"></span>
+                            <span>Safety Margin</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('fall-diagram').innerHTML = diagramHtml;
+            
+            // Display calculation details
+            const detailsHtml = `
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Working Height</td>
+                            <td>${data.workHeight.toFixed(1)} m</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Lanyard Length</td>
+                            <td>${data.lanyardLength.toFixed(1)} m</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Free Fall Distance</td>
+                            <td>${data.clearance.freeFallDistance.toFixed(1)} m</td>
+                            <td>${data.clearance.freeFallDistance <= 1.8 ? '✓ Within Limit' : '⚠ Exceeds 1.8m'}</td>
+                        </tr>
+                        <tr>
+                            <td>Deceleration Distance</td>
+                            <td>${data.decelerationDistance.toFixed(1)} m</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Total Clearance Required</td>
+                            <td>${data.clearance.totalClearance.toFixed(1)} m</td>
+                            <td>${data.clearance.isAdequate ? '✓ Adequate' : '✗ Insufficient'}</td>
+                        </tr>
+                        <tr>
+                            <td>Arresting Force</td>
+                            <td>${data.arrestingForce.forcekN.toFixed(1)} kN</td>
+                            <td>${data.arrestingForce.isWithinLimit ? '✓ Within Limit' : '⚠ Exceeds limit'}</td>
+                        </tr>
+                        <tr>
+                            <td>Anchor Point Strength</td>
+                            <td>${(data.anchorAdequate.anchorStrengthN/1000).toFixed(1)} kN</td>
+                            <td>${data.anchorAdequate.isAdequate ? '✓ Adequate' : '✗ Insufficient'}</td>
+                        </tr>
+                        <tr>
+                            <td>Anchor Safety Factor</td>
+                            <td>${data.anchorAdequate.safetyFactor.toFixed(1)}</td>
+                            <td>${data.anchorAdequate.safetyFactor >= 2.0 ? '✓ Meets 2:1' : '✗ Below 2:1'}</td>
+                        </tr>
+                        <tr>
+                            <td>Swing Fall Radius</td>
+                            <td>${data.clearance.swingFallRadius.toFixed(1)} m</td>
+                            <td>${data.clearance.swingFallRadius > data.clearance.totalClearance * 0.5 ? '⚠ Potential hazard' : '✓ Acceptable'}</td>
+                        </tr>
+                        <tr>
+                            <td>Overall Risk Level</td>
+                            <td><strong>${data.riskAssessment.riskLevel}</strong></td>
+                            <td><span class="status-${data.riskAssessment.colorClass}">${data.safetyMargin >= 0 ? 'System may work' : 'System will fail'}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('fall-details').innerHTML = detailsHtml;
+            
+            // Display recommendations
+            const recList = document.getElementById('fall-recommendations');
+            recList.innerHTML = '';
+            
+            data.riskAssessment.recommendations.forEach(rec => {
+                const div = document.createElement('div');
+                div.className = 'recommendation-item';
+                const isCritical = rec.includes('INSUFFICIENT') || rec.includes('INADEQUATE') || rec.includes('USE NON-CONDUCTIVE');
+                div.innerHTML = `
+                    <i class="fas ${isCritical ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i>
+                    <span>${rec}</span>
+                `;
+                recList.appendChild(div);
+            });
+        }
+
+        function resetFallForm() {
+            document.getElementById('work-height').value = '6';
+            document.getElementById('fall-arrest-system').value = 'full-body-harness';
+            document.getElementById('lanyard-length').value = '2';
+            document.getElementById('deceleration-distance').value = '1.8';
+            document.getElementById('anchor-height').value = '2';
+            document.getElementById('worker-height').value = '1.8';
+            document.getElementById('worker-weight').value = '100';
+            document.getElementById('anchor-strength').value = '5000';
+            document.getElementById('custom-anchor-group').style.display = 'none';
+            document.getElementById('hazard-obstacles').checked = true;
+            document.getElementById('hazard-traffic').checked = false;
+            document.getElementById('hazard-water').checked = false;
+            document.getElementById('hazard-electrical').checked = false;
+            document.getElementById('fall-result').style.display = 'none';
+        }
+
         function generatePDF(elementId, filename) {
             const element = document.getElementById(elementId);
             
             const opt = {
-                margin: 1,
+                margin: 0.5,
                 filename: `${filename}-${new Date().getTime()}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
             
             html2pdf().set(opt).from(element).save();
         }
-        
+
         function shareCalculator(title) {
             const url = encodeURIComponent(window.location.href);
             const text = encodeURIComponent(`${title} - Professional HSE Tool`);
@@ -468,27 +890,5 @@
             };
         }
     </script>
-    
-    <style>
-        .fall-calculations table {
-            width: 100%;
-            font-size: 14px;
-        }
-        
-        .fall-calculations td {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .status-adequate {
-            color: #27ae60;
-            font-weight: bold;
-        }
-        
-        .status-insufficient {
-            color: #e74c3c;
-            font-weight: bold;
-        }
-    </style>
 </body>
 </html>
