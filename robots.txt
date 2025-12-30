@@ -25,6 +25,7 @@ Allow: /assets/
 Allow: /css/
 Allow: /js/
 Allow: /images/
+Allow: /fonts/
 
 # Sitemap location
 Sitemap: https://www.hsecalculator.com/sitemap.xml
@@ -44,39 +45,25 @@ Allow: /
 Disallow: /private/
 Crawl-delay: 1
 
-# Yandex-specific directives
-User-agent: Yandex
-Allow: /
-Disallow: /private/
-Crawl-delay: 3
-
-# Baidu-specific directives
-User-agent: Baiduspider
-Allow: /
-Disallow: /private/
-Crawl-delay: 5
-
-# DuckDuckGo-specific directives
+# Common search engines
 User-agent: DuckDuckBot
 Allow: /
 Disallow: /private/
 Crawl-delay: 1
 
-# Twitter-specific directives
+# Social media bots
 User-agent: Twitterbot
 Allow: /
 
-# Facebook-specific directives
 User-agent: facebookexternalhit
 Allow: /
 Disallow: /private/
 
-# LinkedIn-specific directives
 User-agent: LinkedInBot
 Allow: /
 Disallow: /private/
 
-# Common ad bots - block them
+# Block aggressive crawlers
 User-agent: MJ12bot
 Disallow: /
 
@@ -92,16 +79,7 @@ Disallow: /
 User-agent: MauiBot
 Disallow: /
 
-# Development and testing environments
-User-agent: *
-Disallow: /*?*
-Disallow: /*&*
-Disallow: /*#
-Disallow: /*.json$
-Disallow: /*.xml$  # Except sitemap
-Allow: /sitemap.xml
-
-# Block specific file types that shouldn't be indexed
+# Block file downloads from indexing
 Disallow: /*.pdf$
 Disallow: /*.doc$
 Disallow: /*.docx$
@@ -109,13 +87,19 @@ Disallow: /*.xls$
 Disallow: /*.xlsx$
 Disallow: /*.ppt$
 Disallow: /*.pptx$
+Disallow: /*.zip$
+Disallow: /*.rar$
 
-# Development and staging
-User-agent: *
+# Development environments
 Disallow: /staging/
 Disallow: /test/
 Disallow: /dev/
 Disallow: /development/
+Disallow: /beta/
+
+# Allow sitemap.xml specifically
+Allow: /sitemap.xml
+Allow: /robots.txt
 
 # Comments
 # This robots.txt file allows search engines to index all public content
